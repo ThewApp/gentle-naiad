@@ -438,4 +438,4 @@ if __name__ == "__main__":
     # create tmp dir for download content
     make_static_tmp_dir()
 
-    app.run(debug=options.debug, port=options.port)
+    app.run(debug=options.debug, port=options.port, host='0.0.0.0')
