@@ -295,7 +295,7 @@ def handle_text_message(event):
                         ),
                         QuickReplyButton(
                             action=DatetimePickerAction(label="label3",
-                                                        data="data3",
+                                                        data="date_postback",
                                                         mode="date")
                         ),
                         QuickReplyButton(
