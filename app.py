@@ -382,6 +382,12 @@ def handle_text_message(event):
                 TextSendMessage(text="ยาลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ"),
                 StickerSendMessage(package_id=11537, sticker_id=52002772)
             ])
+    elif text == "ทานแล้ว":
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text="เยี่ยมมากค่ะ"),
+                StickerSendMessage(package_id=11537, sticker_id=52002735)
+            ])
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
