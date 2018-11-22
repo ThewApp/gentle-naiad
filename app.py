@@ -61,23 +61,45 @@ handler = WebhookHandler(channel_secret)
 
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
-# if len(line_bot_api.get_rich_menu_list()) == 0:
-#     rich_menu_to_create = RichMenu(
-#     size=RichMenuSize(width=2500, height=843),
-#     selected=False,
-#     name="richmenu",
-#     chat_bar_text="Menu",
-#     areas=[RichMenuArea(
-#         bounds=RichMenuBounds(x=0, y=0, width=2500, height=843),
-#         action=URIAction(label='Go to line.me', uri='https://line.me'))]
-#     )
-    
-#     rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
-#     file_path
-#     with open(file_path, 'rb') as f:
-#         line_bot_api.set_rich_menu_image(rich_menu_id, content_type, f)
+if len(line_bot_api.get_rich_menu_list()) == 0:
+    rich_menu_to_create = RichMenu(
+        size=RichMenuSize(width=2500, height=1686),
+        selected=True,
+        name="richmenu",
+        chat_bar_text="Menu",
+        areas=[
+            RichMenuArea(
+                bounds=RichMenuBounds(x=0, y=0, width=833, height=843),
+                action=MessageAction(label="ประวัติสุขภาพ", text="ประวัติสุขภาพ")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=834, y=0, width=1666, height=843),
+                action=MessageAction(label="รายการยา", text="รายการยา")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=0, y=844, width=833, height=843),
+                action=MessageAction(label="ประวัติสุขภาพ", text="ประวัติสุขภาพ")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=834, y=844, width=833, height=843),
+                action=MessageAction(label="ประวัติสุขภาพ", text="ประวัติสุขภาพ")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=1667, y=844, width=833, height=843),
+                action=MessageAction(label="ประวัติสุขภาพ", text="ประวัติสุขภาพ")
+            )
+        ]
+    )
+
+    rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+    file_path = "assets/default_rich_menu.jpg"
+    content_type = "image/jpeg"
+    with open(file_path, 'rb') as f:
+        line_bot_api.set_rich_menu_image(rich_menu_id, content_type, f)
 
 # function for create tmp dir for download content
+
+
 def make_static_tmp_dir():
     try:
         os.makedirs(static_tmp_path)
@@ -120,8 +142,10 @@ def handle_text_message(event):
             profile = line_bot_api.get_profile(event.source.user_id)
             line_bot_api.reply_message(
                 event.reply_token, [
-                    TextSendMessage(text='Display name: ' + profile.display_name),
-                    TextSendMessage(text='Status message: ' + profile.status_message)
+                    TextSendMessage(text='Display name: ' +
+                                    profile.display_name),
+                    TextSendMessage(text='Status message: ' +
+                                    profile.status_message)
                 ]
             )
         else:
@@ -154,7 +178,8 @@ def handle_text_message(event):
             title='My buttons sample', text='Hello, my buttons', actions=[
                 URIAction(label='Go to line.me', uri='https://line.me'),
                 PostbackAction(label='ping', data='ping'),
-                PostbackAction(label='ping with text', data='ping', text='ping'),
+                PostbackAction(label='ping with text',
+                               data='ping', text='ping'),
                 MessageAction(label='Translate Rice', text='米')
             ])
         template_message = TemplateSendMessage(
@@ -167,7 +192,8 @@ def handle_text_message(event):
                 PostbackAction(label='ping', data='ping')
             ]),
             CarouselColumn(text='hoge2', title='fuga2', actions=[
-                PostbackAction(label='ping with text', data='ping', text='ping'),
+                PostbackAction(label='ping with text',
+                               data='ping', text='ping'),
                 MessageAction(label='Translate Rice', text='米')
             ]),
         ])
@@ -210,11 +236,16 @@ def handle_text_message(event):
                         layout='baseline',
                         margin='md',
                         contents=[
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/grey_star.png'),
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/grey_star.png'),
+                            IconComponent(
+                                size='sm', url='https://example.com/gold_star.png'),
+                            IconComponent(
+                                size='sm', url='https://example.com/grey_star.png'),
+                            IconComponent(
+                                size='sm', url='https://example.com/gold_star.png'),
+                            IconComponent(
+                                size='sm', url='https://example.com/gold_star.png'),
+                            IconComponent(
+                                size='sm', url='https://example.com/grey_star.png'),
                             TextComponent(text='4.0', size='sm', color='#999999', margin='md',
                                           flex=0)
                         ]
@@ -285,7 +316,8 @@ def handle_text_message(event):
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='WEBSITE', uri="https://example.com")
+                        action=URIAction(
+                            label='WEBSITE', uri="https://example.com")
                     )
                 ]
             ),
@@ -329,27 +361,33 @@ def handle_text_message(event):
     elif text == "ยาความดัน":
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="ทานตอนไหน",
-                quick_reply=QuickReply(
-                    items=[
-                        QuickReplyButton(
-                            action=MessageAction(label="เช้า", text="เช้า")
-                        ),
-                        QuickReplyButton(
-                            action=MessageAction(label="กลางวัน", text="กลางวัน")
-                        ),
-                        QuickReplyButton(
-                            action=MessageAction(label="เย็น", text="เย็น")
-                        ),
-                        QuickReplyButton(
-                            action=MessageAction(label="ก่อนนอน", text="ก่อนนอน")
-                        ),
-                        QuickReplyButton(
-                            action=MessageAction(label="สามเวลา", text="สามเวลา")
-                        ),
-                        QuickReplyButton(
-                            action=MessageAction(label="เช้า-เย็น", text="เช้า-เย็น")
-                        )
-                    ])))
+                                               quick_reply=QuickReply(
+                                                   items=[
+                                                       QuickReplyButton(
+                                                           action=MessageAction(
+                                                               label="เช้า", text="เช้า")
+                                                       ),
+                                                       QuickReplyButton(
+                                                           action=MessageAction(
+                                                               label="กลางวัน", text="กลางวัน")
+                                                       ),
+                                                       QuickReplyButton(
+                                                           action=MessageAction(
+                                                               label="เย็น", text="เย็น")
+                                                       ),
+                                                       QuickReplyButton(
+                                                           action=MessageAction(
+                                                               label="ก่อนนอน", text="ก่อนนอน")
+                                                       ),
+                                                       QuickReplyButton(
+                                                           action=MessageAction(
+                                                               label="สามเวลา", text="สามเวลา")
+                                                       ),
+                                                       QuickReplyButton(
+                                                           action=MessageAction(
+                                                               label="เช้า-เย็น", text="เช้า-เย็น")
+                                                       )
+                                                   ])))
     elif text == "สามเวลา":
         confirm_template = ConfirmTemplate(text='ทานตอนไหนคะ', actions=[
             MessageAction(label='ก่อนอาหาร', text='ก่อนอาหาร'),
@@ -379,7 +417,8 @@ def handle_text_message(event):
     elif text == "ยังเลย":
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text="ยาลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ"),
+                TextSendMessage(
+                    text="ยาลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ"),
                 StickerSendMessage(package_id=11537, sticker_id=52002772)
             ])
     elif text == "ทานแล้ว":
@@ -485,7 +524,8 @@ def handle_content_message(event):
     line_bot_api.reply_message(
         event.reply_token, [
             TextSendMessage(text='Save content.'),
-            TextSendMessage(text=request.host_url + os.path.join('static', 'tmp', dist_name))
+            TextSendMessage(text=request.host_url +
+                            os.path.join('static', 'tmp', dist_name))
         ])
 
 
@@ -504,7 +544,8 @@ def handle_file_message(event):
     line_bot_api.reply_message(
         event.reply_token, [
             TextSendMessage(text='Save file.'),
-            TextSendMessage(text=request.host_url + os.path.join('static', 'tmp', dist_name))
+            TextSendMessage(text=request.host_url +
+                            os.path.join('static', 'tmp', dist_name))
         ])
 
 
