@@ -44,6 +44,9 @@ from linebot.models import (
     SeparatorComponent, QuickReply, QuickReplyButton
 )
 
+from linebot.models import (RichMenu, RichMenuSize,
+                            RichMenuArea, RichMenuBounds)
+
 app = Flask(__name__)
 
 # get channel_secret and channel_access_token from your environment variable
@@ -70,7 +73,8 @@ if len(line_bot_api.get_rich_menu_list()) == 0:
         areas=[
             RichMenuArea(
                 bounds=RichMenuBounds(x=0, y=0, width=833, height=843),
-                action=MessageAction(label="ประวัติสุขภาพ", text="ประวัติสุขภาพ")
+                action=MessageAction(label="ประวัติสุขภาพ",
+                                     text="ประวัติสุขภาพ")
             ),
             RichMenuArea(
                 bounds=RichMenuBounds(x=834, y=0, width=1666, height=843),
@@ -78,15 +82,18 @@ if len(line_bot_api.get_rich_menu_list()) == 0:
             ),
             RichMenuArea(
                 bounds=RichMenuBounds(x=0, y=844, width=833, height=843),
-                action=MessageAction(label="ประวัติสุขภาพ", text="ประวัติสุขภาพ")
+                action=MessageAction(label="ตารางนัดพบแพทย์",
+                                     text="ตารางนัดพบแพทย์")
             ),
             RichMenuArea(
                 bounds=RichMenuBounds(x=834, y=844, width=833, height=843),
-                action=MessageAction(label="ประวัติสุขภาพ", text="ประวัติสุขภาพ")
+                action=MessageAction(label="เพิ่มยาใหม่",
+                                     text="เพิ่มยาใหม่")
             ),
             RichMenuArea(
                 bounds=RichMenuBounds(x=1667, y=844, width=833, height=843),
-                action=MessageAction(label="ประวัติสุขภาพ", text="ประวัติสุขภาพ")
+                action=MessageAction(label="วิธีใช้",
+                                     text="วิธีใช้")
             )
         ]
     )
