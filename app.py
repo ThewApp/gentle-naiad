@@ -454,9 +454,7 @@ def handle_text_message(event):
             body=BoxComponent(
                 layout='vertical',
                 contents=[
-                    # title
-                    TextComponent(text='รายการยา', weight='bold', size='xl'),
-                    # review
+                    TextComponent(text='รายการยา', weight='bold', size='xxl'),
                     BoxComponent(
                         layout='vertical',
                         margin='lg',
@@ -464,23 +462,62 @@ def handle_text_message(event):
                         contents=[
                             BoxComponent(
                                 layout='baseline',
-                                spacing='sm',
+                                spacing='md',
                                 contents=[
                                     TextComponent(
-                                        text='ยาความดัน',
-                                        color='#666666',
-                                        size='sm',
+                                        text='ชื่อยา',
+                                        size='lg',
+                                        flex=2
                                     ),
                                     TextComponent(
                                         text='สามเวลา',
-                                        wrap=True,
-                                        color='#666666',
+                                        size='lg',
+                                        flex=4
+                                    )
+                                ],
+                            ),
+                            SeparatorComponent(),
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='md',
+                                contents=[
+                                    TextComponent(
+                                        text='ยาความดัน',
                                         size='sm',
+                                        flex=2
+                                    ),
+                                    TextComponent(
+                                        text='สามเวลา',
+                                        size='sm',
+                                        align="end",
+                                        flex=2
                                     ),
                                     TextComponent(
                                         text='ก่อนอาหาร',
-                                        color='#666666',
                                         size='sm',
+                                        flex=2
+                                    )
+                                ],
+                            ),
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='md',
+                                contents=[
+                                    TextComponent(
+                                        text='ยาแก้อักเสบ',
+                                        size='sm',
+                                        flex=2
+                                    ),
+                                    TextComponent(
+                                        text='เช้า-เย็น',
+                                        size='sm',
+                                        align="end",
+                                        flex=2
+                                    ),
+                                    TextComponent(
+                                        text='หลังอาหาร',
+                                        size='sm',
+                                        flex=2
                                     )
                                 ],
                             )
