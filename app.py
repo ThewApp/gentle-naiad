@@ -364,6 +364,24 @@ def handle_text_message(event):
                 TextSendMessage(text="บันทึกยาใหม่เรียบร้อยแล้วค่ะ"),
                 StickerSendMessage(package_id=2, sticker_id=144)
             ])
+    elif text == "push":
+        confirm_template = ConfirmTemplate(text='ทานยาความดันก่อนอาหารหรือยังคะ', actions=[
+            MessageAction(label='ทานแล้ว', text='ทานแล้ว'),
+            MessageAction(label='ยังเลย', text='ยังเลย'),
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ทานตอนไหนคะ', template=confirm_template)
+        line_bot_api.reply_message(
+            event.reply_token, [
+                template_message,
+                StickerSendMessage(package_id=2, sticker_id=144)
+            ])
+    elif text == "ยังเลย":
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text="ยาลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภา่พ"),
+                StickerSendMessage(package_id=11537, sticker_id=52002772)
+            ])
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
