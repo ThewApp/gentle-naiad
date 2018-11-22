@@ -65,7 +65,7 @@ handler = WebhookHandler(channel_secret)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
 for rich_menu in line_bot_api.get_rich_menu_list():
-    app.logger.info("Deleting: " + rich_menu.rich_menu_id)
+    print("Deleting: " + rich_menu.rich_menu_id)
     line_bot_api.delete_rich_menu(rich_menu.rich_menu_id)
 
 rich_menu_to_create = RichMenu(
@@ -108,7 +108,7 @@ with open(file_path, 'rb') as f:
     line_bot_api.set_rich_menu_image(rich_menu_id, content_type, f)
 app.logger.info("Rich menu id: " + rich_menu_id)
 # Set default rich menu
-app.logger.info("Adding: " + rich_menu_id)
+print("Adding: " + rich_menu_id)
 line_bot_api._post(
     '/v2/bot/user/all/richmenu/{rich_menu_id}'.format(
         rich_menu_id=rich_menu_id)
