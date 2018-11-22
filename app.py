@@ -388,7 +388,7 @@ def handle_text_message(event):
             ])))
     elif text == "ยาความดัน":
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="ทานตอนไหน", quick_reply=QuickReply(items=[
+            event.reply_token, TextSendMessage(text="ทานเวลาไหนคะ", quick_reply=QuickReply(items=[
                 QuickReplyButton(
                     action=MessageAction(
                         label="เช้า", text="เช้า")
@@ -420,7 +420,7 @@ def handle_text_message(event):
             MessageAction(label='หลังอาหาร', text='หลังอาหาร'),
         ])
         template_message = TemplateSendMessage(
-            alt_text='ทานเวลาไหนคะ', template=confirm_template)
+            alt_text='ทานตอนไหนคะ', template=confirm_template)
         line_bot_api.reply_message(event.reply_token, template_message)
     elif text == "ก่อนอาหาร":
         line_bot_api.reply_message(
@@ -434,7 +434,7 @@ def handle_text_message(event):
             MessageAction(label='ยังเลย', text='ยังเลย'),
         ])
         template_message = TemplateSendMessage(
-            alt_text='ทานตอนไหนคะ', template=confirm_template)
+            alt_text='ทานยาความดันก่อนอาหารหรือยังคะ', template=confirm_template)
         line_bot_api.reply_message(
             event.reply_token, [
                 template_message,
