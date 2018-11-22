@@ -378,44 +378,49 @@ def handle_text_message(event):
                     ])))
     elif text == "เพิ่มยาใหม่":
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="ยาตัวไหนคะ"))
+            event.reply_token, TextSendMessage(text="ยาตัวไหนคะ", quick_reply=QuickReply(items=[
+                QuickReplyButton(action=MessageAction(
+                    label="ยาความดัน", text="ยาความดัน")),
+                QuickReplyButton(action=MessageAction(
+                    label="ยาเบาหวาน", text="ยาเบาหวาน")),
+                QuickReplyButton(action=MessageAction(
+                    label="ยาแก้อักเสบ", text="ยาแก้อักเสบ"))
+            ])))
     elif text == "ยาความดัน":
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="ทานตอนไหน",
-                                               quick_reply=QuickReply(
-                                                   items=[
-                                                       QuickReplyButton(
-                                                           action=MessageAction(
-                                                               label="เช้า", text="เช้า")
-                                                       ),
-                                                       QuickReplyButton(
-                                                           action=MessageAction(
-                                                               label="กลางวัน", text="กลางวัน")
-                                                       ),
-                                                       QuickReplyButton(
-                                                           action=MessageAction(
-                                                               label="เย็น", text="เย็น")
-                                                       ),
-                                                       QuickReplyButton(
-                                                           action=MessageAction(
-                                                               label="ก่อนนอน", text="ก่อนนอน")
-                                                       ),
-                                                       QuickReplyButton(
-                                                           action=MessageAction(
-                                                               label="สามเวลา", text="สามเวลา")
-                                                       ),
-                                                       QuickReplyButton(
-                                                           action=MessageAction(
-                                                               label="เช้า-เย็น", text="เช้า-เย็น")
-                                                       )
-                                                   ])))
+            event.reply_token, TextSendMessage(text="ทานตอนไหน", quick_reply=QuickReply(items=[
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="เช้า", text="เช้า")
+                ),
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="กลางวัน", text="กลางวัน")
+                ),
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="เย็น", text="เย็น")
+                ),
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="ก่อนนอน", text="ก่อนนอน")
+                ),
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="สามเวลา", text="สามเวลา")
+                ),
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="เช้า-เย็น", text="เช้า-เย็น")
+                )
+            ])))
     elif text == "สามเวลา":
         confirm_template = ConfirmTemplate(text='ทานตอนไหนคะ', actions=[
             MessageAction(label='ก่อนอาหาร', text='ก่อนอาหาร'),
             MessageAction(label='หลังอาหาร', text='หลังอาหาร'),
         ])
         template_message = TemplateSendMessage(
-            alt_text='ทานตอนไหนคะ', template=confirm_template)
+            alt_text='ทานเวลาไหนคะ', template=confirm_template)
         line_bot_api.reply_message(event.reply_token, template_message)
     elif text == "ก่อนอาหาร":
         line_bot_api.reply_message(
@@ -439,7 +444,7 @@ def handle_text_message(event):
         line_bot_api.reply_message(
             event.reply_token, [
                 TextSendMessage(
-                    text="ยาลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ"),
+                    text="อย่าลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ"),
                 StickerSendMessage(package_id=11537, sticker_id=52002772)
             ])
     elif text == "ทานแล้ว":
