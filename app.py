@@ -374,7 +374,7 @@ def handle_text_message(event):
         line_bot_api.reply_message(
             event.reply_token, [
                 template_message,
-                StickerSendMessage(package_id=2, sticker_id=144)
+                StickerSendMessage(package_id=11537, sticker_id=52002744)
             ])
     elif text == "ยังเลย":
         line_bot_api.reply_message(
