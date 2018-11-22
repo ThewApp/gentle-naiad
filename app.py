@@ -65,54 +65,58 @@ handler = WebhookHandler(channel_secret)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
 for rich_menu in line_bot_api.get_rich_menu_list():
-    print("Deleting: " + rich_menu.rich_menu_id)
-    line_bot_api.delete_rich_menu(rich_menu.rich_menu_id)
+    try:
+        print("Deleting rich menu: " + rich_menu.rich_menu_id)
+        line_bot_api.delete_rich_menu(rich_menu.rich_menu_id)
+    except LineBotApiError as e:
+        print(e.status_code, e.error.message, e.error.details)
 
-rich_menu_to_create = RichMenu(
-    size=RichMenuSize(width=2500, height=1686),
-    selected=True,
-    name="richmenu",
-    chat_bar_text="Menu",
-    areas=[
-        RichMenuArea(
-            bounds=RichMenuBounds(x=0, y=0, width=833, height=843),
-            action=MessageAction(label="ประวัติสุขภาพ",
-                                 text="ประวัติสุขภาพ")
-        ),
-        RichMenuArea(
-            bounds=RichMenuBounds(x=834, y=0, width=1666, height=843),
-            action=MessageAction(label="รายการยา", text="รายการยา")
-        ),
-        RichMenuArea(
-            bounds=RichMenuBounds(x=0, y=844, width=833, height=843),
-            action=MessageAction(label="ตารางนัดพบแพทย์",
-                                 text="ตารางนัดพบแพทย์")
-        ),
-        RichMenuArea(
-            bounds=RichMenuBounds(x=834, y=844, width=833, height=843),
-            action=MessageAction(label="เพิ่มยาใหม่",
-                                 text="เพิ่มยาใหม่")
-        ),
-        RichMenuArea(
-            bounds=RichMenuBounds(x=1667, y=844, width=833, height=843),
-            action=MessageAction(label="วิธีใช้",
-                                 text="วิธีใช้")
-        )
-    ]
-)
+if len(line_bot_api.get_rich_menu_list()) == 0:
+    rich_menu_to_create = RichMenu(
+        size=RichMenuSize(width=2500, height=1686),
+        selected=True,
+        name="richmenu",
+        chat_bar_text="Menu",
+        areas=[
+            RichMenuArea(
+                bounds=RichMenuBounds(x=0, y=0, width=833, height=843),
+                action=MessageAction(label="ประวัติสุขภาพ",
+                                     text="ประวัติสุขภาพ")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=834, y=0, width=1666, height=843),
+                action=MessageAction(label="รายการยา", text="รายการยา")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=0, y=844, width=833, height=843),
+                action=MessageAction(label="ตารางนัดพบแพทย์",
+                                     text="ตารางนัดพบแพทย์")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=834, y=844, width=833, height=843),
+                action=MessageAction(label="เพิ่มยาใหม่",
+                                     text="เพิ่มยาใหม่")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=1667, y=844, width=833, height=843),
+                action=MessageAction(label="วิธีใช้",
+                                     text="วิธีใช้")
+            )
+        ]
+    )
 
-rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
-file_path = "assets/default_rich_menu.jpg"
-content_type = "image/jpeg"
-with open(file_path, 'rb') as f:
-    line_bot_api.set_rich_menu_image(rich_menu_id, content_type, f)
-app.logger.info("Rich menu id: " + rich_menu_id)
-# Set default rich menu
-print("Adding: " + rich_menu_id)
-line_bot_api._post(
-    '/v2/bot/user/all/richmenu/{rich_menu_id}'.format(
-        rich_menu_id=rich_menu_id)
-)
+    rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+    file_path = "assets/default_rich_menu.jpg"
+    content_type = "image/jpeg"
+    with open(file_path, 'rb') as f:
+        line_bot_api.set_rich_menu_image(rich_menu_id, content_type, f)
+    app.logger.info("Rich menu id: " + rich_menu_id)
+    # Set default rich menu
+    print("Adding: " + rich_menu_id)
+    line_bot_api._post(
+        '/v2/bot/user/all/richmenu/{rich_menu_id}'.format(
+            rich_menu_id=rich_menu_id)
+    )
 
 # function for create tmp dir for download content
 
