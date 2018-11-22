@@ -44,6 +44,9 @@ from linebot.models import (
     SeparatorComponent, QuickReply, QuickReplyButton
 )
 
+from linebot.models import (RichMenu, RichMenuSize,
+                            RichMenuArea, RichMenuBounds)
+
 app = Flask(__name__)
 
 # get channel_secret and channel_access_token from your environment variable
@@ -61,8 +64,63 @@ handler = WebhookHandler(channel_secret)
 
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
+for rich_menu in line_bot_api.get_rich_menu_list():
+    try:
+        print("Deleting rich menu: " + rich_menu.rich_menu_id)
+        line_bot_api.delete_rich_menu(rich_menu.rich_menu_id)
+    except LineBotApiError as e:
+        print(e.status_code, e.error.message, e.error.details)
+
+if len(line_bot_api.get_rich_menu_list()) == 0:
+    rich_menu_to_create = RichMenu(
+        size=RichMenuSize(width=2500, height=1686),
+        selected=True,
+        name="richmenu",
+        chat_bar_text="Menu",
+        areas=[
+            RichMenuArea(
+                bounds=RichMenuBounds(x=0, y=0, width=833, height=843),
+                action=MessageAction(label="ประวัติสุขภาพ",
+                                     text="ประวัติสุขภาพ")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=834, y=0, width=1666, height=843),
+                action=MessageAction(label="รายการยา", text="รายการยา")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=0, y=844, width=833, height=843),
+                action=MessageAction(label="ตารางนัดพบแพทย์",
+                                     text="ตารางนัดพบแพทย์")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=834, y=844, width=833, height=843),
+                action=MessageAction(label="เพิ่มยาใหม่",
+                                     text="เพิ่มยาใหม่")
+            ),
+            RichMenuArea(
+                bounds=RichMenuBounds(x=1667, y=844, width=833, height=843),
+                action=MessageAction(label="วิธีใช้",
+                                     text="วิธีใช้")
+            )
+        ]
+    )
+
+    rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+    file_path = "assets/default_rich_menu.jpg"
+    content_type = "image/jpeg"
+    with open(file_path, 'rb') as f:
+        line_bot_api.set_rich_menu_image(rich_menu_id, content_type, f)
+    app.logger.info("Rich menu id: " + rich_menu_id)
+    # Set default rich menu
+    print("Adding: " + rich_menu_id)
+    line_bot_api._post(
+        '/v2/bot/user/all/richmenu/{rich_menu_id}'.format(
+            rich_menu_id=rich_menu_id)
+    )
 
 # function for create tmp dir for download content
+
+
 def make_static_tmp_dir():
     try:
         os.makedirs(static_tmp_path)
@@ -98,15 +156,17 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    text = event.message.text
+    text = event.message.text.lower()
 
     if text == 'profile':
         if isinstance(event.source, SourceUser):
             profile = line_bot_api.get_profile(event.source.user_id)
             line_bot_api.reply_message(
                 event.reply_token, [
-                    TextSendMessage(text='Display name: ' + profile.display_name),
-                    TextSendMessage(text='Status message: ' + profile.status_message)
+                    TextSendMessage(text='Display name: ' +
+                                    profile.display_name),
+                    TextSendMessage(text='Status message: ' +
+                                    profile.status_message)
                 ]
             )
         else:
@@ -139,7 +199,8 @@ def handle_text_message(event):
             title='My buttons sample', text='Hello, my buttons', actions=[
                 URIAction(label='Go to line.me', uri='https://line.me'),
                 PostbackAction(label='ping', data='ping'),
-                PostbackAction(label='ping with text', data='ping', text='ping'),
+                PostbackAction(label='ping with text',
+                               data='ping', text='ping'),
                 MessageAction(label='Translate Rice', text='米')
             ])
         template_message = TemplateSendMessage(
@@ -152,7 +213,8 @@ def handle_text_message(event):
                 PostbackAction(label='ping', data='ping')
             ]),
             CarouselColumn(text='hoge2', title='fuga2', actions=[
-                PostbackAction(label='ping with text', data='ping', text='ping'),
+                PostbackAction(label='ping with text',
+                               data='ping', text='ping'),
                 MessageAction(label='Translate Rice', text='米')
             ]),
         ])
@@ -195,11 +257,16 @@ def handle_text_message(event):
                         layout='baseline',
                         margin='md',
                         contents=[
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/grey_star.png'),
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/grey_star.png'),
+                            IconComponent(
+                                size='sm', url='https://example.com/gold_star.png'),
+                            IconComponent(
+                                size='sm', url='https://example.com/grey_star.png'),
+                            IconComponent(
+                                size='sm', url='https://example.com/gold_star.png'),
+                            IconComponent(
+                                size='sm', url='https://example.com/gold_star.png'),
+                            IconComponent(
+                                size='sm', url='https://example.com/grey_star.png'),
                             TextComponent(text='4.0', size='sm', color='#999999', margin='md',
                                           flex=0)
                         ]
@@ -270,7 +337,8 @@ def handle_text_message(event):
                     ButtonComponent(
                         style='link',
                         height='sm',
-                        action=URIAction(label='WEBSITE', uri="https://example.com")
+                        action=URIAction(
+                            label='WEBSITE', uri="https://example.com")
                     )
                 ]
             ),
@@ -295,7 +363,7 @@ def handle_text_message(event):
                         ),
                         QuickReplyButton(
                             action=DatetimePickerAction(label="label3",
-                                                        data="data3",
+                                                        data="date_postback",
                                                         mode="date")
                         ),
                         QuickReplyButton(
@@ -308,6 +376,167 @@ def handle_text_message(event):
                             action=LocationAction(label="label6")
                         ),
                     ])))
+    elif text == "เพิ่มยาใหม่":
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text="ยาตัวไหนคะ", quick_reply=QuickReply(items=[
+                QuickReplyButton(action=MessageAction(
+                    label="ยาความดัน", text="ยาความดัน")),
+                QuickReplyButton(action=MessageAction(
+                    label="ยาเบาหวาน", text="ยาเบาหวาน")),
+                QuickReplyButton(action=MessageAction(
+                    label="ยาแก้อักเสบ", text="ยาแก้อักเสบ"))
+            ])))
+    elif text == "ยาความดัน":
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text="ทานเวลาไหนคะ", quick_reply=QuickReply(items=[
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="เช้า", text="เช้า")
+                ),
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="กลางวัน", text="กลางวัน")
+                ),
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="เย็น", text="เย็น")
+                ),
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="ก่อนนอน", text="ก่อนนอน")
+                ),
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="สามเวลา", text="สามเวลา")
+                ),
+                QuickReplyButton(
+                    action=MessageAction(
+                        label="เช้า-เย็น", text="เช้า-เย็น")
+                )
+            ])))
+    elif text == "สามเวลา":
+        confirm_template = ConfirmTemplate(text='ทานตอนไหนคะ', actions=[
+            MessageAction(label='ก่อนอาหาร', text='ก่อนอาหาร'),
+            MessageAction(label='หลังอาหาร', text='หลังอาหาร'),
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ทานตอนไหนคะ', template=confirm_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == "ก่อนอาหาร":
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text="บันทึกยาใหม่เรียบร้อยแล้วค่ะ"),
+                StickerSendMessage(package_id=2, sticker_id=144)
+            ])
+    elif text == "push":
+        confirm_template = ConfirmTemplate(text='ทานยาความดันก่อนอาหารหรือยังคะ', actions=[
+            MessageAction(label='ทานแล้ว', text='ทานแล้ว'),
+            MessageAction(label='ยังเลย', text='ยังเลย'),
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ทานยาความดันก่อนอาหารหรือยังคะ', template=confirm_template)
+        line_bot_api.reply_message(
+            event.reply_token, [
+                template_message,
+                StickerSendMessage(package_id=11537, sticker_id=52002744)
+            ])
+    elif text == "ยังเลย":
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(
+                    text="อย่าลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ"),
+                StickerSendMessage(package_id=11537, sticker_id=52002772)
+            ])
+    elif text == "ทานแล้ว":
+        line_bot_api.reply_message(
+            event.reply_token, [
+                TextSendMessage(text="เยี่ยมมากค่ะ"),
+                StickerSendMessage(package_id=11537, sticker_id=52002735)
+            ])
+    elif text == "รายการยา":
+        bubble = BubbleContainer(
+            direction='ltr',
+            body=BoxComponent(
+                layout='vertical',
+                contents=[
+                    TextComponent(text='รายการยา', weight='bold', size='xxl'),
+                    BoxComponent(
+                        layout='vertical',
+                        margin='lg',
+                        spacing='sm',
+                        contents=[
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='md',
+                                contents=[
+                                    TextComponent(
+                                        text='ชื่อยา',
+                                        size='lg',
+                                        flex=2
+                                    ),
+                                    TextComponent(
+                                        text='เวลาทาน',
+                                        size='lg',
+                                        align="center",
+                                        flex=4
+                                    )
+                                ],
+                            ),
+                            SeparatorComponent(),
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='md',
+                                contents=[
+                                    TextComponent(
+                                        text='ยาความดัน',
+                                        size='sm',
+                                        flex=2
+                                    ),
+                                    TextComponent(
+                                        text='สามเวลา',
+                                        size='sm',
+                                        align="end",
+                                        flex=2
+                                    ),
+                                    TextComponent(
+                                        text='ก่อนอาหาร',
+                                        size='sm',
+                                        flex=2
+                                    )
+                                ],
+                            ),
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='md',
+                                contents=[
+                                    TextComponent(
+                                        text='ยาแก้อักเสบ',
+                                        size='sm',
+                                        flex=2
+                                    ),
+                                    TextComponent(
+                                        text='เช้า-เย็น',
+                                        size='sm',
+                                        align="end",
+                                        flex=2
+                                    ),
+                                    TextComponent(
+                                        text='หลังอาหาร',
+                                        size='sm',
+                                        flex=2
+                                    )
+                                ],
+                            )
+                        ],
+                    )
+                ],
+            )
+        )
+        message = FlexSendMessage(alt_text="รายการยา", contents=bubble)
+        line_bot_api.reply_message(
+            event.reply_token,
+            message
+        )
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
@@ -359,7 +588,8 @@ def handle_content_message(event):
     line_bot_api.reply_message(
         event.reply_token, [
             TextSendMessage(text='Save content.'),
-            TextSendMessage(text=request.host_url + os.path.join('static', 'tmp', dist_name))
+            TextSendMessage(text=request.host_url +
+                            os.path.join('static', 'tmp', dist_name))
         ])
 
 
@@ -378,14 +608,15 @@ def handle_file_message(event):
     line_bot_api.reply_message(
         event.reply_token, [
             TextSendMessage(text='Save file.'),
-            TextSendMessage(text=request.host_url + os.path.join('static', 'tmp', dist_name))
+            TextSendMessage(text=request.host_url +
+                            os.path.join('static', 'tmp', dist_name))
         ])
 
 
 @handler.add(FollowEvent)
 def handle_follow(event):
     line_bot_api.reply_message(
-        event.reply_token, TextSendMessage(text='Got follow event'))
+        event.reply_token, TextSendMessage(text='สวัสดีค่ะ'))
 
 
 @handler.add(UnfollowEvent)
@@ -416,26 +647,3 @@ def handle_postback(event):
     elif event.postback.data == 'date_postback':
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.postback.params['date']))
-
-
-@handler.add(BeaconEvent)
-def handle_beacon(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(
-            text='Got beacon event. hwid={}, device_message(hex string)={}'.format(
-                event.beacon.hwid, event.beacon.dm)))
-
-
-if __name__ == "__main__":
-    arg_parser = ArgumentParser(
-        usage='Usage: python ' + __file__ + ' [--port <port>] [--help]'
-    )
-    arg_parser.add_argument('-p', '--port', type=int, default=8000, help='port')
-    arg_parser.add_argument('-d', '--debug', default=False, help='debug')
-    options = arg_parser.parse_args()
-
-    # create tmp dir for download content
-    make_static_tmp_dir()
-
-    app.run(debug=options.debug, port=options.port, host='0.0.0.0')
