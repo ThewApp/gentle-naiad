@@ -65,7 +65,7 @@ handler = WebhookHandler(channel_secret)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
 for rich_menu in line_bot_api.get_rich_menu_list():
-    line_bot_api.delete_rich_menu(rich_menu.richMenuId)
+    line_bot_api.delete_rich_menu(rich_menu.rich_menu_id)
 
 rich_menu_to_create = RichMenu(
     size=RichMenuSize(width=2500, height=1686),
