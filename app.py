@@ -388,6 +388,52 @@ def handle_text_message(event):
                 TextSendMessage(text="เยี่ยมมากค่ะ"),
                 StickerSendMessage(package_id=11537, sticker_id=52002735)
             ])
+    elif text == "รายการยา":
+        bubble = BubbleContainer(
+            direction='ltr',
+            body=BoxComponent(
+                layout='vertical',
+                contents=[
+                    # title
+                    TextComponent(text='รายการยา', weight='bold', size='xl'),
+                    # review
+                    BoxComponent(
+                        layout='vertical',
+                        margin='lg',
+                        spacing='sm',
+                        contents=[
+                            BoxComponent(
+                                layout='baseline',
+                                spacing='sm',
+                                contents=[
+                                    TextComponent(
+                                        text='ยาความดัน',
+                                        color='#666666',
+                                        size='sm',
+                                    ),
+                                    TextComponent(
+                                        text='สามเวลา',
+                                        wrap=True,
+                                        color='#666666',
+                                        size='sm',
+                                    ),
+                                    TextComponent(
+                                        text='ก่อนอาหาร',
+                                        color='#666666',
+                                        size='sm',
+                                    )
+                                ],
+                            )
+                        ],
+                    )
+                ],
+            )
+        )
+        message = FlexSendMessage(alt_text="รายการยา", contents=bubble)
+        line_bot_api.reply_message(
+            event.reply_token,
+            message
+        )
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
