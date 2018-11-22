@@ -61,6 +61,21 @@ handler = WebhookHandler(channel_secret)
 
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
+# if len(line_bot_api.get_rich_menu_list()) == 0:
+#     rich_menu_to_create = RichMenu(
+#     size=RichMenuSize(width=2500, height=843),
+#     selected=False,
+#     name="richmenu",
+#     chat_bar_text="Menu",
+#     areas=[RichMenuArea(
+#         bounds=RichMenuBounds(x=0, y=0, width=2500, height=843),
+#         action=URIAction(label='Go to line.me', uri='https://line.me'))]
+#     )
+    
+#     rich_menu_id = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+#     file_path
+#     with open(file_path, 'rb') as f:
+#         line_bot_api.set_rich_menu_image(rich_menu_id, content_type, f)
 
 # function for create tmp dir for download content
 def make_static_tmp_dir():
@@ -308,6 +323,9 @@ def handle_text_message(event):
                             action=LocationAction(label="label6")
                         ),
                     ])))
+    elif text == "เพิ่มยาใหม่":
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text="ยาตัวไหนคะ"))
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
@@ -416,26 +434,3 @@ def handle_postback(event):
     elif event.postback.data == 'date_postback':
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.postback.params['date']))
-
-
-@handler.add(BeaconEvent)
-def handle_beacon(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(
-            text='Got beacon event. hwid={}, device_message(hex string)={}'.format(
-                event.beacon.hwid, event.beacon.dm)))
-
-
-if __name__ == "__main__":
-    arg_parser = ArgumentParser(
-        usage='Usage: python ' + __file__ + ' [--port <port>] [--help]'
-    )
-    arg_parser.add_argument('-p', '--port', type=int, default=8000, help='port')
-    arg_parser.add_argument('-d', '--debug', default=False, help='debug')
-    options = arg_parser.parse_args()
-
-    # create tmp dir for download content
-    make_static_tmp_dir()
-
-    app.run(debug=options.debug, port=options.port)
