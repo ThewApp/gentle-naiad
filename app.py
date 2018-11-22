@@ -326,6 +326,30 @@ def handle_text_message(event):
     elif text == "เพิ่มยาใหม่":
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text="ยาตัวไหนคะ"))
+    elif text == "ยาความดัน":
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text="ทานตอนไหน",
+                quick_reply=QuickReply(
+                    items=[
+                        QuickReplyButton(
+                            action=MessageAction(label="เช้า", text="เช้า")
+                        ),
+                        QuickReplyButton(
+                            action=MessageAction(label="กลางวัน", text="กลางวัน")
+                        ),
+                        QuickReplyButton(
+                            action=MessageAction(label="เย็น", text="เย็น")
+                        ),
+                        QuickReplyButton(
+                            action=MessageAction(label="ก่อนนอน", text="ก่อนนอน")
+                        ),
+                        QuickReplyButton(
+                            action=MessageAction(label="สามเวลา", text="สามเวลา")
+                        ),
+                        QuickReplyButton(
+                            action=MessageAction(label="เช้า-เย็น", text="เช้า-เย็น")
+                        )
+                    ])))
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
