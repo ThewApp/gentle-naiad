@@ -350,6 +350,14 @@ def handle_text_message(event):
                             action=MessageAction(label="เช้า-เย็น", text="เช้า-เย็น")
                         )
                     ])))
+    elif text == "สามเวลา":
+        confirm_template = ConfirmTemplate(text='ทานตอนไหนคะ', actions=[
+            MessageAction(label='ก่อนอาหาร', text='ก่อนอาหาร'),
+            MessageAction(label='หลังอาหาร', text='หลังอาหาร'),
+        ])
+        template_message = TemplateSendMessage(
+            alt_text='ทานตอนไหนคะ', template=confirm_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
