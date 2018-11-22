@@ -379,7 +379,7 @@ def handle_text_message(event):
     elif text == "ยังเลย":
         line_bot_api.reply_message(
             event.reply_token, [
-                TextSendMessage(text="ยาลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภา่พ"),
+                TextSendMessage(text="ยาลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ"),
                 StickerSendMessage(package_id=11537, sticker_id=52002772)
             ])
     else:
