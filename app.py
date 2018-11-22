@@ -360,13 +360,10 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, template_message)
     elif text == "ก่อนอาหาร":
         line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text="บันทึกยาใหม่เรียบร้อยแล้วค่ะ"))
-        line_bot_api.reply_message(
-            event.reply_token,
-            StickerSendMessage(
-                package_id=2,
-                sticker_id=144)
-        )
+            event.reply_token, [
+                TextSendMessage(text="บันทึกยาใหม่เรียบร้อยแล้วค่ะ"),
+                StickerSendMessage(package_id=2, sticker_id=144)
+            ])
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
