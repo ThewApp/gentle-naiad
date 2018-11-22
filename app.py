@@ -477,6 +477,7 @@ def handle_text_message(event):
                                     TextComponent(
                                         text='เวลาทาน',
                                         size='lg',
+                                        align="center"
                                         flex=4
                                     )
                                 ],
