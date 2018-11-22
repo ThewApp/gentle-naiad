@@ -358,6 +358,9 @@ def handle_text_message(event):
         template_message = TemplateSendMessage(
             alt_text='ทานตอนไหนคะ', template=confirm_template)
         line_bot_api.reply_message(event.reply_token, template_message)
+    elif text == "ก่อนอาหาร":
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text="บันทึกยาใหม่เรียบร้อยแล้วค่ะ"))
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
