@@ -1,6 +1,7 @@
 Flask>=1.0.2
-line-bot-sdk>=1.8.0
 gunicorn>=19.9.0
+ipython<7.0.0
+line-bot-sdk>=1.8.0
+pythainlp>=1.7.1
 rasa_core>=0.12
 rasa_nlu[tensorflow]>=0.13 
-pythainlp>=1.7.1
