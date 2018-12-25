@@ -9,7 +9,7 @@ agent = Agent.load("models/dialogue", interpreter=RegexInterpreter())
 
 line_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 line_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
-port = os.getenv('PORT', None)
+port = int(os.getenv('PORT', None))
 
 input_channel = LineInput(
     line_secret=line_secret,
