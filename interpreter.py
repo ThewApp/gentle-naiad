@@ -16,7 +16,9 @@ class LineEventInterpreter(NaturalLanguageInterpreter):
 
         if self.lazy_init and self.interpreter is None:
             self._load_interpreter()
-        return self.interpreter.parse(event.message.text)
+        parsed = self.interpreter.parse(event.message.text)
+        parsed.event = event
+        return parsed
 
     def _load_interpreter(self):
         from rasa_nlu.model import Interpreter
