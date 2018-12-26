@@ -1,8 +1,8 @@
 from flask import Flask
-from line import LineInput
+from rasa.line import LineInput
 import os
 from rasa_core.agent import Agent
-from interpreter import LineEventInterpreter
+from rasa.interpreter import LineEventInterpreter
 
 # load your trained agent
 agent = Agent.load("models/dialogue", interpreter=LineEventInterpreter("models/current/nlu"))
