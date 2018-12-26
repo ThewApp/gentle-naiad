@@ -9,6 +9,7 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage)
 
+
 class RasaLineHandler():
     @classmethod
     def name(cls):
@@ -23,24 +24,26 @@ class RasaLineHandler():
         def handle_text_message(event):
             out_channel = LineOutput(self.line_api, event.reply_token)
             user_msg = UserMessage(event.message.text, out_channel, event.source.user_id,
-                               input_channel=self.name())
+                                   input_channel=self.name())
             self.on_new_message(user_msg)
 
     def handle(self, body, signature):
         self.webhook.handle(body, signature)
 
+
 class LineOutput(OutputChannel):
     @classmethod
     def name(cls):
         return "line"
-    
+
     def __init__(self, line_api, reply_token):
         self.line_api = line_api
         self.reply_token = reply_token
-    
+
     def send_text_message(self, recipient_id, message):
         self.line_api.reply_message(
-                self.reply_token, TextSendMessage(text="Rasa: " + message + " recipient_id: " + recipient_id))
+            self.reply_token, TextSendMessage(text="Rasa: " + message))
+
 
 class LineInput(InputChannel):
     """LINE input channel implementation. Based on the HTTPInputChannel."""
@@ -59,7 +62,7 @@ class LineInput(InputChannel):
             line_access_token: Access token
         """
         self.webhook = WebhookHandler(line_secret)
-        self.lint_api = LineBotApi(line_access_token)
+        self.line_api = LineBotApi(line_access_token)
 
     def blueprint(self, on_new_message):
 
@@ -73,7 +76,8 @@ class LineInput(InputChannel):
         def webhook():
             signature = request.headers.get("X-Line-Signature") or ''
             body = request.get_data(as_text=True)
-            handler = RasaLineHandler(self.webhook, self.line_api, on_new_message)
+            handler = RasaLineHandler(
+                self.webhook, self.line_api, on_new_message)
             try:
                 handler.handle(body, signature)
             except LineBotApiError as e:
