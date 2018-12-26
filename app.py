@@ -1,4 +1,3 @@
-from flask import Flask
 from rasa.line import LineInput
 import os
 from rasa_core.agent import Agent

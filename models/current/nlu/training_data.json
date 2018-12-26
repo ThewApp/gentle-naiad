@@ -26,10 +26,6 @@
         "text": "hey there"
       },
       {
-        "intent": "greet",
-        "text": "สวัสดีปีใหม่"
-      },
-      {
         "intent": "goodbye",
         "text": "bye"
       },

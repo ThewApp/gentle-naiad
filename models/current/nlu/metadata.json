@@ -3,7 +3,7 @@
     "pipeline": [
         {
             "name": "thai_tokenizer",
-            "class": "thai_tokenize.thai_tokenize"
+            "class": "rasa.thai_tokenize.thai_tokenize"
         },
         {
             "BILOU_flag": true,
@@ -92,6 +92,6 @@
         }
     ],
     "training_data": "training_data.json",
-    "trained_at": "20181226-122330",
+    "trained_at": "20181226-135324",
     "rasa_nlu_version": "0.13.8"
 }
