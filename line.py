@@ -9,6 +9,14 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage)
 
+class RasaLineHandler(WebhookHandler):
+    def __init__(self, line_secret):
+        super().__init__(self.line_secret)
+
+    def handle(body, signature, on_new_message):
+        super().handle(body, signature)
+
+
 class LineInput(InputChannel):
     """LINE input channel implementation. Based on the HTTPInputChannel."""
 
@@ -28,7 +36,7 @@ class LineInput(InputChannel):
         # self.line_secret = line_secret
         # self.line_access_token = line_access_token
         self.line_bot_api = LineBotApi(line_access_token)
-        self.handler = WebhookHandler(line_secret)
+        self.handler = RasaLineHandler(line_secret)
 
         @self.handler.add(MessageEvent, message=TextMessage)
         def handle_text_message(event):
@@ -48,7 +56,7 @@ class LineInput(InputChannel):
             signature = request.headers.get("X-Line-Signature") or ''
             body = request.get_data(as_text=True)
             try:
-                self.handler.handle(body, signature)
+                self.handler.handle(body, signature, on_new_message)
             except LineBotApiError as e:
                 print("Got exception from LINE Messaging API: %s\n" % e.message)
                 for m in e.error.details:
