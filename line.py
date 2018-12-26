@@ -22,7 +22,7 @@ class RasaLineHandler(WebhookHandler):
             self.line_bot_api.reply_message(
                 event.reply_token, TextSendMessage(text=event.message.text + event.source.user_id))
 
-    def handle(self, body, signature, on_new_message):
+    def handle(self, body, signature):
         # out_channel = LineOutput(self.line_bot_api)
         # on_new_message(UserMessage())
         super().handle(body, signature)
