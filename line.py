@@ -9,43 +9,37 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage)
 
-class RasaLineHandler(WebhookHandler):
+class RasaLineHandler():
     @classmethod
     def name(cls):
         return "line"
 
-    def __init__(self, line_secret, line_access_token, on_new_message):
-        self.line_secret = line_secret
-        self.line_bot_api = LineBotApi(line_access_token)
+    def __init__(self, webhook, line_api, on_new_message):
+        self.webhook = webhook
+        self.line_api = line_api
         self.on_new_message = on_new_message
 
-        super().__init__(self.line_secret)
-
-        @self.add(MessageEvent, message=TextMessage)
+        @self.webhook.add(MessageEvent, message=TextMessage)
         def handle_text_message(event):
-            out_channel = LineOutput(self.line_bot_api, event.reply_token)
+            out_channel = LineOutput(self.line_api, event.reply_token)
             user_msg = UserMessage(event.message.text, out_channel, event.source.user_id,
                                input_channel=self.name())
             self.on_new_message(user_msg)
-            self.line_bot_api.reply_message(
-                event.reply_token, TextSendMessage(text=event.message.text + event.source.user_id))
 
     def handle(self, body, signature):
-        # out_channel = LineOutput(self.line_bot_api)
-        # on_new_message(UserMessage())
-        super().handle(body, signature)
+        self.webhook.handle(body, signature)
 
 class LineOutput(OutputChannel):
     @classmethod
     def name(cls):
         return "line"
     
-    def __init__(self, line_bot_api, reply_token):
-        self.line_bot_api = line_bot_api
+    def __init__(self, line_api, reply_token):
+        self.line_api = line_api
         self.reply_token = reply_token
     
     def send_text_message(self, recipient_id, message):
-        self.line_bot_api.reply_message(
+        self.line_api.reply_message(
                 self.reply_token, TextSendMessage(text="Rasa: " + message + " recipient_id: " + recipient_id))
 
 class LineInput(InputChannel):
@@ -64,8 +58,8 @@ class LineInput(InputChannel):
             line_secret: Line Signature validation
             line_access_token: Access token
         """
-        self.line_secret = line_secret
-        self.line_access_token = line_access_token
+        self.webhook = WebhookHandler(line_secret)
+        self.lint_api = LineBotApi(line_access_token)
 
     def blueprint(self, on_new_message):
 
@@ -79,7 +73,7 @@ class LineInput(InputChannel):
         def webhook():
             signature = request.headers.get("X-Line-Signature") or ''
             body = request.get_data(as_text=True)
-            handler = RasaLineHandler(self.line_secret, self.line_access_token, on_new_message)
+            handler = RasaLineHandler(self.webhook, self.line_api, on_new_message)
             try:
                 handler.handle(body, signature)
             except LineBotApiError as e:
