@@ -10,6 +10,10 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage)
 
 class RasaLineHandler(WebhookHandler):
+    @classmethod
+    def name(cls):
+        return "line"
+
     def __init__(self, line_secret, line_access_token, on_new_message):
         self.line_secret = line_secret
         self.line_bot_api = LineBotApi(line_access_token)
@@ -19,6 +23,10 @@ class RasaLineHandler(WebhookHandler):
 
         @self.add(MessageEvent, message=TextMessage)
         def handle_text_message(event):
+            out_channel = LineOutput(self.line_bot_api, event.reply_token)
+            user_msg = UserMessage(event.message.text, out_channel, event.source.user_id,
+                               input_channel=self.name())
+            self.on_new_message(user_msg)
             self.line_bot_api.reply_message(
                 event.reply_token, TextSendMessage(text=event.message.text + event.source.user_id))
 
@@ -27,15 +35,18 @@ class RasaLineHandler(WebhookHandler):
         # on_new_message(UserMessage())
         super().handle(body, signature)
 
-# class LineOutput(OutputChannel):
-#     @classmethod
-#     def name(cls):
-#         return "line"
+class LineOutput(OutputChannel):
+    @classmethod
+    def name(cls):
+        return "line"
     
-#     def __init__(self, line_bot_api):
-#         self.line_bot_api = line_bot_api
+    def __init__(self, line_bot_api, reply_token):
+        self.line_bot_api = line_bot_api
+        self.reply_token = reply_token
     
-#     def send_text_message(self):
+    def send_text_message(self, recipient_id, message):
+        self.line_bot_api.reply_message(
+                self.reply_token, TextSendMessage(text="Rasa: " + message + " recipient_id: " + recipient_id))
 
 class LineInput(InputChannel):
     """LINE input channel implementation. Based on the HTTPInputChannel."""
