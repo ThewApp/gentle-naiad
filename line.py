@@ -11,7 +11,7 @@ from linebot.models import (
 
 class RasaLineHandler(WebhookHandler):
     def __init__(self, line_secret):
-        super().__init__(self.line_secret)
+        super().__init__(line_secret)
 
     def handle(body, signature, on_new_message):
         super().handle(body, signature)
