@@ -23,8 +23,9 @@ class RasaLineHandler():
         @self.webhook.add(MessageEvent, message=TextMessage)
         def handle_text_message(event):
             out_channel = LineOutput(self.line_api, event.reply_token)
-            user_msg = UserMessage(event, out_channel, event.source.user_id,
+            user_msg = UserMessage(event.message.text, out_channel, event.source.user_id,
                                    input_channel=self.name())
+            user_msg.event = event
             self.on_new_message(user_msg)
 
     def handle(self, body, signature):
