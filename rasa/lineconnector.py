@@ -68,7 +68,9 @@ class LineOutput(CollectingOutputChannel):
     def send_reply(self):
         if self.messages:
             # Filter out internal keys
-            messages = {key: self.messages[key] for key in self.messages if key not in ["recipient_id"]}
+            internal_keys = ['recipient_id']
+            messages = [{key: message[key] for key in message if key not in internal_keys}
+                        for message in self.messages]
             data = {
                 'replyToken': self.reply_token,
                 'messages': messages
