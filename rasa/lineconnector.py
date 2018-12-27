@@ -44,15 +44,15 @@ class LineOutput(CollectingOutputChannel):
         super().__init__()
 
     def send_output(self):
-        ReplyMessages = []
-        for message in self.messages:
-            if "text" in message:
-                ReplyMessages.append(TextSendMessage(message['text']))
-            elif "image" in message:
-                ReplyMessages.append(ImageSendMessage(
-                    message['image']['original'], message['image']['preview']))
-        print("sending :", self.messages)
-        self.line_api.reply_message(self.reply_token, ReplyMessages)
+        if self.messages:
+            ReplyMessages = []
+            for message in self.messages:
+                if "text" in message:
+                    ReplyMessages.append(TextSendMessage(message['text']))
+                elif "image" in message:
+                    ReplyMessages.append(ImageSendMessage(
+                        message['image']['original'], message['image']['preview']))
+            self.line_api.reply_message(self.reply_token, ReplyMessages)
 
 
 class LineInput(InputChannel):
