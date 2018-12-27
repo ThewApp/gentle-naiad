@@ -16,6 +16,7 @@ class LineNLG(NaturalLanguageGenerator):
     def _random_template_for(self, line_action: Text) -> Optional[Dict[Text, Any]]:
         """Select random template for the line action from available ones."""
 
+        print("_random_template_for")
         if line_action in self.templates:
             return np.random.choice(self.templates[line_action])
         else:
@@ -28,8 +29,6 @@ class LineNLG(NaturalLanguageGenerator):
                  **kwargs: Any
                  ) -> Optional[Dict[Text, Any]]:
         """Generate a response for the requested template."""
-
-        print("Generate")
 
         filled_slots = tracker.current_slot_values()
         return self.generate_from_slots(template_name,
@@ -47,6 +46,7 @@ class LineNLG(NaturalLanguageGenerator):
 
         # Fetching a random template for the passed template name
         r = copy.deepcopy(self._random_template_for(template_name))
+        print("generate_from_slots")
         # Filling the slots in the template and returning the template
         if r is not None:
             return self._fill_template_text(r, filled_slots, **kwargs)
@@ -61,6 +61,7 @@ class LineNLG(NaturalLanguageGenerator):
     ) -> Dict[Text, Any]:
         """"Combine slot values and key word arguments to fill templates."""
 
+        print("_fill_template_text")
         # Getting the slot values in the template variables
         template_vars = self._template_variables(filled_slots, kwargs)
 

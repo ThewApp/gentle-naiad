@@ -20,7 +20,6 @@ class LineDispatcher(Dispatcher):
         """"Send a message to the client based on a template."""
 
         message = self.nlg.generate(template, tracker, **kwargs)
-        print(message, self.nlg.templates)
 
         if not message:
             return
