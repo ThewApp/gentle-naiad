@@ -7,25 +7,27 @@ intents:
   - mood_unhappy
 
 actions:
-- utter_greet
-- utter_cheer_up
-- utter_did_that_help
-- utter_happy
-- utter_goodbye
+  - line_greet
+  - line_cheer_up
+  - line_did_that_help
+  - line_happy
+  - line_goodbye
 
 templates:
-  utter_greet:
-  - text: "Hey! How are you?"
+  line_greet:
+    - text: "Hey! How are you?"
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+  line_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image:
+        original: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024"
+        preview: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240"
 
-  utter_did_that_help:
-  - text: "Did that help you?"
+  line_did_that_help:
+    - text: "Did that help you?"
 
-  utter_happy:
-  - text: "Great carry on!"
+  line_happy:
+    - text: "Great carry on!"
 
-  utter_goodbye:
-  - text: "Bye"
+  line_goodbye:
+    - text: "Bye"

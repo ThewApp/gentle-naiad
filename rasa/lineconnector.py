@@ -7,7 +7,7 @@ from linebot.exceptions import (
     LineBotApiError, InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage)
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage)
 
 
 class RasaLineHandler():
@@ -42,13 +42,17 @@ class LineOutput(CollectingOutputChannel):
         self.line_api = line_api
         self.reply_token = reply_token
         super().__init__()
-    
+
     def send_output(self):
         ReplyMessages = []
         for message in self.messages:
             if "text" in message:
                 ReplyMessages.append(TextSendMessage(message['text']))
+            if "image" in message:
+                ReplyMessages.append(ImageSendMessage(
+                    message['image']['original'], message['image']['preview']))
         self.line_api.reply_message(self.reply_token, ReplyMessages)
+
 
 class LineInput(InputChannel):
     """LINE input channel implementation. Based on the HTTPInputChannel."""

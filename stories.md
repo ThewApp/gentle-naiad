@@ -1,27 +1,27 @@
 ## happy path
 * greet
-  - utter_greet
+  - line_greet
 * mood_great
-  - utter_happy
+  - line_happy
 
 ## sad path 1
 * greet
-  - utter_greet
+  - line_greet
 * mood_unhappy
-  - utter_cheer_up
-  - utter_did_that_help
+  - line_cheer_up
+  - line_did_that_help
 * mood_affirm
-  - utter_happy
+  - line_happy
 
 ## sad path 2
 * greet
-  - utter_greet
+  - line_greet
 * mood_unhappy
-  - utter_cheer_up
-  - utter_did_that_help
+  - line_cheer_up
+  - line_did_that_help
 * mood_deny
-  - utter_goodbye
+  - line_goodbye
 
 ## say goodbye
 * goodbye
-  - utter_goodbye
+  - line_goodbye
