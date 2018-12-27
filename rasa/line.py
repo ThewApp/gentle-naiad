@@ -44,10 +44,11 @@ class LineOutput(CollectingOutputChannel):
         super().__init__()
     
     def send_output(self):
-        TextMessage = []
+        ReplyMessages = []
         for message in self.messages:
-            TextMessage.append(TextSendMessage(message['text']))
-        self.line_api.reply_message(self.reply_token, TextMessage)
+            if "text" in message:
+                ReplyMessages.append(TextSendMessage(message['text']))
+        self.line_api.reply_message(self.reply_token, ReplyMessages)
 
 class LineInput(InputChannel):
     """LINE input channel implementation. Based on the HTTPInputChannel."""
