@@ -1,9 +1,9 @@
-import numpy as np
 from rasa_core.nlg.generator import NaturalLanguageGenerator
 from rasa_core.trackers import DialogueStateTracker
 
 import copy
 import logging
+import random
 from typing import Text, Any, Dict, Optional, List
 
 logger = logging.getLogger(__name__)
@@ -17,7 +17,7 @@ class LineNLG(NaturalLanguageGenerator):
         """Select random template for the line action from available ones."""
 
         if line_action in self.templates:
-            return np.random.choice(self.templates[line_action])
+            return random.choice(self.templates[line_action])
         else:
             return None
 
