@@ -1,4 +1,4 @@
-from rasa_core.channels import UserMessage, OutputChannel, InputChannel
+from rasa_core.channels import UserMessage, CollectingOutputChannel, InputChannel
 from flask import Blueprint, request, jsonify, abort
 from linebot import (
     LineBotApi, WebhookHandler
@@ -27,12 +27,13 @@ class RasaLineHandler():
                                    input_channel=self.name())
             user_msg.event = event
             self.on_new_message(user_msg)
+            out_channel.send_output()
 
     def handle(self, body, signature):
         self.webhook.handle(body, signature)
 
 
-class LineOutput(OutputChannel):
+class LineOutput(CollectingOutputChannel):
     @classmethod
     def name(cls):
         return "line"
@@ -40,11 +41,12 @@ class LineOutput(OutputChannel):
     def __init__(self, line_api, reply_token):
         self.line_api = line_api
         self.reply_token = reply_token
-
-    def send_text_message(self, recipient_id, message):
-        self.line_api.reply_message(
-            self.reply_token, TextSendMessage(text="Rasa: " + message))
-
+    
+    def send_output(self):
+        TextMessage = []
+        for message in self.messages:
+            TextMessage.append(TextSendMessage(message.text))
+        self.line_api.reply_message(self.reply_token, TextMessage)
 
 class LineInput(InputChannel):
     """LINE input channel implementation. Based on the HTTPInputChannel."""
