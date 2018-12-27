@@ -1,7 +1,7 @@
 from rasa_core.actions import Action
 from rasa_core.domain import Domain
 from rasa_core.utils import EndpointConfig
-from lineaction import action_from_name
+from rasa.lineaction import action_from_name
 
 from typing import Text, List, Optional, Callable, Any, Dict, Union
 

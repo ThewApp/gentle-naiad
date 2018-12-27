@@ -1,7 +1,7 @@
 from rasa_core.agent import Agent
 from rasa_core.processor import MessageProcessor
-from linedispatcher import LineDispatcher
-from linedomain import LineDomain
+from rasa.linedispatcher import LineDispatcher
+from rasa.linedomain import LineDomain
 import logging
 
 from typing import Text, List, Optional, Callable, Any, Dict, Union
