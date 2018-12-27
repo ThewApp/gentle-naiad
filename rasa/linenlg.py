@@ -46,6 +46,7 @@ class LineNLG(NaturalLanguageGenerator):
         # Fetching a random template for the passed template name
         r = copy.deepcopy(self._random_template_for(template_name))
         # Filling the slots in the template and returning the template
+        print(r)
         if r is not None:
             return self._fill_template_text(r, filled_slots, **kwargs)
         else:

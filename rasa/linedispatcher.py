@@ -21,10 +21,10 @@ class LineDispatcher(Dispatcher):
 
         message = self.nlg.generate(template, tracker, **kwargs)
 
+        print(message)
+
         if not message:
             return
-
-        print(message)
 
         if type(message) == list:
             for item in message:
