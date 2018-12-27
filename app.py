@@ -1,10 +1,10 @@
-from rasa.line import LineInput
+from rasa.lineconnector import LineInput
 import os
-from rasa_core.agent import Agent
+from rasa.lineagent import LineAgent
 from rasa_core.interpreter import RasaNLUInterpreter
 
 # load your trained agent
-agent = Agent.load("models/dialogue", interpreter=RasaNLUInterpreter("models/current/nlu"))
+agent = LineAgent.load("models/dialogue", interpreter=RasaNLUInterpreter("models/current/nlu"))
 
 line_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 line_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
