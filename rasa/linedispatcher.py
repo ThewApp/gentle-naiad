@@ -21,8 +21,6 @@ class LineDispatcher(Dispatcher):
 
         message = self.nlg.generate(template, tracker, **kwargs)
 
-        print(message)
-
         if not message:
             return
 
