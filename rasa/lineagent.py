@@ -1,10 +1,12 @@
 from rasa_core.agent import Agent
 from rasa_core.interpreter import NaturalLanguageInterpreter
+from rasa_core.policies import Policy
 from rasa_core.policies.ensemble import PolicyEnsemble
 from rasa_core.processor import MessageProcessor
 from rasa_core.utils import EndpointConfig
 from rasa.linedispatcher import LineDispatcher
 from rasa.linedomain import LineDomain
+from rasa.linenlg import LineNLG
 
 import logging
 import os
@@ -14,6 +16,20 @@ logger = logging.getLogger(__name__)
 
 
 class LineAgent(Agent):
+    def __init__(
+        self,
+        domain: Union[Text, LineDomain] = None,
+        policies: Union[PolicyEnsemble, List[Policy], None] = None,
+        interpreter: Optional[NaturalLanguageInterpreter] = None,
+        generator: Union[EndpointConfig, 'NLG', None] = None,
+        tracker_store: Optional['TrackerStore'] = None,
+        action_endpoint: Optional[EndpointConfig] = None,
+        fingerprint: Optional[Text] = None
+    ):
+        super().__init__(domain, policies, interpreter, generator,
+                         tracker_store, action_endpoint, fingerprint)
+        self.nlg = LineNLG(self.domain)
+
     def create_processor(self,
                          preprocessor: Optional[Callable[[Text], Text]] = None
                          ) -> MessageProcessor:

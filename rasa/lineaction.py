@@ -21,14 +21,12 @@ def action_from_name(name: Text, action_endpoint: Optional[EndpointConfig],
 
 
 class LineAction(Action):
-
     def __init__(self, name):
         self._name = name
 
     def run(self, dispatcher, tracker, domain):
 
-        dispatcher.line_template(self.name(),
-                                  tracker)
+        dispatcher.line_template(self.name(), tracker)
         return []
 
     def name(self) -> Text:

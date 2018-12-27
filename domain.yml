@@ -18,10 +18,10 @@ templates:
     - text: "Hey! How are you?"
 
   line_cheer_up:
-    - text: "Here is something to cheer you up:"
-      image:
-        original: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024"
-        preview: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240"
+    - - image:
+          original: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024"
+          preview: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240"
+      - text: "Here is something to cheer you up:"
 
   line_did_that_help:
     - text: "Did that help you?"
