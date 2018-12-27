@@ -30,8 +30,16 @@ templates:
       text: "Did that help you?"
 
   line_happy:
-    - type: "text"
-      text: "Great carry on!"
+    - - type: "text"
+        text: "Great carry on!"
+      - type: "sticker"
+        packageId: "11538"
+        stickerId: "51626501"
+    - - type: "text"
+        text: "Great carry on!"
+      - type: "sticker"
+        packageId: "11537"
+        stickerId: "52002734"
 
   line_goodbye:
     - type: "text"

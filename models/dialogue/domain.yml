@@ -41,5 +41,13 @@ templates:
   - text: Hey! How are you?
     type: text
   line_happy:
-  - text: Great carry on!
-    type: text
+  - - text: Great carry on!
+      type: text
+    - packageId: '11538'
+      stickerId: '51626501'
+      type: sticker
+  - - text: Great carry on!
+      type: text
+    - packageId: '11537'
+      stickerId: '52002734'
+      type: sticker
