@@ -43,7 +43,7 @@ class LineApi():
         self.line_endpoint = "https://api.line.me/v2/bot/message"
 
     def post(self, url, data):
-        response = requests.post(self.line_endpoint + url, data)
+        response = requests.post(self.line_endpoint + url, data, headers=self.headers)
         self.check_error(response)
         return response
 
@@ -52,7 +52,7 @@ class LineApi():
             pass
         else:
             logger.error('{0}: status_code={1}, error_response={2}'.format(
-                self.__class__.__name__, response.status_code, response.json))
+                self.__class__.__name__, response.status_code, response.json()))
 
 
 class LineOutput(CollectingOutputChannel):
