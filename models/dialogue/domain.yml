@@ -26,15 +26,20 @@ intents:
 slots: {}
 templates:
   line_cheer_up:
-  - - image:
-        original: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024
-        preview: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240
-    - text: 'Here is something to cheer you up:'
+  - - text: 'Here is something to cheer you up:'
+      type: text
+    - originalContentUrl: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024
+      previewImageUrl: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240
+      type: image
   line_did_that_help:
   - text: Did that help you?
+    type: text
   line_goodbye:
   - text: Bye
+    type: text
   line_greet:
   - text: Hey! How are you?
+    type: text
   line_happy:
   - text: Great carry on!
+    type: text

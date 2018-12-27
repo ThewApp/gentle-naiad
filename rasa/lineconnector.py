@@ -1,14 +1,10 @@
 from rasa_core.channels import UserMessage, CollectingOutputChannel, InputChannel
 import requests
 from flask import Blueprint, request, jsonify, abort
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    LineBotApiError, InvalidSignatureError
-)
+from linebot import WebhookHandler
+from linebot.exceptions import InvalidSignatureError
 from linebot.models import (
-    MessageEvent, TextSendMessage
+    MessageEvent, TextMessage
 )
 
 import logging
@@ -115,11 +111,6 @@ class LineInput(InputChannel):
                 self.webhook, self.line_api, on_new_message)
             try:
                 handler.handle(body, signature)
-            except LineBotApiError as e:
-                print("Got exception from LINE Messaging API: %s\n" % e.message)
-                for m in e.error.details:
-                    print("  %s: %s" % (m.property, m.message))
-                print("\n")
             except InvalidSignatureError:
                 abort(400)
 
