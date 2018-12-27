@@ -1,4 +1,5 @@
 from rasa_core.channels import UserMessage, CollectingOutputChannel, InputChannel
+import requests
 from flask import Blueprint, request, jsonify, abort
 from linebot import (
     LineBotApi, WebhookHandler
@@ -7,8 +8,12 @@ from linebot.exceptions import (
     LineBotApiError, InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage
+    MessageEvent, TextSendMessage
 )
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class RasaLineHandler():
@@ -28,10 +33,30 @@ class RasaLineHandler():
                                    input_channel=self.name())
             user_msg.event = event
             self.on_new_message(user_msg)
-            out_channel.send_output()
+            out_channel.send_reply()
 
     def handle(self, body, signature):
         self.webhook.handle(body, signature)
+
+
+class LineApi():
+    def __init__(self, access_token):
+        self.headers = {
+            "Authorization": "Bearer " + access_token
+        }
+        self.line_endpoint = "https://api.line.me/v2/bot/message"
+
+    def post(self, url, data):
+        response = requests.post(self.line_endpoint + url, data)
+        self.check_error(response)
+        return response
+
+    def check_error(self, response):
+        if 200 <= response.status_code < 300:
+            pass
+        else:
+            logger.error('{0}: status_code={1}, error_response={2}'.format(
+                self.__class__.__name__, response.status_code, response.json))
 
 
 class LineOutput(CollectingOutputChannel):
@@ -44,21 +69,15 @@ class LineOutput(CollectingOutputChannel):
         self.reply_token = reply_token
         super().__init__()
 
-    def send_output(self):
+    def send_reply(self):
         if self.messages:
-            ReplyMessages = []
-            for message in self.messages:
-                if "text" in message:
-                    ReplyMessages.append(TextSendMessage(message['text']))
-                if "image" in message:
-                    ReplyMessages.append(ImageSendMessage(
-                        message['image']['original'], message['image']['preview']
-                    ))
-                if "sticker" in message:
-                    ReplyMessages.append(StickerSendMessage(
-                        message['sticker']['package'], message['sticker']['sticker']
-                    ))
-            self.line_api.reply_message(self.reply_token, ReplyMessages)
+            # Filter out internal keys
+            messages = {key: self.messages[key] for key in self.messages if key not in ["recipient_id"]}
+            data = {
+                'replyToken': self.reply_token,
+                'messages': messages
+            }
+            return self.line_api.post("/reply", data)
 
 
 class LineInput(InputChannel):
@@ -78,7 +97,7 @@ class LineInput(InputChannel):
             line_access_token: Access token
         """
         self.webhook = WebhookHandler(line_secret)
-        self.line_api = LineBotApi(line_access_token)
+        self.line_api = LineApi(line_access_token)
 
     def blueprint(self, on_new_message):
 

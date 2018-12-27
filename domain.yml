@@ -15,19 +15,24 @@ actions:
 
 templates:
   line_greet:
-    - text: "Hey! How are you?"
+    - type: "text"
+      text: "Hey! How are you?"
 
   line_cheer_up:
-    - - image:
-          original: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024"
-          preview: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240"
-      - text: "Here is something to cheer you up:"
+    - - type: "text"
+        text: "Here is something to cheer you up:"
+      - type: "image"
+        originalContentUrl: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024"
+        previewImageUrl: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240"
 
   line_did_that_help:
-    - text: "Did that help you?"
+    - type: "text"
+      text: "Did that help you?"
 
   line_happy:
-    - text: "Great carry on!"
+    - type: "text"
+      text: "Great carry on!"
 
   line_goodbye:
-    - text: "Bye"
+    - type: "text"
+      text: "Bye"
