@@ -45,9 +45,8 @@ class LineOutput(CollectingOutputChannel):
     
     def send_output(self):
         TextMessage = []
-        print(self.messages)
         for message in self.messages:
-            TextMessage.append(TextSendMessage(message.text))
+            TextMessage.append(TextSendMessage(message['text']))
         self.line_api.reply_message(self.reply_token, TextMessage)
 
 class LineInput(InputChannel):
