@@ -26,7 +26,6 @@ class LineAction(Action):
         self._name = name
 
     def run(self, dispatcher, tracker, domain):
-        """Simple run implementation uttering a (hopefully defined) template."""
 
         dispatcher.line_template(self.name(),
                                   tracker)

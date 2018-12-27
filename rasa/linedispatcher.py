@@ -7,6 +7,17 @@ BotMessage = namedtuple("BotMessage", "text data")
 
 
 class LineDispatcher(Dispatcher):
+    def line_response(self, message: Dict[Text, Any]) -> None:
+        """Send a message to the client."""
+
+        bot_message = BotMessage(text=message.get("text"),
+                                 data={"elements": message.get("elements"),
+                                       "buttons": message.get("buttons"),
+                                       "attachment": message.get("image")})
+
+        self.latest_bot_messages.append(bot_message)
+        self.output_channel.send_response(self.sender_id, message)
+
     def line_template(self,
                       template: Text,
                       tracker: 'DialogueStateTracker',
@@ -23,4 +34,4 @@ class LineDispatcher(Dispatcher):
         if not message:
             return
 
-        self.utter_response(message)
+        self.line_response(message)
