@@ -29,7 +29,7 @@ class LineNLG(NaturalLanguageGenerator):
                  ) -> Optional[Dict[Text, Any]]:
         """Generate a response for the requested template."""
 
-        print("Generate", self.templates, template_name)
+        print("Generate")
 
         filled_slots = tracker.current_slot_values()
         return self.generate_from_slots(template_name,
