@@ -24,6 +24,8 @@ class LineDispatcher(Dispatcher):
         if not message:
             return
 
+        print(message)
+
         if type(message) == list:
             for item in message:
                 self.line_response(item)
