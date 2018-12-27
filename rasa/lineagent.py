@@ -1,9 +1,13 @@
 from rasa_core.agent import Agent
+from rasa_core.interpreter import NaturalLanguageInterpreter
+from rasa_core.policies.ensemble import PolicyEnsemble
 from rasa_core.processor import MessageProcessor
+from rasa_core.utils import EndpointConfig
 from rasa.linedispatcher import LineDispatcher
 from rasa.linedomain import LineDomain
-import logging
 
+import logging
+import os
 from typing import Text, List, Optional, Callable, Any, Dict, Union
 
 logger = logging.getLogger(__name__)
@@ -25,6 +29,43 @@ class LineAgent(Agent):
             self.nlg,
             action_endpoint=self.action_endpoint,
             message_preprocessor=preprocessor)
+
+    @classmethod
+    def load(cls,
+             path: Text,
+             interpreter: Optional[NaturalLanguageInterpreter] = None,
+             generator: Union[EndpointConfig, 'NLG'] = None,
+             tracker_store: Optional['TrackerStore'] = None,
+             action_endpoint: Optional[EndpointConfig] = None,
+             ) -> 'Agent':
+        """Load a persisted model from the passed path."""
+
+        if not path:
+            raise ValueError("You need to provide a valid directory where "
+                             "to load the agent from when calling "
+                             "`Agent.load`.")
+
+        if os.path.isfile(path):
+            raise ValueError("You are trying to load a MODEL from a file "
+                             "('{}'), which is not possible. \n"
+                             "The persisted path should be a directory "
+                             "containing the various model files. \n\n"
+                             "If you want to load training data instead of "
+                             "a model, use `agent.load_data(...)` "
+                             "instead.".format(path))
+
+        domain = LineDomain.load(os.path.join(path, "domain.yml"))
+        ensemble = PolicyEnsemble.load(path) if path else None
+
+        # ensures the domain hasn't changed between test and train
+        domain.compare_with_specification(path)
+
+        return cls(domain=domain,
+                   policies=ensemble,
+                   interpreter=interpreter,
+                   generator=generator,
+                   tracker_store=tracker_store,
+                   action_endpoint=action_endpoint)
 
     @staticmethod
     def _create_domain(domain: Union[None, LineDomain, Text]) -> LineDomain:
