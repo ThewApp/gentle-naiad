@@ -7,7 +7,8 @@ from linebot.exceptions import (
     LineBotApiError, InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage)
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage, StickerSendMessage
+)
 
 
 class RasaLineHandler():
@@ -49,9 +50,14 @@ class LineOutput(CollectingOutputChannel):
             for message in self.messages:
                 if "text" in message:
                     ReplyMessages.append(TextSendMessage(message['text']))
-                elif "image" in message:
+                if "image" in message:
                     ReplyMessages.append(ImageSendMessage(
-                        message['image']['original'], message['image']['preview']))
+                        message['image']['original'], message['image']['preview']
+                    ))
+                if "sticker" in message:
+                    ReplyMessages.append(StickerSendMessage(
+                        message['sticker']['package'], message['sticker']['sticker']
+                    ))
             self.line_api.reply_message(self.reply_token, ReplyMessages)
 
 
