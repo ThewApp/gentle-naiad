@@ -51,6 +51,7 @@ class LineOutput(CollectingOutputChannel):
             elif "image" in message:
                 ReplyMessages.append(ImageSendMessage(
                     message['image']['original'], message['image']['preview']))
+        print("sending :", self.messages)
         self.line_api.reply_message(self.reply_token, ReplyMessages)
 
 
