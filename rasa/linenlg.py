@@ -16,7 +16,6 @@ class LineNLG(NaturalLanguageGenerator):
     def _random_template_for(self, line_action: Text) -> Optional[Dict[Text, Any]]:
         """Select random template for the line action from available ones."""
 
-        print("_random_template_for")
         if line_action in self.templates:
             return np.random.choice(self.templates[line_action])
         else:
@@ -25,7 +24,6 @@ class LineNLG(NaturalLanguageGenerator):
     def generate(self,
                  template_name: Text,
                  tracker: DialogueStateTracker,
-                 output_channel: Text,
                  **kwargs: Any
                  ) -> Optional[Dict[Text, Any]]:
         """Generate a response for the requested template."""
@@ -33,20 +31,17 @@ class LineNLG(NaturalLanguageGenerator):
         filled_slots = tracker.current_slot_values()
         return self.generate_from_slots(template_name,
                                         filled_slots,
-                                        output_channel,
                                         **kwargs)
 
     def generate_from_slots(self,
                             template_name: Text,
                             filled_slots: Dict[Text, Any],
-                            output_channel: Text,
                             **kwargs: Any
                             ) -> Optional[Dict[Text, Any]]:
         """Generate a response for the requested template."""
 
         # Fetching a random template for the passed template name
         r = copy.deepcopy(self._random_template_for(template_name))
-        print("generate_from_slots")
         # Filling the slots in the template and returning the template
         if r is not None:
             return self._fill_template_text(r, filled_slots, **kwargs)
@@ -61,9 +56,8 @@ class LineNLG(NaturalLanguageGenerator):
     ) -> Dict[Text, Any]:
         """"Combine slot values and key word arguments to fill templates."""
 
-        print("_fill_template_text")
         # Getting the slot values in the template variables
-        template_vars = self._template_variables(filled_slots, kwargs)
+        template_vars = self._combine_template_variables(filled_slots, kwargs)
 
         # Filling the template variables in the template
         if template_vars:
