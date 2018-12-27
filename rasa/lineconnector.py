@@ -7,6 +7,7 @@ from linebot.models import (
     MessageEvent, TextMessage
 )
 
+import json
 import logging
 
 logger = logging.getLogger(__name__)
@@ -38,12 +39,13 @@ class RasaLineHandler():
 class LineApi():
     def __init__(self, access_token):
         self.headers = {
-            "Authorization": "Bearer " + access_token
+            "Authorization": "Bearer " + access_token,
+            'Content-Type': 'application/json'
         }
         self.line_endpoint = "https://api.line.me/v2/bot/message"
 
     def post(self, url, data):
-        response = requests.post(self.line_endpoint + url, data, headers=self.headers)
+        response = requests.post(self.line_endpoint + url, data=json.dumps(data), headers=self.headers)
         self.check_error(response)
         return response
 
@@ -64,6 +66,10 @@ class LineOutput(CollectingOutputChannel):
         self.line_api = line_api
         self.reply_token = reply_token
         super().__init__()
+
+    def add_reply(self, recipient_id, message):
+        message['recipient_id'] = recipient_id
+        self.messages.append(message)
 
     def send_reply(self):
         if self.messages:

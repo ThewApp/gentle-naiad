@@ -10,7 +10,7 @@ class LineDispatcher(Dispatcher):
     def line_response(self, message: Dict[Text, Any]) -> None:
         """Send a message to the client."""
 
-        self.output_channel.send_response(self.sender_id, message)
+        self.output_channel.add_reply(self.sender_id, message)
 
     def line_template(self,
                       template: Text,
