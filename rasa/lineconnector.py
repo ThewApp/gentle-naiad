@@ -1,9 +1,15 @@
+import json
+
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import MessageEvent, TextMessage
+from linebot.models import (AudioSendMessage, BaseSize, ImagemapAction,
+                            ImagemapArea, ImagemapSendMessage,
+                            ImageSendMessage, LocationSendMessage,
+                            MessageEvent, StickerSendMessage,
+                            TemplateSendMessage, TextMessage, TextSendMessage,
+                            VideoSendMessage)
 
 from flask import Blueprint, abort, jsonify, request
-from rasa.LineApi import LineApi
 from rasa_core.channels import (CollectingOutputChannel, InputChannel,
                                 UserMessage)
 
@@ -55,7 +61,14 @@ class LineOutput(CollectingOutputChannel):
             messages = [{key: message[key] for key in message if key not in internal_keys}
                         for message in self.messages]
 
-            return self.line_api.reply_message(self.reply_token, messages)
+            data = {
+                'replyToken': self.reply_token,
+                'messages': messages
+            }
+
+            return self.line_api._post(
+                '/v2/bot/message/reply', data=json.dumps(data)
+            )
 
 
 class LineInput(InputChannel):
@@ -74,7 +87,7 @@ class LineInput(InputChannel):
             line_secret: Line Signature validation
             line_access_token: Access token
         """
-        self.line_api = LineApi(line_access_token)
+        self.line_api = LineBotApi(line_access_token)
         self.handler = RasaLineHandler(line_secret, self.line_api)
 
     def blueprint(self, on_new_message):
