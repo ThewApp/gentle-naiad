@@ -1,8 +1,8 @@
 from rasa_core.channels import UserMessage, CollectingOutputChannel, InputChannel
 import requests
 from flask import Blueprint, request, jsonify, abort
-from linebot import WebhookHandler
-from linebot.exceptions import InvalidSignatureError
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import LineBotApiError, InvalidSignatureError
 from linebot.models import (
     MessageEvent, TextMessage
 )
@@ -77,11 +77,12 @@ class LineOutput(CollectingOutputChannel):
             internal_keys = ['recipient_id']
             messages = [{key: message[key] for key in message if key not in internal_keys}
                         for message in self.messages]
-            data = {
-                'replyToken': self.reply_token,
-                'messages': messages
-            }
-            return self.line_api.post("/reply", data)
+            # data = {
+            #     'replyToken': self.reply_token,
+            #     'messages': messages
+            # }
+            # return self.line_api.post("/reply", data)
+            return self.line_api.reply_message(self.reply_token, messages)
 
 
 class LineInput(InputChannel):
@@ -101,7 +102,7 @@ class LineInput(InputChannel):
             line_access_token: Access token
         """
         self.webhook = WebhookHandler(line_secret)
-        self.line_api = LineApi(line_access_token)
+        self.line_api = LineBotApi(line_access_token)
 
     def blueprint(self, on_new_message):
 
@@ -119,6 +120,10 @@ class LineInput(InputChannel):
                 self.webhook, self.line_api, on_new_message)
             try:
                 handler.handle(body, signature)
+            except LineBotApiError as e:
+                print(e.status_code)
+                print(e.error.message)
+                print(e.error.details)
             except InvalidSignatureError:
                 abort(400)
 
