@@ -7,7 +7,7 @@ import logging
 
 ENV = os.getenv('ENV', 'PRODUCTION')
 
-logging_level = logging.DEBUG if ENV == "DEVELOPMENT" else logging.WARNING
+logging_level = logging.INFO if ENV == "DEVELOPMENT" else logging.WARNING
 logging.basicConfig(level=logging_level)
 
 # load your trained agent

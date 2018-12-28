@@ -28,7 +28,7 @@ class LineAction(Action):
         self._name = name
 
     def run(self, dispatcher, tracker, domain):
-        logger("Running action... %s", self.name())
+        logger.info("Running action... %s", self.name())
         dispatcher.line_template(self.name(), tracker)
         return []
 
