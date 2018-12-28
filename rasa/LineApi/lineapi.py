@@ -16,7 +16,7 @@ class LineApi():
 
     def _post(self, url, data, timeout):
         response = requests.post(
-            self.line_endpoint + url, data=json.dumps(data), headers=self.headers, timeout=timeout)
+            self.line_endpoint + url, data=data, headers=self.headers, timeout=timeout)
         self.check_error(response)
         return response
 
@@ -28,7 +28,7 @@ class LineApi():
         }
 
         self._post(
-            '/v2/bot/message/reply', data=json.dumps(data), timeout=timeout
+            '/reply', data=json.dumps(data), timeout=timeout
         )
 
     def check_error(self, response):
