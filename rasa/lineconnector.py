@@ -1,7 +1,8 @@
-from flask import Blueprint, abort, jsonify, request
 from linebot import LineBotApi, WebhookHandler
-from linebot.exceptions import LineBotApiError, InvalidSignatureError
+from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextMessage
+
+from flask import Blueprint, abort, jsonify, request
 from rasa.LineApi import LineApi
 from rasa_core.channels import (CollectingOutputChannel, InputChannel,
                                 UserMessage)
@@ -81,10 +82,12 @@ class LineInput(InputChannel):
         line_webhook = Blueprint('line_webhook', __name__)
 
         @line_webhook.route("/", methods=['GET'])
+        # pylint: disable=unused-variable
         def health():
             return jsonify({"status": "ok"})
 
         @line_webhook.route("/webhook", methods=['POST'])
+        # pylint: disable=unused-variable
         def webhook():
             try:
                 self.handler.handle_webhook(on_new_message)
