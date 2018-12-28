@@ -1,7 +1,10 @@
 from rasa_core.actions.action import UtterAction, RemoteAction, default_actions, Action
 from rasa_core.utils import EndpointConfig
 
+import logging
 from typing import Text, List, Optional, Callable, Any, Dict, Union
+
+logger = logging.getLogger(__name__)
 
 
 def action_from_name(name: Text, action_endpoint: Optional[EndpointConfig],
@@ -25,7 +28,7 @@ class LineAction(Action):
         self._name = name
 
     def run(self, dispatcher, tracker, domain):
-
+        logger("Running action... %s", self.name())
         dispatcher.line_template(self.name(), tracker)
         return []
 

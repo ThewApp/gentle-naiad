@@ -3,9 +3,16 @@ from rasa.lineagent import LineAgent
 from rasa.lineconnector import LineInput
 
 import os
+import logging
+
+ENV = os.getenv('ENV', 'PRODUCTION')
+
+logging_level = logging.DEBUG if ENV == "DEVELOPMENT" else logging.WARNING
+logging.basicConfig(level=logging_level)
 
 # load your trained agent
-agent = LineAgent.load("models/dialogue", interpreter=RasaNLUInterpreter("models/current/nlu"))
+agent = LineAgent.load(
+    "models/dialogue", interpreter=RasaNLUInterpreter("models/current/nlu"))
 
 line_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 line_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)

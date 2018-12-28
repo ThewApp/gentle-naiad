@@ -1,4 +1,5 @@
 import json
+import logging
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
@@ -12,6 +13,8 @@ from linebot.models import (AudioSendMessage, BaseSize, ImagemapAction,
 from flask import Blueprint, abort, jsonify, request
 from rasa_core.channels import (CollectingOutputChannel, InputChannel,
                                 UserMessage)
+
+logger = logging.getLogger(__name__)
 
 
 class RasaLineHandler(WebhookHandler):
@@ -29,6 +32,7 @@ class RasaLineHandler(WebhookHandler):
         self.on_new_message = on_new_message
         signature = request.headers.get("X-Line-Signature") or ''
         body = request.get_data(as_text=True)
+        logger.info("Handling... %s", body)
         self.handle(body, signature)
 
     def handle_text_message(self, event):
@@ -65,6 +69,8 @@ class LineOutput(CollectingOutputChannel):
                 'replyToken': self.reply_token,
                 'messages': messages
             }
+
+            logger.info("Sending reply... %s", data)
 
             return self.line_api._post(
                 '/v2/bot/message/reply', data=json.dumps(data)
