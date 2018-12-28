@@ -50,12 +50,8 @@ class LineOutput(CollectingOutputChannel):
             internal_keys = ['recipient_id']
             messages = [{key: message[key] for key in message if key not in internal_keys}
                         for message in self.messages]
-            data = {
-                'replyToken': self.reply_token,
-                'messages': messages
-            }
 
-            return self.line_api.reply_message(self.reply_token, data)
+            return self.line_api.reply_message(self.reply_token, messages)
 
 
 class LineInput(InputChannel):
