@@ -1,7 +1,7 @@
-from rasa_core.dispatcher import Dispatcher
-
 from collections import namedtuple
-from typing import Text, List, Optional, Callable, Any, Dict, Union
+from typing import Any, Callable, Dict, List, Optional, Text, Union
+
+from rasa_core.dispatcher import Dispatcher
 
 BotMessage = namedtuple("BotMessage", "text data")
 
@@ -10,7 +10,12 @@ class LineDispatcher(Dispatcher):
     def line_response(self, message: Dict[Text, Any]) -> None:
         """Send a message to the client."""
 
-        self.output_channel.add_reply(self.sender_id, message)
+        if hasattr(self.output_channel, "add_reply"):
+            self.output_channel.add_reply(self.sender_id, message)
+        else:
+            import json
+            self.output_channel.send_response(
+                self.sender_id, {'text': json.dumps(message, sort_keys=True, indent=2)})
 
     def line_template(self,
                       template: Text,
