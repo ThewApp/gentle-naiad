@@ -1,16 +1,10 @@
-from rasa_core.channels import UserMessage, CollectingOutputChannel, InputChannel
-import requests
-from flask import Blueprint, request, jsonify, abort
-from linebot import LineBotApi, WebhookHandler
-from linebot.exceptions import LineBotApiError, InvalidSignatureError
-from linebot.models import (
-    MessageEvent, TextMessage
-)
-
-import json
-import logging
-
-logger = logging.getLogger(__name__)
+from flask import Blueprint, abort, jsonify, request
+from linebot import WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent, TextMessage
+from rasa.LineApi import LineApi
+from rasa_core.channels import (CollectingOutputChannel, InputChannel,
+                                UserMessage)
 
 
 class RasaLineHandler():
@@ -36,27 +30,6 @@ class RasaLineHandler():
         self.webhook.handle(body, signature)
 
 
-class LineApi():
-    def __init__(self, access_token):
-        self.headers = {
-            "Authorization": "Bearer " + access_token,
-            'Content-Type': 'application/json'
-        }
-        self.line_endpoint = "https://api.line.me/v2/bot/message"
-
-    def post(self, url, data):
-        response = requests.post(self.line_endpoint + url, data=json.dumps(data), headers=self.headers)
-        self.check_error(response)
-        return response
-
-    def check_error(self, response):
-        if 200 <= response.status_code < 300:
-            pass
-        else:
-            logger.error('{0}: status_code={1}, error_response={2}'.format(
-                self.__class__.__name__, response.status_code, response.json()))
-
-
 class LineOutput(CollectingOutputChannel):
     @classmethod
     def name(cls):
@@ -77,12 +50,12 @@ class LineOutput(CollectingOutputChannel):
             internal_keys = ['recipient_id']
             messages = [{key: message[key] for key in message if key not in internal_keys}
                         for message in self.messages]
-            # data = {
-            #     'replyToken': self.reply_token,
-            #     'messages': messages
-            # }
-            # return self.line_api.post("/reply", data)
-            return self.line_api.reply_message(self.reply_token, messages)
+            data = {
+                'replyToken': self.reply_token,
+                'messages': messages
+            }
+
+            return self.line_api.reply_message(self.reply_token, data)
 
 
 class LineInput(InputChannel):
@@ -102,7 +75,7 @@ class LineInput(InputChannel):
             line_access_token: Access token
         """
         self.webhook = WebhookHandler(line_secret)
-        self.line_api = LineBotApi(line_access_token)
+        self.line_api = LineApi(line_access_token)
 
     def blueprint(self, on_new_message):
 
@@ -120,10 +93,6 @@ class LineInput(InputChannel):
                 self.webhook, self.line_api, on_new_message)
             try:
                 handler.handle(body, signature)
-            except LineBotApiError as e:
-                print(e.status_code)
-                print(e.error.message)
-                print(e.error.details)
             except InvalidSignatureError:
                 abort(400)
 
