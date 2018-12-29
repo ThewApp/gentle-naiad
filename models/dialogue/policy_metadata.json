@@ -28,5 +28,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20181229-065627"
+  "trained_at": "20181229-145337"
 }

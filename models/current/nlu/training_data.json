@@ -178,37 +178,37 @@
         "text": "เพิ่มยาใหม่"
       },
       {
-        "intent": "add_medicine_success",
+        "intent": "enter_medicine_name",
         "entities": [
           {
             "start": 2,
             "end": 9,
             "value": "ความดัน",
-            "entity": "drug"
+            "entity": "medicine_name"
           }
         ],
         "text": "ยาความดัน"
       },
       {
-        "intent": "add_medicine_success",
+        "intent": "enter_medicine_name",
         "entities": [
           {
             "start": 2,
             "end": 9,
             "value": "เบาหวาน",
-            "entity": "drug"
+            "entity": "medicine_name"
           }
         ],
         "text": "ยาเบาหวาน"
       },
       {
-        "intent": "add_medicine_success",
+        "intent": "enter_medicine_name",
         "entities": [
           {
             "start": 2,
             "end": 11,
             "value": "แก้อักเสบ",
-            "entity": "drug"
+            "entity": "medicine_name"
           }
         ],
         "text": "ยาแก้อักเสบ"

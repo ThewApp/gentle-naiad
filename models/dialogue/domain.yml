@@ -27,14 +27,16 @@ intents:
     use_entities: true
 - add_medicine:
     use_entities: true
+- enter_medicine_name:
+    use_entities: true
 slots:
-  drug:
+  medicine_name:
     auto_fill: true
     initial_value: ''
     type: rasa_core.slots.TextSlot
 templates:
   line_add_medicine_success:
-  - - text: เพิ่ม ยา{drug} เรียบร้อยแล้วค่ะ
+  - - text: เพิ่ม ยา{medicine_name} เรียบร้อยแล้วค่ะ
       type: text
     - packageId: '2'
       stickerId: '144'
@@ -75,12 +77,12 @@ templates:
   - text: Hey! How are you?
     type: text
   line_happy:
-  - - text: Great carry on! {drug}
+  - - text: Great carry on!
       type: text
     - packageId: '11538'
       stickerId: '51626501'
       type: sticker
-  - - text: Great carry on! {drug}
+  - - text: Great carry on!
       type: text
     - packageId: '11537'
       stickerId: '52002734'

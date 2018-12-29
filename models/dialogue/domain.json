@@ -1,13 +1,14 @@
 {
   "states": [
     "intent_add_medicine",
+    "intent_enter_medicine_name",
     "intent_goodbye",
     "intent_greet",
     "intent_mood_affirm",
     "intent_mood_deny",
     "intent_mood_great",
     "intent_mood_unhappy",
-    "slot_drug_0",
+    "slot_medicine_name_0",
     "prev_action_listen",
     "prev_action_restart",
     "prev_action_default_fallback",

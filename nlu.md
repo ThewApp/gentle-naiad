@@ -56,7 +56,7 @@
 - ยาใหม่
 - เพิ่มยาใหม่
 
-## intent:add_medicine_success
-- ยา[ความดัน](drug)
-- ยา[เบาหวาน](drug)
-- ยา[แก้อักเสบ](drug)
+## intent:enter_medicine_name
+- ยา[ความดัน](medicine_name)
+- ยา[เบาหวาน](medicine_name)
+- ยา[แก้อักเสบ](medicine_name)

@@ -6,6 +6,7 @@ intents:
   - mood_great
   - mood_unhappy
   - add_medicine
+  - enter_medicine_name
 
 actions:
   - line_greet
@@ -34,12 +35,12 @@ templates:
 
   line_happy:
     - - type: "text"
-        text: "Great carry on! {drug}"
+        text: "Great carry on!"
       - type: "sticker"
         packageId: "11538"
         stickerId: "51626501"
     - - type: "text"
-        text: "Great carry on! {drug}"
+        text: "Great carry on!"
       - type: "sticker"
         packageId: "11537"
         stickerId: "52002734"
@@ -71,13 +72,13 @@ templates:
 
   line_add_medicine_success:
     - - type: "text"
-        text: "เพิ่ม ยา{drug} เรียบร้อยแล้วค่ะ"
+        text: "เพิ่ม ยา{medicine_name} เรียบร้อยแล้วค่ะ"
       - type: "sticker"
         packageId: "2"
         stickerId: "144"
       
 
 slots:
-  drug:
+  medicine_name:
     type: text
     initial_value: ""

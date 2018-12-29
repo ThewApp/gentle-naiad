@@ -29,5 +29,5 @@
 ## add medicine
 * add_medicine
   - line_ask_medicine_name
-* medicine_name
+* enter_medicine_name
   - line_add_medicine_success
