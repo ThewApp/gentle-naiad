@@ -15,7 +15,7 @@ class LineDispatcher(Dispatcher):
         else:
             import json
             self.output_channel.send_response(
-                self.sender_id, {'text': json.dumps(message, sort_keys=True, indent=2)})
+                self.sender_id, {'text': json.dumps(message, sort_keys=True, indent=2, ensure_ascii=False)})
 
     def line_template(self,
                       template: Text,
