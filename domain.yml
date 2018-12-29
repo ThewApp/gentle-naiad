@@ -5,6 +5,7 @@ intents:
   - mood_deny
   - mood_great
   - mood_unhappy
+  - add_medicine
 
 actions:
   - line_greet
@@ -12,6 +13,8 @@ actions:
   - line_did_that_help
   - line_happy
   - line_goodbye
+  - line_ask_medicine_name
+  - line_add_medicine_success
 
 templates:
   line_greet:
@@ -31,12 +34,12 @@ templates:
 
   line_happy:
     - - type: "text"
-        text: "Great carry on!"
+        text: "Great carry on! {drug}"
       - type: "sticker"
         packageId: "11538"
         stickerId: "51626501"
     - - type: "text"
-        text: "Great carry on!"
+        text: "Great carry on! {drug}"
       - type: "sticker"
         packageId: "11537"
         stickerId: "52002734"
@@ -44,3 +47,37 @@ templates:
   line_goodbye:
     - type: "text"
       text: "Bye"
+
+  line_ask_medicine_name:
+    - type: "text"
+      text: "ยาตัวไหนคะ"
+      quickReply:
+        items:
+          - type: "action"
+            action:
+              type: "message"
+              label: "ยาความดัน"
+              text: "ยาความดัน"
+          - type: "action"
+            action:
+              type: "message"
+              label: "ยาเบาหวาน"
+              text: "ยาเบาหวาน"
+          - type: "action"
+            action:
+              type: "message"
+              label: "ยาแก้อักเสบ"
+              text: "ยาแก้อักเสบ"
+
+  line_add_medicine_success:
+    - - type: "text"
+        text: "เพิ่ม ยา{drug} เรียบร้อยแล้วค่ะ"
+      - type: "sticker"
+        packageId: "2"
+        stickerId: "144"
+      
+
+slots:
+  drug:
+    type: text
+    initial_value: ""

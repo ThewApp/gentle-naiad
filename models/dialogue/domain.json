@@ -1,11 +1,13 @@
 {
   "states": [
+    "intent_add_medicine",
     "intent_goodbye",
     "intent_greet",
     "intent_mood_affirm",
     "intent_mood_deny",
     "intent_mood_great",
     "intent_mood_unhappy",
+    "slot_drug_0",
     "prev_action_listen",
     "prev_action_restart",
     "prev_action_default_fallback",
@@ -14,6 +16,8 @@
     "prev_line_cheer_up",
     "prev_line_did_that_help",
     "prev_line_happy",
-    "prev_line_goodbye"
+    "prev_line_goodbye",
+    "prev_line_ask_medicine_name",
+    "prev_line_add_medicine_success"
   ]
 }

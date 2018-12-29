@@ -48,3 +48,15 @@
 - not very good
 - extremely sad
 - so sad
+
+## intent:add_medicine
+- เพิ่มยา
+- add medicine
+- add drug
+- ยาใหม่
+- เพิ่มยาใหม่
+
+## intent:add_medicine_success
+- ยา[ความดัน](drug)
+- ยา[เบาหวาน](drug)
+- ยา[แก้อักเสบ](drug)

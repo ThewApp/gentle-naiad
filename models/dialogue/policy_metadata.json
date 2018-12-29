@@ -3,10 +3,13 @@
     "action_listen": {
       "slots": []
     },
-    "line_happy": {
+    "line_goodbye": {
       "slots": []
     },
-    "line_goodbye": {
+    "line_add_medicine_success": {
+      "slots": []
+    },
+    "line_happy": {
       "slots": []
     }
   },
@@ -25,5 +28,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20181227-161643"
+  "trained_at": "20181229-065627"
 }

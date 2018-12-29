@@ -156,6 +156,62 @@
       {
         "intent": "mood_unhappy",
         "text": "so sad"
+      },
+      {
+        "intent": "add_medicine",
+        "text": "เพิ่มยา"
+      },
+      {
+        "intent": "add_medicine",
+        "text": "add medicine"
+      },
+      {
+        "intent": "add_medicine",
+        "text": "add drug"
+      },
+      {
+        "intent": "add_medicine",
+        "text": "ยาใหม่"
+      },
+      {
+        "intent": "add_medicine",
+        "text": "เพิ่มยาใหม่"
+      },
+      {
+        "intent": "add_medicine_success",
+        "entities": [
+          {
+            "start": 2,
+            "end": 9,
+            "value": "ความดัน",
+            "entity": "drug"
+          }
+        ],
+        "text": "ยาความดัน"
+      },
+      {
+        "intent": "add_medicine_success",
+        "entities": [
+          {
+            "start": 2,
+            "end": 9,
+            "value": "เบาหวาน",
+            "entity": "drug"
+          }
+        ],
+        "text": "ยาเบาหวาน"
+      },
+      {
+        "intent": "add_medicine_success",
+        "entities": [
+          {
+            "start": 2,
+            "end": 11,
+            "value": "แก้อักเสบ",
+            "entity": "drug"
+          }
+        ],
+        "text": "ยาแก้อักเสบ"
       }
     ],
     "regex_features": [],
