@@ -11,7 +11,8 @@ actions:
 - line_ask_new_medicine_meal
 - line_add_new_medicine_success
 - line_ask_add_new_medicine
-- line_flex_medicine_list
+- custom_flex_medicine_list
+- line_cancel_success
 config:
   store_entities_as_slots: true
 entities: []
@@ -33,6 +34,12 @@ intents:
 - add_medicine:
     use_entities: true
 - enter_medicine_data:
+    use_entities: true
+- medicine_list:
+    use_entities: true
+- affirmative:
+    use_entities: true
+- negative:
     use_entities: true
 slots:
   medicine_list:
@@ -148,6 +155,9 @@ templates:
         type: action
     text: ทานเวลาไหนคะ
     type: text
+  line_cancel_success:
+  - text: ยกเลิกแล้วค่ะ
+    type: text
   line_cheer_up:
   - - text: 'Here is something to cheer you up:'
       type: text
@@ -159,9 +169,6 @@ templates:
     type: text
   line_did_that_help:
   - text: Did that help you?
-    type: text
-  line_flex_medicine_list:
-  - text: Flex...
     type: text
   line_goodbye:
   - text: Bye

@@ -1,6 +1,8 @@
+from rasa_core.actions.action import Action
 from rasa_core.events import SlotSet
 
 from rasa.lineform import LineForm
+from rasa.template.flex_medicine_list import get_flex_medicine_list
 
 
 class custom_form_add_medicine(LineForm):
@@ -26,7 +28,7 @@ class custom_form_add_medicine(LineForm):
             or a list of them, where the first match will be picked"""
 
         return {
-            "new_medicine_name": self.from_text(intent="enter_medicine_data"),
+            "new_medicine_name": self.from_text(),
             "new_medicine_time": self.from_text(intent="enter_medicine_data"),
             "new_medicine_meal": self.from_text(intent="enter_medicine_data")
         }
@@ -41,7 +43,7 @@ class custom_form_add_medicine(LineForm):
             new_medicine_list = []
         else:
             new_medicine_list = medicine_list.copy()
-        
+
         new_medicine_list.append({
             "name": tracker.get_slot("new_medicine_name"),
             "time": tracker.get_slot("new_medicine_time"),
@@ -56,3 +58,20 @@ class custom_form_add_medicine(LineForm):
             SlotSet("new_medicine_time", None),
             SlotSet("new_medicine_meal", None)
         ]
+
+
+class custom_flex_medicine_list(Action):
+    def name(self):
+        # type: () -> Text
+        return "custom_flex_medicine_list"
+
+    def run(self, dispatcher, tracker, domain):
+        # type: (CollectingDispatcher, Tracker, Dict[Text, Any]) -> List[Dict[Text, Any]]
+
+        medicine_list = tracker.get_slot("medicine_list")
+
+        message = get_flex_medicine_list(medicine_list)
+
+        dispatcher.line_response(message)
+
+        return []

@@ -283,7 +283,59 @@
       },
       {
         "intent": "enter_medicine_data",
+        "text": "insulin"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "อินซูลิน"
+      },
+      {
+        "intent": "enter_medicine_data",
         "text": "ยาแก้อักเสบ"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "ยาแก้ไอ"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "ยาแก้เจ็บคอ"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "ยาลดกรด"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "ยาโรคกระเพาะ"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "ยาแก้ปวด"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "ยาถ่าย"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "ยาแก้ท้องเสีย"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "ยาลดความดัน"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "พารา"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "พาราเซตามอล"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "text": "Paracetamol"
       },
       {
         "intent": "medicine_list",
