@@ -69,6 +69,11 @@ templates:
           - type: "action"
             action:
               type: "message"
+              label: "ยกเลิก"
+              text: "ยกเลิก"
+          - type: "action"
+            action:
+              type: "message"
               label: "ยาความดัน"
               text: "ยาความดัน"
           - type: "action"
@@ -87,6 +92,11 @@ templates:
       text: "ทานเวลาไหนคะ"
       quickReply:
         items:
+          - type: "action"
+            action:
+              type: "message"
+              label: "ยกเลิก"
+              text: "ยกเลิก"
           - type: "action"
             action:
               type: "message"
@@ -126,6 +136,11 @@ templates:
           - type: "action"
             action:
               type: "message"
+              label: "ยกเลิก"
+              text: "ยกเลิก"
+          - type: "action"
+            action:
+              type: "message"
               label: "ก่อนอาหาร"
               text: "ก่อนอาหาร"
           - type: "action"
@@ -136,7 +151,7 @@ templates:
 
   line_add_new_medicine_success:
     - - type: "text"
-        text: "เพิ่ม {new_medicine_name} ทาน {new_medicine_time} {new_medicine_meal} เรียบร้อยแล้วค่ะ"
+        text: "เพิ่ม {new_medicine_name} ทาน{new_medicine_time} {new_medicine_meal} เรียบร้อยแล้วค่ะ"
       - type: "sticker"
         packageId: "2"
         stickerId: "144"

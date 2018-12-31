@@ -5,10 +5,10 @@
         "medicine_list"
       ]
     },
-    "line_happy": {
+    "line_goodbye": {
       "slots": []
     },
-    "line_goodbye": {
+    "line_happy": {
       "slots": []
     },
     "custom_flex_medicine_list": {
@@ -16,10 +16,10 @@
     },
     "custom_form_add_medicine": {
       "slots": [
-        "new_medicine_meal",
-        "medicine_list",
         "new_medicine_name",
-        "new_medicine_time"
+        "new_medicine_time",
+        "medicine_list",
+        "new_medicine_meal"
       ]
     },
     "line_cancel_success": {
@@ -41,5 +41,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20181231-235307"
+  "trained_at": "20190101-003609"
 }

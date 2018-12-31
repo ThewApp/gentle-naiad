@@ -64,8 +64,7 @@ slots:
     type: rasa_core.slots.UnfeaturizedSlot
 templates:
   line_add_new_medicine_success:
-  - - text: เพิ่ม {new_medicine_name} ทาน {new_medicine_time} {new_medicine_meal}
-        เรียบร้อยแล้วค่ะ
+  - - text: เพิ่ม {new_medicine_name} ทาน{new_medicine_time} {new_medicine_meal} เรียบร้อยแล้วค่ะ
       type: text
     - packageId: '2'
       stickerId: '144'
@@ -89,6 +88,11 @@ templates:
   - quickReply:
       items:
       - action:
+          label: ยกเลิก
+          text: ยกเลิก
+          type: message
+        type: action
+      - action:
           label: ก่อนอาหาร
           text: ก่อนอาหาร
           type: message
@@ -103,6 +107,11 @@ templates:
   line_ask_new_medicine_name:
   - quickReply:
       items:
+      - action:
+          label: ยกเลิก
+          text: ยกเลิก
+          type: message
+        type: action
       - action:
           label: ยาความดัน
           text: ยาความดัน
@@ -123,6 +132,11 @@ templates:
   line_ask_new_medicine_time:
   - quickReply:
       items:
+      - action:
+          label: ยกเลิก
+          text: ยกเลิก
+          type: message
+        type: action
       - action:
           label: เช้า
           text: เช้า
