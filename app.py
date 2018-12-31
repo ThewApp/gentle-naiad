@@ -7,8 +7,18 @@ import logging
 
 ENV = os.getenv('ENV', 'PRODUCTION')
 
+if ENV == "DEVELOPMENT":
+    import ptvsd
+
+    # 5678 is the default attach port in the VS Code debug configurations
+    print("Waiting for debugger attach")
+    ptvsd.enable_attach(address=('localhost', 5678), redirect_output=True)
+    ptvsd.wait_for_attach()
+
 logging_level = logging.INFO if ENV == "DEVELOPMENT" else logging.WARNING
 logging.basicConfig(level=logging_level)
+
+logger = logging.getLogger(__name__)
 
 # load your trained agent
 agent = LineAgent.load(
@@ -22,5 +32,7 @@ input_channel = LineInput(
     line_secret=line_secret,
     line_access_token=line_access_token
 )
+
+logger.info("Ready")
 
 app = agent.handle_channels([input_channel], http_port=port)
