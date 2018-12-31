@@ -56,7 +56,32 @@
 - ยาใหม่
 - เพิ่มยาใหม่
 
-## intent:enter_medicine_name
-- ยา[ความดัน](medicine_name)
-- ยา[เบาหวาน](medicine_name)
-- ยา[แก้อักเสบ](medicine_name)
+## intent:enter_medicine_data
+- [ก่อนอาหาร](medicine_meal)
+- [หลังอาหาร](medicine_meal)
+- [เช้า](medicine_time)
+- [กลางวัน](medicine_time)
+- [เย็น](medicine_time)
+- [ก่อนนอน](medicine_time)
+- [สามเวลา](medicine_time)
+- [เช้า-เย็น](medicine_time)
+- ยาความดัน
+- ยาเบาหวาน
+- ยาแก้อักเสบ
+
+## intent: medicine_list
+- รายการยา
+- รายชื่อยา
+- ลิสต์ยา
+- drug list
+- medicine list
+- medication list
+
+## intent: affirmative
+- ใช่
+- ใช่ เพิ่มยาใหม่
+
+## intent: negative
+- ไม่
+- ไม่เอา
+- ยกเลิก

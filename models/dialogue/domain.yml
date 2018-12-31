@@ -6,12 +6,17 @@ actions:
 - line_did_that_help
 - line_happy
 - line_goodbye
-- line_ask_medicine_name
-- line_add_medicine_success
+- line_ask_new_medicine_name
+- line_ask_new_medicine_time
+- line_ask_new_medicine_meal
+- line_add_new_medicine_success
+- line_ask_add_new_medicine
+- line_flex_medicine_list
 config:
   store_entities_as_slots: true
 entities: []
-forms: []
+forms:
+- custom_form_add_medicine
 intents:
 - greet:
     use_entities: true
@@ -27,21 +32,68 @@ intents:
     use_entities: true
 - add_medicine:
     use_entities: true
-- enter_medicine_name:
+- enter_medicine_data:
     use_entities: true
 slots:
-  medicine_name:
+  medicine_list:
     auto_fill: true
-    initial_value: ''
+    initial_value: null
+    type: rasa_core.slots.ListSlot
+  new_medicine_meal:
+    auto_fill: true
+    initial_value: null
     type: rasa_core.slots.TextSlot
+  new_medicine_name:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  new_medicine_time:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.TextSlot
+  requested_slot:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
 templates:
-  line_add_medicine_success:
-  - - text: เพิ่ม ยา{medicine_name} เรียบร้อยแล้วค่ะ
+  line_add_new_medicine_success:
+  - - text: เพิ่ม {new_medicine_name} ทาน {new_medicine_time} {new_medicine_meal}
+        เรียบร้อยแล้วค่ะ
       type: text
     - packageId: '2'
       stickerId: '144'
       type: sticker
-  line_ask_medicine_name:
+  line_ask_add_new_medicine:
+  - - text: ท่านยังไม่มีรายการยา
+      type: text
+    - altText: ท่านต้องการเพิ่มยาใหม่ไหมคะ
+      template:
+        actions:
+        - label: ใช่ เพิ่มยาใหม่
+          text: ใช่ เพิ่มยาใหม่
+          type: message
+        - label: ไม่
+          text: ไม่
+          type: message
+        text: ท่านต้องการเพิ่มยาใหม่ไหมคะ
+        type: confirm
+      type: template
+  line_ask_new_medicine_meal:
+  - quickReply:
+      items:
+      - action:
+          label: ก่อนอาหาร
+          text: ก่อนอาหาร
+          type: message
+        type: action
+      - action:
+          label: หลังอาหาร
+          text: หลังอาหาร
+          type: message
+        type: action
+    text: ทานก่อนอาหารหรือหลังอาหารคะ
+    type: text
+  line_ask_new_medicine_name:
   - quickReply:
       items:
       - action:
@@ -61,14 +113,55 @@ templates:
         type: action
     text: ยาตัวไหนคะ
     type: text
+  line_ask_new_medicine_time:
+  - quickReply:
+      items:
+      - action:
+          label: เช้า
+          text: เช้า
+          type: message
+        type: action
+      - action:
+          label: กลางวัน
+          text: กลางวัน
+          type: message
+        type: action
+      - action:
+          label: เย็น
+          text: เย็น
+          type: message
+        type: action
+      - action:
+          label: ก่อนนอน
+          text: ก่อนนอน
+          type: message
+        type: action
+      - action:
+          label: สามเวลา
+          text: สามเวลา
+          type: message
+        type: action
+      - action:
+          label: เช้า-เย็น
+          text: เช้า-เย็น
+          type: message
+        type: action
+    text: ทานเวลาไหนคะ
+    type: text
   line_cheer_up:
   - - text: 'Here is something to cheer you up:'
       type: text
     - originalContentUrl: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024
       previewImageUrl: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240
       type: image
+  line_default:
+  - text: "ลองกดปุ่มเมนูด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้"
+    type: text
   line_did_that_help:
   - text: Did that help you?
+    type: text
+  line_flex_medicine_list:
+  - text: Flex...
     type: text
   line_goodbye:
   - text: Bye

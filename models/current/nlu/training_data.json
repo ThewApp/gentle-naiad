@@ -178,40 +178,156 @@
         "text": "เพิ่มยาใหม่"
       },
       {
-        "intent": "enter_medicine_name",
+        "intent": "enter_medicine_data",
         "entities": [
           {
-            "start": 2,
+            "start": 0,
             "end": 9,
-            "value": "ความดัน",
-            "entity": "medicine_name"
+            "value": "ก่อนอาหาร",
+            "entity": "medicine_meal"
           }
         ],
+        "text": "ก่อนอาหาร"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "หลังอาหาร",
+            "entity": "medicine_meal"
+          }
+        ],
+        "text": "หลังอาหาร"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "เช้า",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "เช้า"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "กลางวัน",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "กลางวัน"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "เย็น",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "เย็น"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "ก่อนนอน",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "ก่อนนอน"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "สามเวลา",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "สามเวลา"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "เช้า-เย็น",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "เช้า-เย็น"
+      },
+      {
+        "intent": "enter_medicine_data",
         "text": "ยาความดัน"
       },
       {
-        "intent": "enter_medicine_name",
-        "entities": [
-          {
-            "start": 2,
-            "end": 9,
-            "value": "เบาหวาน",
-            "entity": "medicine_name"
-          }
-        ],
+        "intent": "enter_medicine_data",
         "text": "ยาเบาหวาน"
       },
       {
-        "intent": "enter_medicine_name",
-        "entities": [
-          {
-            "start": 2,
-            "end": 11,
-            "value": "แก้อักเสบ",
-            "entity": "medicine_name"
-          }
-        ],
+        "intent": "enter_medicine_data",
         "text": "ยาแก้อักเสบ"
+      },
+      {
+        "intent": "medicine_list",
+        "text": "รายการยา"
+      },
+      {
+        "intent": "medicine_list",
+        "text": "รายชื่อยา"
+      },
+      {
+        "intent": "medicine_list",
+        "text": "ลิสต์ยา"
+      },
+      {
+        "intent": "medicine_list",
+        "text": "drug list"
+      },
+      {
+        "intent": "medicine_list",
+        "text": "medicine list"
+      },
+      {
+        "intent": "medicine_list",
+        "text": "medication list"
+      },
+      {
+        "intent": "affirmative",
+        "text": "ใช่"
+      },
+      {
+        "intent": "affirmative",
+        "text": "ใช่ เพิ่มยาใหม่"
+      },
+      {
+        "intent": "negative",
+        "text": "ไม่"
+      },
+      {
+        "intent": "negative",
+        "text": "ไม่เอา"
+      },
+      {
+        "intent": "negative",
+        "text": "ยกเลิก"
       }
     ],
     "regex_features": [],

@@ -28,6 +28,28 @@
 
 ## add medicine
 * add_medicine
-  - line_ask_medicine_name
-* enter_medicine_name
-  - line_add_medicine_success
+  - custom_form_add_medicine
+  - form{"name": "custom_form_add_medicine"}
+  - slot{"medicine_list": [{"name": "ยาความดัน", "time": "สามเวลา", "meal": "หลังอาหาร"}]}
+  - slot{"new_medicine_name": null}
+  - slot{"new_medicine_time": null}
+  - slot{"new_medicine_meal": null}
+
+## list medicine (empty) affirmative
+* medicine_list
+  - slot{"medicine_list": null}
+  - line_ask_add_new_medicine
+* affirmative
+  - custom_form_add_medicine
+  - form{"name": "custom_form_add_medicine"}
+
+## list medicine (empty) negative
+* medicine_list
+  - slot{"medicine_list": null}
+  - line_ask_add_new_medicine
+* negative
+
+## list medicine
+* medicine_list
+  - slot{"medicine_list": [{"name": "ยาความดัน"}]}
+  - line_flex_medicine_list

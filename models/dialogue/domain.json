@@ -1,14 +1,17 @@
 {
   "states": [
     "intent_add_medicine",
-    "intent_enter_medicine_name",
+    "intent_enter_medicine_data",
     "intent_goodbye",
     "intent_greet",
     "intent_mood_affirm",
     "intent_mood_deny",
     "intent_mood_great",
     "intent_mood_unhappy",
-    "slot_medicine_name_0",
+    "slot_medicine_list_0",
+    "slot_new_medicine_meal_0",
+    "slot_new_medicine_name_0",
+    "slot_new_medicine_time_0",
     "prev_action_listen",
     "prev_action_restart",
     "prev_action_default_fallback",
@@ -18,7 +21,13 @@
     "prev_line_did_that_help",
     "prev_line_happy",
     "prev_line_goodbye",
-    "prev_line_ask_medicine_name",
-    "prev_line_add_medicine_success"
+    "prev_line_ask_new_medicine_name",
+    "prev_line_ask_new_medicine_time",
+    "prev_line_ask_new_medicine_meal",
+    "prev_line_add_new_medicine_success",
+    "prev_line_ask_add_new_medicine",
+    "prev_line_flex_medicine_list",
+    "prev_custom_form_add_medicine",
+    "active_form_custom_form_add_medicine"
   ]
 }

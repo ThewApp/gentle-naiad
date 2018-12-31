@@ -1,20 +1,30 @@
 {
   "action_fingerprints": {
     "action_listen": {
-      "slots": []
+      "slots": [
+        "medicine_list"
+      ]
     },
     "line_goodbye": {
       "slots": []
     },
-    "line_add_medicine_success": {
+    "line_flex_medicine_list": {
       "slots": []
+    },
+    "custom_form_add_medicine": {
+      "slots": [
+        "new_medicine_name",
+        "new_medicine_meal",
+        "new_medicine_time",
+        "medicine_list"
+      ]
     },
     "line_happy": {
       "slots": []
     }
   },
   "rasa_core": "0.12.3",
-  "python": "3.6.7",
+  "python": "3.6.8",
   "max_histories": [
     5,
     null,
@@ -28,5 +38,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20181229-145337"
+  "trained_at": "20181231-202639"
 }

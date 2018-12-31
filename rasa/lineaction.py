@@ -1,10 +1,20 @@
-from rasa_core.actions.action import UtterAction, RemoteAction, default_actions, Action
+from rasa_core.actions.action import (
+    UtterAction, RemoteAction, ACTION_DEFAULT_FALLBACK_NAME,
+    Action, ActionListen, ActionRestart, ActionDeactivateForm
+)
 from rasa_core.utils import EndpointConfig
+import rasa.actions
 
 import logging
 from typing import Text, List, Optional, Callable, Any, Dict, Union
 
 logger = logging.getLogger(__name__)
+
+
+def default_actions() -> List['Action']:
+    """List default actions."""
+    return [ActionListen(), ActionRestart(),
+            ActionDefaultFallback(), ActionDeactivateForm()]
 
 
 def action_from_name(name: Text, action_endpoint: Optional[EndpointConfig],
@@ -19,8 +29,25 @@ def action_from_name(name: Text, action_endpoint: Optional[EndpointConfig],
         return UtterAction(name)
     elif name.startswith("line_"):
         return LineAction(name)
+    elif name.startswith("custom_"):
+        return get_custom_action(name)
     else:
         return RemoteAction(name, action_endpoint)
+
+
+class ActionDefaultFallback(Action):
+    """Executes the fallback action and goes back to the previous state
+    of the dialogue"""
+
+    def name(self) -> Text:
+        return ACTION_DEFAULT_FALLBACK_NAME
+
+    def run(self, dispatcher, tracker, domain):
+        from rasa_core.events import UserUtteranceReverted
+
+        dispatcher.line_template("line_default", tracker)
+
+        return [UserUtteranceReverted()]
 
 
 class LineAction(Action):
@@ -37,3 +64,12 @@ class LineAction(Action):
 
     def __str__(self) -> Text:
         return "LineAction('{}')".format(self.name())
+
+
+def get_custom_action(name):
+    try:
+        action = getattr(rasa.actions, name)
+        return action()
+    except AttributeError:
+        logger.error("%s action not found in %s", name, rasa.actions.__name__)
+        return ActionDefaultFallback()
