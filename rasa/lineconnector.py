@@ -39,7 +39,6 @@ class RasaLineHandler(WebhookHandler):
         out_channel = LineOutput(self.line_api, event.reply_token)
         user_msg = UserMessage(event.message.text, out_channel, event.source.user_id,
                                input_channel=self.name())
-        user_msg.event = event
         self.on_new_message(user_msg)
         out_channel.send_reply()
 
