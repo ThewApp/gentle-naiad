@@ -28,7 +28,7 @@ class custom_form_add_medicine(LineForm):
             or a list of them, where the first match will be picked"""
 
         return {
-            "new_medicine_name": self.from_text(),
+            "new_medicine_name": self.from_text(not_intent="negative"),
             "new_medicine_time": self.from_text(intent="enter_medicine_data"),
             "new_medicine_meal": self.from_text(intent="enter_medicine_data")
         }
