@@ -5,28 +5,39 @@
         "medicine_list"
       ]
     },
+    "custom_flex_medicine_list": {
+      "slots": []
+    },
     "line_happy": {
+      "slots": []
+    },
+    "custom_remove_medicine": {
+      "slots": [
+        "medicine_list"
+      ]
+    },
+    "line_goodbye": {
       "slots": []
     },
     "custom_form_add_medicine": {
       "slots": [
         "new_medicine_time",
-        "new_medicine_name",
         "medicine_list",
-        "new_medicine_meal"
+        "new_medicine_meal",
+        "new_medicine_name"
       ]
+    },
+    "action_restart": {
+      "slots": []
     },
     "custom_reset_add_new_medicine": {
       "slots": [
         "new_medicine_time",
-        "new_medicine_name",
-        "new_medicine_meal"
+        "new_medicine_meal",
+        "new_medicine_name"
       ]
     },
-    "custom_flex_medicine_list": {
-      "slots": []
-    },
-    "line_goodbye": {
+    "line_follow": {
       "slots": []
     }
   },
@@ -45,5 +56,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20190101-134851"
+  "trained_at": "20190101-171122"
 }

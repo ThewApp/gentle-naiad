@@ -79,6 +79,24 @@ class custom_reset_add_new_medicine(Action):
         ]
 
 
+class custom_remove_medicine(Action):
+    def name(self):
+        # type: () -> Text
+        return "custom_remove_medicine"
+
+    def run(self, dispatcher, tracker, domain):
+        # type: (CollectingDispatcher, Tracker, Dict[Text, Any]) -> List[Dict[Text, Any]]
+
+        new_medicine_list = tracker.get_slot("medicine_list").copy()
+
+        index = next(tracker.get_latest_entity_values("remove_medicine_index"), None)
+
+        removed_medicine = new_medicine_list.pop(index)
+
+        dispatcher.line_template('line_remove_medicine_success', tracker, medicine_name=removed_medicine["name"])
+
+        return [SlotSet("medicine_list", new_medicine_list)]
+
 class custom_flex_medicine_list(Action):
     def name(self):
         # type: () -> Text

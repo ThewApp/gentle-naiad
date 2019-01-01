@@ -26,6 +26,14 @@
 * goodbye
   - line_goodbye
 
+## follow
+* follow_event
+  - line_follow
+
+## unfollow
+* unfollow_event
+  - action_restart
+
 ## add medicine
 * add_medicine
   - custom_form_add_medicine
@@ -46,6 +54,11 @@
   - slot{"new_medicine_name": null}
   - slot{"new_medicine_time": null}
   - slot{"new_medicine_meal": null}
+
+## delete medicine
+* remove_medicine{"remove_medicine_index": 0}
+  - custom_remove_medicine
+  - slot{"medicine_list": []}
 
 ## list medicine (empty) affirmative
 * medicine_list

@@ -1,6 +1,7 @@
 %YAML 1.1
 ---
 actions:
+- line_follow
 - line_greet
 - line_cheer_up
 - line_did_that_help
@@ -11,15 +12,22 @@ actions:
 - line_ask_new_medicine_meal
 - line_add_new_medicine_success
 - line_ask_add_new_medicine
-- custom_flex_medicine_list
 - custom_reset_add_new_medicine
+- custom_remove_medicine
+- line_remove_medicine_success
+- custom_flex_medicine_list
 - line_cancel_success
 config:
   store_entities_as_slots: true
-entities: []
+entities:
+- remove_medicine_index
 forms:
 - custom_form_add_medicine
 intents:
+- follow_event:
+    use_entities: true
+- unfollow_event:
+    use_entities: true
 - greet:
     use_entities: true
 - goodbye:
@@ -35,6 +43,8 @@ intents:
 - add_medicine:
     use_entities: true
 - enter_medicine_data:
+    use_entities: true
+- remove_medicine:
     use_entities: true
 - medicine_list:
     use_entities: true
@@ -180,11 +190,16 @@ templates:
       previewImageUrl: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240
       type: image
   line_default:
-  - text: "ลองกดปุ่มเมนูด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้"
+  - text: "ลองกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
     type: text
   line_did_that_help:
   - text: Did that help you?
     type: text
+  line_follow:
+  - - text: "สวัสดีค่ะ !\nMediary เป็นบริการที่จะมาดูแลสุขภาพของคุณค่ะ ♥"
+      type: text
+    - text: "ท่านสามารถกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
+      type: text
   line_goodbye:
   - text: Bye
     type: text
@@ -202,3 +217,6 @@ templates:
     - packageId: '11537'
       stickerId: '52002734'
       type: sticker
+  line_remove_medicine_success:
+  - - text: ลบ {medicine_name} เรียบร้อยแล้วค่ะ
+      type: text

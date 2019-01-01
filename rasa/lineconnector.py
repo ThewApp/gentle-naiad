@@ -3,16 +3,15 @@ import logging
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import (AudioSendMessage, BaseSize, ImagemapAction,
-                            ImagemapArea, ImagemapSendMessage,
-                            ImageSendMessage, LocationSendMessage,
-                            MessageEvent, StickerSendMessage,
-                            TemplateSendMessage, TextMessage, TextSendMessage,
-                            VideoSendMessage)
+from linebot.models import (
+    FollowEvent, UnfollowEvent, MessageEvent, PostbackEvent,
+    TextMessage
+)
 
 from flask import Blueprint, abort, jsonify, request
-from rasa_core.channels import (CollectingOutputChannel, InputChannel,
-                                UserMessage)
+from rasa_core.channels import (
+    CollectingOutputChannel, InputChannel, UserMessage
+)
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +26,9 @@ class RasaLineHandler(WebhookHandler):
         super().__init__(channel_secret)
 
         self.add(MessageEvent, message=TextMessage)(self.handle_text_message)
+        self.add(PostbackEvent)(self.handle_postback_event)
+        self.add(FollowEvent)(self.handle_follow_event)
+        self.add(UnfollowEvent)(self.handle_unfollow_event)
 
     def handle_webhook(self, on_new_message):
         self.on_new_message = on_new_message
@@ -37,10 +39,45 @@ class RasaLineHandler(WebhookHandler):
 
     def handle_text_message(self, event):
         out_channel = LineOutput(self.line_api, event.reply_token)
-        user_msg = UserMessage(event.message.text, out_channel, event.source.user_id,
-                               input_channel=self.name())
+        user_msg = UserMessage(
+            event.message.text,
+            out_channel,
+            event.source.user_id,
+            input_channel=self.name()
+        )
         self.on_new_message(user_msg)
         out_channel.send_reply()
+
+    def handle_postback_event(self, event):
+        out_channel = LineOutput(self.line_api, event.reply_token)
+        user_msg = UserMessage(
+            event.postback.data,
+            out_channel,
+            event.source.user_id,
+            input_channel=self.name()
+        )
+        self.on_new_message(user_msg)
+        out_channel.send_reply()
+
+    def handle_follow_event(self, event):
+        out_channel = LineOutput(self.line_api, event.reply_token)
+        user_msg = UserMessage(
+            "/follow_event",
+            out_channel,
+            event.source.user_id,
+            input_channel=self.name()
+        )
+        self.on_new_message(user_msg)
+        out_channel.send_reply()
+
+    def handle_unfollow_event(self, event):
+        user_msg = UserMessage(
+            "/unfollow_event",
+            None,
+            event.source.user_id,
+            input_channel=self.name()
+        )
+        self.on_new_message(user_msg)
 
 
 class LineOutput(CollectingOutputChannel):
@@ -48,7 +85,7 @@ class LineOutput(CollectingOutputChannel):
     def name(cls):
         return "line"
 
-    def __init__(self, line_api, reply_token):
+    def __init__(self, line_api, reply_token=None):
         self.line_api = line_api
         self.reply_token = reply_token
         super().__init__()

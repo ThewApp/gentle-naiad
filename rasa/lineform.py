@@ -266,9 +266,7 @@ class LineForm(Action):
             if self._should_request_slot(tracker, slot):
                 logger.debug("Request next slot '{}'".format(slot))
                 dispatcher.line_template("line_ask_{}".format(slot),
-                                          tracker,
-                                          silent_fail=False,
-                                          **tracker.slots)
+                                          tracker)
                 return [SlotSet(REQUESTED_SLOT, slot)]
 
         logger.debug("No slots left to request")

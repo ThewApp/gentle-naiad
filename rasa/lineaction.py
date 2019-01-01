@@ -1,6 +1,7 @@
 from rasa_core.actions.action import (
-    UtterAction, RemoteAction, ACTION_DEFAULT_FALLBACK_NAME,
-    Action, ActionListen, ActionRestart, ActionDeactivateForm
+    UtterAction, RemoteAction,
+    ACTION_DEFAULT_FALLBACK_NAME, ACTION_RESTART_NAME,
+    Action, ActionListen, ActionDeactivateForm
 )
 from rasa_core.utils import EndpointConfig
 import rasa.actions
@@ -48,6 +49,19 @@ class ActionDefaultFallback(Action):
         dispatcher.line_template("line_default", tracker)
 
         return [UserUtteranceReverted()]
+
+
+class ActionRestart(Action):
+    """Resets the tracker to its initial state.
+    Utters the restart template if available."""
+
+    def name(self) -> Text:
+        return ACTION_RESTART_NAME
+
+    def run(self, dispatcher, tracker, domain):
+        from rasa_core.events import Restarted
+
+        return [Restarted()]
 
 
 class LineAction(Action):

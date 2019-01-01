@@ -1,4 +1,6 @@
 intents:
+  - follow_event
+  - unfollow_event
   - greet
   - goodbye
   - mood_affirm
@@ -7,11 +9,16 @@ intents:
   - mood_unhappy
   - add_medicine
   - enter_medicine_data
+  - remove_medicine
   - medicine_list
   - affirmative
   - negative
 
+entities:
+  - remove_medicine_index
+
 actions:
+  - line_follow
   - line_greet
   - line_cheer_up
   - line_did_that_help
@@ -22,15 +29,24 @@ actions:
   - line_ask_new_medicine_meal
   - line_add_new_medicine_success
   - line_ask_add_new_medicine
-  - custom_flex_medicine_list
   - custom_reset_add_new_medicine
+  - custom_remove_medicine
+  - line_remove_medicine_success
+  - custom_flex_medicine_list
   - line_cancel_success
   
 
 templates:
   line_default:
     - type: "text"
-      text: "ลองกดปุ่มเมนูด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้"
+      text: "ลองกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
+
+  line_follow:
+    - - type: "text"
+        text: "สวัสดีค่ะ !\nMediary เป็นบริการที่จะมาดูแลสุขภาพของคุณค่ะ ♥"
+      - type: "text"
+        text: "ท่านสามารถกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
+
   line_greet:
     - type: "text"
       text: "Hey! How are you?"
@@ -172,6 +188,10 @@ templates:
             - type: "message"
               label: "ไม่"
               text: "ไม่"
+  
+  line_remove_medicine_success:
+    - - type: "text"
+        text: "ลบ {medicine_name} เรียบร้อยแล้วค่ะ"
   
   line_cancel_success:
     - type: "text"

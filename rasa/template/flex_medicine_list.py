@@ -38,6 +38,7 @@ def get_body_contents(medicine_list):
     contents = []
     length = len(medicine_list)
     for index, medicine in enumerate(medicine_list):
+        delete_data = "/remove_medicine{\"remove_medicine_index\": %i}" % (index)
         contents.append({
             "type": "box",
             "layout": "vertical",
@@ -80,7 +81,7 @@ def get_body_contents(medicine_list):
                             "action": {
                                 "type": "postback",
                                 "label": "ลบ",
-                                "data": "delete[%i]" % index,
+                                "data": delete_data,
                                 "displayText": "ลบ" + medicine["name"]
                             }
                         }
