@@ -17,6 +17,8 @@ if ENV == "LOCAL_DEVELOPMENT":
     ptvsd.enable_attach(address=('localhost', 5678), redirect_output=True)
     ptvsd.wait_for_attach()
 elif ENV == "DEVELOPMENT":
+    logging_level = logging.DEBUG
+elif ENV == "STAGING":
     logging_level = logging.INFO
 else:
     logging_level = None
