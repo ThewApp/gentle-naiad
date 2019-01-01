@@ -259,7 +259,7 @@ class LineForm(Action):
                           domain  # type: Dict[Text, Any]
                           ):
         # type: (...) -> Optional[List[Dict]]
-        """Request the next slot and utter template if needed,
+        """Request the next slot and line template if needed,
             else return None"""
 
         for slot in self.required_slots(tracker):
