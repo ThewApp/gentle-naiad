@@ -41,8 +41,9 @@ class RasaLineHandler(WebhookHandler):
             except LineBotApiError as e:
                 logger.error(e.status_code, e.error.message, e.error.details)
         default_rich_menu_object = DEFAULT_RICH_MENU_OBJECT
-        default_rich_menu_id = self.line_api.create_rich_menu(
-            default_rich_menu_object)
+        default_rich_menu_id = self.line_api.self._post(
+            '/v2/bot/richmenu', data=json.dumps(default_rich_menu_object), timeout=timeout
+        ).get('richMenuId')
         with open(DEFAULT_RICH_MENU_IMAGE["path"], 'rb') as f:
             self.line_api.set_rich_menu_image(
                 default_rich_menu_id, DEFAULT_RICH_MENU_IMAGE["type"], f)
