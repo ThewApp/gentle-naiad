@@ -18,6 +18,8 @@ if ENV == "LOCAL_DEVELOPMENT":
     ptvsd.wait_for_attach()
 elif ENV == "DEVELOPMENT":
     logging_level = logging.INFO
+else:
+    logging_level = None
 
 logging.basicConfig(level=logging_level)
 
