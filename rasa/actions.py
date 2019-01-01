@@ -1,5 +1,6 @@
 from rasa_core.actions.action import Action
-from rasa_core.events import SlotSet
+from rasa_core.constants import REQUESTED_SLOT
+from rasa_core.events import SlotSet, Form
 
 from rasa.lineform import LineForm
 from rasa.template.flex_medicine_list import get_flex_medicine_list
@@ -57,6 +58,24 @@ class custom_form_add_medicine(LineForm):
             SlotSet("new_medicine_name", None),
             SlotSet("new_medicine_time", None),
             SlotSet("new_medicine_meal", None)
+        ]
+
+class custom_reset_add_new_medicine(Action):
+    def name(self):
+        # type: () -> Text
+        return "custom_reset_add_new_medicine"
+
+    def run(self, dispatcher, tracker, domain):
+        # type: (CollectingDispatcher, Tracker, Dict[Text, Any]) -> List[Dict[Text, Any]]
+
+        dispatcher.line_template('line_cancel_success', tracker)
+
+        return [
+            Form(None),
+            SlotSet("new_medicine_name", None),
+            SlotSet("new_medicine_time", None),
+            SlotSet("new_medicine_meal", None),
+            SlotSet(REQUESTED_SLOT, None)
         ]
 
 

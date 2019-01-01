@@ -30,6 +30,7 @@
 * add_medicine
   - custom_form_add_medicine
   - form{"name": "custom_form_add_medicine"}
+  - form{"name": null}
   - slot{"medicine_list": [{"name": "ยาความดัน", "time": "สามเวลา", "meal": "หลังอาหาร"}]}
   - slot{"new_medicine_name": null}
   - slot{"new_medicine_time": null}
@@ -40,8 +41,11 @@
   - custom_form_add_medicine
   - form{"name": "custom_form_add_medicine"}
 * negative
+  - custom_reset_add_new_medicine
   - form{"name": null}
-  - line_cancel_success
+  - slot{"new_medicine_name": null}
+  - slot{"new_medicine_time": null}
+  - slot{"new_medicine_meal": null}
 
 ## list medicine (empty) affirmative
 * medicine_list
