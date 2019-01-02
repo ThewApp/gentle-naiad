@@ -192,5 +192,5 @@ class LineMessageProcessor(MessageProcessor):
                         job_id=e.name
                     )
 
-def Test(e, dispatcher):
+def Test(e):
     logger.warning("TestTestTest")
