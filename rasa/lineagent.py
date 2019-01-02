@@ -148,8 +148,6 @@ class LineMessageProcessor(MessageProcessor):
                         ) -> None:
         """Handle a reminder that is triggered asynchronously."""
 
-        print("Handle reminder")
-
         tracker = self._get_tracker(dispatcher.sender_id)
 
         if not tracker:
@@ -164,13 +162,12 @@ class LineMessageProcessor(MessageProcessor):
                          "(event: {} id: {})".format(reminder_event.action_name,
                                                      reminder_event.name))
         else:
-            print("Handle reminder2")
             # necessary for proper featurization, otherwise the previous
             # unrelated message would influence featurization
             tracker.update(UserUttered.empty())
             action = self._get_action(reminder_event.action_name)
-            print("Got action %s", action)
             should_continue = self._run_action(action, tracker, dispatcher)
+            dispatcher.send_push()
             if should_continue:
                 user_msg = UserMessage(None,
                                        dispatcher.output_channel,

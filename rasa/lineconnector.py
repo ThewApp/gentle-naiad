@@ -119,7 +119,7 @@ class LineOutput(CollectingOutputChannel):
         self.reply_token = reply_token
         super().__init__()
 
-    def add_reply(self, recipient_id, message):
+    def add_message(self, recipient_id, message):
         message[RECIPIENT_ID] = recipient_id
         self.messages.append(message)
 

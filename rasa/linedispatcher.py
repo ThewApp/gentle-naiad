@@ -7,11 +7,14 @@ BotMessage = namedtuple("BotMessage", "text data")
 
 
 class LineDispatcher(Dispatcher):
+    def send_push(self):
+        self.output_channel.send_push()
+
     def line_response(self, message: Dict[Text, Any]) -> None:
         """Send a message to the client."""
 
-        if hasattr(self.output_channel, "add_reply"):
-            self.output_channel.add_reply(self.sender_id, message)
+        if hasattr(self.output_channel, "add_message"):
+            self.output_channel.add_message(self.sender_id, message)
         else:
             import json
             self.output_channel.send_response(
