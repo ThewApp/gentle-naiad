@@ -106,6 +106,9 @@ class RasaLineHandler(WebhookHandler):
         self.on_new_message(user_msg)
 
 
+RECIPIENT_ID = "recipient_id"
+
+
 class LineOutput(CollectingOutputChannel):
     @classmethod
     def name(cls):
@@ -117,13 +120,13 @@ class LineOutput(CollectingOutputChannel):
         super().__init__()
 
     def add_reply(self, recipient_id, message):
-        message['recipient_id'] = recipient_id
+        message[RECIPIENT_ID] = recipient_id
         self.messages.append(message)
 
     def send_reply(self):
         if self.messages:
             # Filter out internal keys
-            internal_keys = ['recipient_id']
+            internal_keys = [RECIPIENT_ID]
             messages = [{key: message[key] for key in message if key not in internal_keys}
                         for message in self.messages]
 
@@ -136,6 +139,25 @@ class LineOutput(CollectingOutputChannel):
 
             return self.line_api._post(
                 '/v2/bot/message/reply', data=json.dumps(data)
+            )
+
+    def send_push(self):
+        if self.messages:
+            to = self.messages[0][RECIPIENT_ID]
+            # Filter out internal keys
+            internal_keys = [RECIPIENT_ID]
+            messages = [{key: message[key] for key in message if key not in internal_keys}
+                        for message in self.messages]
+
+            data = {
+                'to': to,
+                'messages': messages
+            }
+
+            logger.debug("Sending push... %s", data)
+
+            return self.line_api._post(
+                '/v2/bot/message/push', data=json.dumps(data)
             )
 
 

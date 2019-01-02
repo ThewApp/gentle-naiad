@@ -78,3 +78,18 @@
 * medicine_list
   - slot{"medicine_list": [{"name": "ยาความดัน"}]}
   - custom_flex_medicine_list
+
+## test reminder
+* test_reminder
+  - custom_test_reminder_setup
+  - reminder{"action": "custom_medicine_reminder_push", "date_time": "2019-01-02 11:59:29"}
+
+## test reminder push
+  - line_reminder_push
+* affirmative
+  - line_medicine_reminder_affirmative
+
+## test reminder push
+  - line_reminder_push
+* negative
+  - line_medicine_reminder_negative

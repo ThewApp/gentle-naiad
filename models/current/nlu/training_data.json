@@ -370,6 +370,14 @@
         "text": "ใช่ เพิ่มยาใหม่"
       },
       {
+        "intent": "affirmative",
+        "text": "ทานแล้ว"
+      },
+      {
+        "intent": "affirmative",
+        "text": "เรียบร้อย"
+      },
+      {
         "intent": "negative",
         "text": "ไม่"
       },
@@ -380,6 +388,18 @@
       {
         "intent": "negative",
         "text": "ยกเลิก"
+      },
+      {
+        "intent": "negative",
+        "text": "ยังเลย"
+      },
+      {
+        "intent": "negative",
+        "text": "ยังไม่ทาน"
+      },
+      {
+        "intent": "negative",
+        "text": "ยังไม่ได้ทานเลย"
       }
     ],
     "regex_features": [],

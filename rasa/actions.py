@@ -1,6 +1,9 @@
+from datetime import datetime, timedelta
+
 from rasa_core.actions.action import Action
 from rasa_core.constants import REQUESTED_SLOT
-from rasa_core.events import SlotSet, Form
+from rasa_core.events import SlotSet, Form, ReminderScheduled
+from rasa.linedispatcher import LineDispatcher
 
 from rasa.lineform import LineForm
 from rasa.template.flex_medicine_list import get_flex_medicine_list
@@ -34,8 +37,7 @@ class custom_form_add_medicine(LineForm):
             "new_medicine_meal": self.from_text(intent="enter_medicine_data")
         }
 
-    def submit(self, dispatcher, tracker, domain):
-        # type: (CollectingDispatcher, Tracker, Dict[Text, Any]) -> List[Dict]
+    def submit(self, dispatcher: LineDispatcher, tracker, domain):
         """Define what the form has to do
             after all required slots are filled"""
 
@@ -60,13 +62,13 @@ class custom_form_add_medicine(LineForm):
             SlotSet("new_medicine_meal", None)
         ]
 
+
 class custom_reset_add_new_medicine(Action):
     def name(self):
         # type: () -> Text
         return "custom_reset_add_new_medicine"
 
-    def run(self, dispatcher, tracker, domain):
-        # type: (CollectingDispatcher, Tracker, Dict[Text, Any]) -> List[Dict[Text, Any]]
+    def run(self, dispatcher: LineDispatcher, tracker, domain):
 
         dispatcher.line_template('line_cancel_success', tracker)
 
@@ -84,26 +86,27 @@ class custom_remove_medicine(Action):
         # type: () -> Text
         return "custom_remove_medicine"
 
-    def run(self, dispatcher, tracker, domain):
-        # type: (CollectingDispatcher, Tracker, Dict[Text, Any]) -> List[Dict[Text, Any]]
+    def run(self, dispatcher: LineDispatcher, tracker, domain):
 
         new_medicine_list = tracker.get_slot("medicine_list").copy()
 
-        index = next(tracker.get_latest_entity_values("remove_medicine_index"), None)
+        index = next(tracker.get_latest_entity_values(
+            "remove_medicine_index"), None)
 
         removed_medicine = new_medicine_list.pop(index)
 
-        dispatcher.line_template('line_remove_medicine_success', tracker, medicine_name=removed_medicine["name"])
+        dispatcher.line_template(
+            'line_remove_medicine_success', tracker, medicine_name=removed_medicine["name"])
 
         return [SlotSet("medicine_list", new_medicine_list)]
+
 
 class custom_flex_medicine_list(Action):
     def name(self):
         # type: () -> Text
         return "custom_flex_medicine_list"
 
-    def run(self, dispatcher, tracker, domain):
-        # type: (CollectingDispatcher, Tracker, Dict[Text, Any]) -> List[Dict[Text, Any]]
+    def run(self, dispatcher: LineDispatcher, tracker, domain):
 
         medicine_list = tracker.get_slot("medicine_list")
 
@@ -112,3 +115,15 @@ class custom_flex_medicine_list(Action):
         dispatcher.line_response(message)
 
         return []
+
+
+class custom_test_reminder_setup(Action):
+    def name(self):
+        # type: () -> Text
+        return "custom_test_reminder_setup1"
+
+    def run(self, dispatcher: LineDispatcher, tracker, domain):
+
+        dispatcher.line_template("line_test_reminder_setup", tracker)
+
+        return [ReminderScheduled("line_medicine_reminder_push", datetime.utcnow() + timedelta(seconds=30))]

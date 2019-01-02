@@ -17,7 +17,8 @@ from typing import Text, List, Optional, Callable, Any, Dict, Union
 
 logger = logging.getLogger(__name__)
 
-scheduler = Scheduler(connection=scheduler_store)
+if scheduler_store:
+    scheduler = Scheduler(connection=scheduler_store)
 
 
 class LineAgent(Agent):
