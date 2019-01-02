@@ -3,3 +3,4 @@ line-bot-sdk>=1.8.0
 pythainlp>=1.7.1
 rasa_core>=0.12
 rasa_nlu[tensorflow]>=0.13 
+rq-scheduler>=0.9

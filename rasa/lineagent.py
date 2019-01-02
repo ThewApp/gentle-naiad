@@ -1,4 +1,5 @@
 from rasa_core.agent import Agent
+from rasa_core.events import Event, ReminderScheduled
 from rasa_core.interpreter import NaturalLanguageInterpreter
 from rasa_core.policies import Policy
 from rasa_core.policies.ensemble import PolicyEnsemble
@@ -7,12 +8,16 @@ from rasa_core.utils import EndpointConfig
 from rasa.linedispatcher import LineDispatcher
 from rasa.linedomain import LineDomain
 from rasa.linenlg import LineNLG
+from rasa.store import scheduler_store
+from rq_scheduler import Scheduler
 
 import logging
 import os
 from typing import Text, List, Optional, Callable, Any, Dict, Union
 
 logger = logging.getLogger(__name__)
+
+scheduler = Scheduler(connection=scheduler_store)
 
 
 class LineAgent(Agent):
@@ -133,3 +138,20 @@ class LineMessageProcessor(MessageProcessor):
             if self.on_circuit_break:
                 # call a registered callback
                 self.on_circuit_break(tracker, dispatcher)
+
+    def _schedule_reminders(self, events: List[Event],
+                            dispatcher: LineDispatcher) -> None:
+        """Uses the scheduler to time a job to trigger the passed reminder.
+        Reminders with the same `id` property will overwrite one another
+        (i.e. only one of them will eventually run)."""
+
+        if events is not None:
+            for e in events:
+                if isinstance(e, ReminderScheduled):
+                    scheduler.enqueue_at(
+                        e.trigger_date_time,
+                        self.handle_reminder,
+                        e,
+                        dispatcher,
+                        job_id=e.name
+                    )
