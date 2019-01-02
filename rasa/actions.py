@@ -120,7 +120,7 @@ class custom_flex_medicine_list(Action):
 class custom_test_reminder_setup(Action):
     def name(self):
         # type: () -> Text
-        return "custom_test_reminder_setup1"
+        return "custom_test_reminder_setup"
 
     def run(self, dispatcher: LineDispatcher, tracker, domain):
 

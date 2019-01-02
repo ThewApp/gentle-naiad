@@ -1,5 +1,6 @@
 from rasa_core.agent import Agent
-from rasa_core.events import Event, ReminderScheduled
+from rasa_core.channels.channel import UserMessage
+from rasa_core.events import Event, ReminderScheduled, UserUttered
 from rasa_core.interpreter import NaturalLanguageInterpreter
 from rasa_core.policies import Policy
 from rasa_core.policies.ensemble import PolicyEnsemble
@@ -139,6 +140,40 @@ class LineMessageProcessor(MessageProcessor):
             if self.on_circuit_break:
                 # call a registered callback
                 self.on_circuit_break(tracker, dispatcher)
+
+    def handle_reminder(self,
+                        reminder_event: ReminderScheduled,
+                        dispatcher: LineDispatcher
+                        ) -> None:
+        """Handle a reminder that is triggered asynchronously."""
+
+        tracker = self._get_tracker(dispatcher.sender_id)
+
+        if not tracker:
+            logger.warning("Failed to retrieve or create tracker for sender "
+                           "'{}'.".format(dispatcher.sender_id))
+            return None
+
+        if (reminder_event.kill_on_user_message and
+                self._has_message_after_reminder(tracker, reminder_event) or not
+                self._is_reminder_still_valid(tracker, reminder_event)):
+            logger.debug("Canceled reminder because it is outdated. "
+                         "(event: {} id: {})".format(reminder_event.action_name,
+                                                     reminder_event.name))
+        else:
+            # necessary for proper featurization, otherwise the previous
+            # unrelated message would influence featurization
+            tracker.update(UserUttered.empty())
+            action = self._get_action(reminder_event.action_name)
+            logger.debug("Got action %s", action)
+            should_continue = self._run_action(action, tracker, dispatcher)
+            if should_continue:
+                user_msg = UserMessage(None,
+                                       dispatcher.output_channel,
+                                       dispatcher.sender_id)
+                self._predict_and_execute_next_action(user_msg, tracker)
+            # save tracker state to continue conversation from this state
+            self._save_tracker(tracker)
 
     # def _schedule_reminders(self, events: List[Event],
     #                         dispatcher: LineDispatcher) -> None:
