@@ -188,9 +188,8 @@ class LineMessageProcessor(MessageProcessor):
                     scheduler.enqueue_at(
                         e.trigger_date_time,
                         Test,
-                        e,
                         job_id=e.name
                     )
 
-def Test(e):
+def Test():
     logger.warning("TestTestTest")
