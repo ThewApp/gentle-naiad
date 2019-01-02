@@ -185,6 +185,10 @@ class LineMessageProcessor(MessageProcessor):
         if events is not None:
             for e in events:
                 if isinstance(e, ReminderScheduled):
+                    import calendar
+                    logger.debug(e.trigger_date_time)
+                    logger.debug(calendar.timegm(e.trigger_date_time.utctimetuple()))
+                    logger.debug(e.name)
                     scheduler.enqueue_at(
                         e.trigger_date_time,
                         Test
