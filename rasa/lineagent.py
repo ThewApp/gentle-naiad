@@ -140,19 +140,19 @@ class LineMessageProcessor(MessageProcessor):
                 # call a registered callback
                 self.on_circuit_break(tracker, dispatcher)
 
-    def _schedule_reminders(self, events: List[Event],
-                            dispatcher: LineDispatcher) -> None:
-        """Uses the scheduler to time a job to trigger the passed reminder.
-        Reminders with the same `id` property will overwrite one another
-        (i.e. only one of them will eventually run)."""
+    # def _schedule_reminders(self, events: List[Event],
+    #                         dispatcher: LineDispatcher) -> None:
+    #     """Uses the scheduler to time a job to trigger the passed reminder.
+    #     Reminders with the same `id` property will overwrite one another
+    #     (i.e. only one of them will eventually run)."""
 
-        if events is not None:
-            for e in events:
-                if isinstance(e, ReminderScheduled):
-                    scheduler.enqueue_at(
-                        e.trigger_date_time,
-                        self.handle_reminder,
-                        e,
-                        dispatcher,
-                        job_id=e.name
-                    )
+    #     if events is not None:
+    #         for e in events:
+    #             if isinstance(e, ReminderScheduled):
+    #                 scheduler.enqueue_at(
+    #                     e.trigger_date_time,
+    #                     self.handle_reminder,
+    #                     e,
+    #                     dispatcher,
+    #                     job_id=e.name
+    #                 )
