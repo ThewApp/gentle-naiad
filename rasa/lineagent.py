@@ -17,6 +17,7 @@ import os
 from typing import Text, List, Optional, Callable, Any, Dict, Union
 
 logger = logging.getLogger(__name__)
+logging.getLogger('apscheduler').setLevel(logging.DEBUG)
 
 if scheduler_store:
     scheduler = Scheduler(connection=scheduler_store)
