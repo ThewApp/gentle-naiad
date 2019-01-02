@@ -20,7 +20,7 @@ if redis_url:
     scheduler_store = Redis(
         host=hostname,
         port=port,
-        db=5,
+        db=1,
         password=password
     )
 else:
