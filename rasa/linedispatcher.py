@@ -7,9 +7,6 @@ BotMessage = namedtuple("BotMessage", "text data")
 
 
 class LineDispatcher(Dispatcher):
-    def send_push(self):
-        self.output_channel.send_push()
-
     def line_response(self, message: Dict[Text, Any]) -> None:
         """Send a message to the client."""
 

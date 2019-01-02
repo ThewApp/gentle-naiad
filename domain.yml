@@ -205,7 +205,7 @@ templates:
 
   line_test_reminder_setup:
     - type: "text"
-      text: "ตั้งเวลาทดสอบการแจ้งเตือนแล้ว\nอีก 30 วินาทีจะมีข้อความแจ้งเตือน"
+      text: "ตั้งเวลาทดสอบการแจ้งเตือนแล้ว\nอีก 10 วินาทีจะมีข้อความแจ้งเตือน"
 
   line_medicine_reminder_push:
     - type: "template"

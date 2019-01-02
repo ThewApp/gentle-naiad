@@ -126,4 +126,4 @@ class custom_test_reminder_setup(Action):
 
         dispatcher.line_template("line_test_reminder_setup", tracker)
 
-        return [ReminderScheduled("line_medicine_reminder_push", datetime.utcnow() + timedelta(seconds=30))]
+        return [ReminderScheduled("line_medicine_reminder_push", datetime.utcnow() + timedelta(seconds=10))]

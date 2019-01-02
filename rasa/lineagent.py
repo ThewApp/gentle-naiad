@@ -167,7 +167,7 @@ class LineMessageProcessor(MessageProcessor):
             tracker.update(UserUttered.empty())
             action = self._get_action(reminder_event.action_name)
             should_continue = self._run_action(action, tracker, dispatcher)
-            dispatcher.send_push()
+            dispatcher.output_channel.send_push()
             if should_continue:
                 user_msg = UserMessage(None,
                                        dispatcher.output_channel,
@@ -176,19 +176,19 @@ class LineMessageProcessor(MessageProcessor):
             # save tracker state to continue conversation from this state
             self._save_tracker(tracker)
 
-    # def _schedule_reminders(self, events: List[Event],
-    #                         dispatcher: LineDispatcher) -> None:
-    #     """Uses the scheduler to time a job to trigger the passed reminder.
-    #     Reminders with the same `id` property will overwrite one another
-    #     (i.e. only one of them will eventually run)."""
+    def _schedule_reminders(self, events: List[Event],
+                            dispatcher: LineDispatcher) -> None:
+        """Uses the scheduler to time a job to trigger the passed reminder.
+        Reminders with the same `id` property will overwrite one another
+        (i.e. only one of them will eventually run)."""
 
-    #     if events is not None:
-    #         for e in events:
-    #             if isinstance(e, ReminderScheduled):
-    #                 scheduler.enqueue_at(
-    #                     e.trigger_date_time,
-    #                     self.handle_reminder,
-    #                     e,
-    #                     dispatcher,
-    #                     job_id=e.name
-    #                 )
+        if events is not None:
+            for e in events:
+                if isinstance(e, ReminderScheduled):
+                    scheduler.enqueue_at(
+                        e.trigger_date_time,
+                        self.handle_reminder,
+                        e,
+                        dispatcher,
+                        job_id=e.name
+                    )
