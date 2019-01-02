@@ -187,8 +187,7 @@ class LineMessageProcessor(MessageProcessor):
                 if isinstance(e, ReminderScheduled):
                     scheduler.enqueue_at(
                         e.trigger_date_time,
-                        Test,
-                        job_id=e.name
+                        Test
                     )
 
 def Test():
