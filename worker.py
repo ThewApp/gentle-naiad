@@ -3,6 +3,10 @@ from rq import Worker, Queue, Connection
 from rq_scheduler.scheduler import Scheduler
 import threading
 
+from rq_scheduler.utils import setup_loghandlers
+
+setup_loghandlers('DEBUG')
+
 listen = ['high', 'default', 'low']
 
 if __name__ == '__main__':
