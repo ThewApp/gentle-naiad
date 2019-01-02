@@ -186,11 +186,12 @@ class LineMessageProcessor(MessageProcessor):
             for e in events:
                 if isinstance(e, ReminderScheduled):
                     import calendar
+                    from datetime import datetime
                     logger.debug(e.trigger_date_time)
                     logger.debug(calendar.timegm(e.trigger_date_time.utctimetuple()))
                     logger.debug(e.name)
                     scheduler.enqueue_at(
-                        e.trigger_date_time,
+                        datetime(2000, 1, 1),
                         Test
                     )
 
