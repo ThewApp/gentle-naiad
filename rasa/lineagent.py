@@ -129,6 +129,8 @@ class LineMessageProcessor(MessageProcessor):
             # this actually just calls the policy's method by the same name
             action, policy, confidence = self.predict_next_action(tracker)
 
+            logger.debug("should_predict_another_action %s", action)
+
             should_predict_another_action = self._run_action(action,
                                                              tracker,
                                                              dispatcher,
@@ -173,13 +175,17 @@ class LineMessageProcessor(MessageProcessor):
             logger.info("Running reminder action %s", action)
             should_continue = self._run_action(action, tracker, dispatcher)
             dispatcher.output_channel.send_push()
+            logger.debug(should_continue)
             if should_continue:
+                logger.debug("Should continue true...")
                 user_msg = UserMessage(None,
                                        dispatcher.output_channel,
                                        dispatcher.sender_id)
                 self._predict_and_execute_next_action(user_msg, tracker)
+            logger.debug("Save tracker...")
             # save tracker state to continue conversation from this state
             self._save_tracker(tracker)
+            logger.debug("ENDING...")
 
     def _schedule_reminders(self, events: List[Event],
                             dispatcher: LineDispatcher) -> None:
