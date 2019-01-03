@@ -164,10 +164,10 @@ class custom_medicine_reminder_push(Action):
             number_to_remind = len(medicine_to_remind)
             if number_to_remind > 0:
                 if number_to_remind == 1:
-                    text = "สวัสดีค่ะ คุณทานยา{} ตอน{} {} หรือยังคะ".format(
+                    text = "สวัสดีค่ะ คุณทาน{} ตอน{} {} หรือยังคะ".format(
                         medicine_to_remind[0], reminder_data["time"], reminder_data["meal"])
                 else:
-                    text = "สวัสดีค่ะ คุณทานยา\n"
+                    text = "สวัสดีค่ะ คุณทาน\n"
                     for medicine in medicine_to_remind:
                         text += "❥" + medicine + "\n"
                     text += "ตอน{} {} หรือยังคะ".format(
