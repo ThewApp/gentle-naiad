@@ -5,6 +5,7 @@ from rq.job import Job, _job_stack
 from rq.worker import Worker, green, blue, yellow
 from rq.connections import push_connection, pop_connection
 from rq.registry import StartedJobRegistry
+from rq.timeouts import JobTimeoutException
 from rq.utils import utcnow
 
 
