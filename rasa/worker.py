@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 def reminder_job(e, dispatcher, agent):
-    agent.handle_reminder(e, dispatcher)
+    logger.debug("EVENT NAME %s", e.name)
 
 
 class ReminderJob(Job):

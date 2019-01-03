@@ -20,7 +20,7 @@ from typing import Text, List, Optional, Callable, Any, Dict, Union
 logger = logging.getLogger(__name__)
 
 if scheduler_store:
-    scheduler = Scheduler(connection=scheduler_store, job_class=ReminderJob)
+    scheduler = Scheduler(connection=scheduler_store)
 
 
 class LineAgent(Agent):
@@ -171,15 +171,14 @@ class LineMessageProcessor(MessageProcessor):
             tracker.update(UserUttered.empty())
             action = self._get_action(reminder_event.action_name)
             logger.info("Running reminder action %s", action)
-            dispatcher.output_channel.clear_messages()
             should_continue = self._run_action(action, tracker, dispatcher)
+            dispatcher.output_channel.send_push()
             if should_continue:
                 user_msg = UserMessage(None,
                                        dispatcher.output_channel,
                                        dispatcher.sender_id)
                 self._predict_and_execute_next_action(user_msg, tracker)
             # save tracker state to continue conversation from this state
-            dispatcher.output_channel.send_push()
             self._save_tracker(tracker)
 
     def _schedule_reminders(self, events: List[Event],
