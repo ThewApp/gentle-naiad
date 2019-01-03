@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 
 
 def reminder_job(e, dispatcher, agent):
-    logger.debug("reminder_job %s", e.name)
     agent.handle_reminder(e, dispatcher)
 
 
@@ -34,6 +33,7 @@ class ReminderJob(Job):
 class ReminderWorker(Worker):
     def work(self, *args, **kwargs):
         self.agent = kwargs.pop("agent", None)
+        logger.debug("Reminder worker.work()")
         super().work(*args, **kwargs)
 
     def perform_job(self, job, queue, heartbeat_ttl=None):
