@@ -1,3 +1,4 @@
+import logging
 import sys
 
 from rq.compat import as_text, text_type
@@ -8,8 +9,11 @@ from rq.registry import StartedJobRegistry
 from rq.timeouts import JobTimeoutException
 from rq.utils import utcnow
 
+logger = logging.getLogger(__name__)
+
 
 def reminder_job(e, dispatcher, agent):
+    logger.debug("reminder_job %s", e.name)
     agent.handle_reminder(e, dispatcher)
 
 
