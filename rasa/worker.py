@@ -9,7 +9,7 @@ from rq.timeouts import JobTimeoutException
 from rq.utils import utcnow
 
 
-def reminder_job(agent, e, dispatcher):
+def reminder_job(e, dispatcher, agent):
     agent.handle_reminder(e, dispatcher)
 
 
