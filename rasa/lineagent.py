@@ -206,3 +206,28 @@ class LineMessageProcessor(MessageProcessor):
                         dispatcher,
                         job_id=e.name
                     )
+    
+    def _get_next_action_probabilities(
+        self,
+        tracker
+    ):
+        logger.debug("_get_next_action_probabilities")
+        followup_action = tracker.followup_action
+        if followup_action:
+            logger.debug("Followup Action")
+            tracker.clear_followup_action()
+            result = self._prob_array_for_action(followup_action)
+            logger.debug("result: %s", result)
+            if result:
+                return result
+            else:
+                logger.error(
+                    "Trying to run unknown follow up action '{}'!"
+                    "Instead of running that, we will ignore the action "
+                    "and predict the next action.".format(followup_action))
+
+        if (tracker.latest_message.intent.get("name") ==
+                self.domain.restart_intent):
+            return self._prob_array_for_action("action_restart")
+        return self.policy_ensemble.probabilities_using_best_policy(
+            tracker, self.domain)
