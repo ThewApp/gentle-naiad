@@ -127,6 +127,8 @@ class LineMessageProcessor(MessageProcessor):
                self._should_handle_message(tracker) and
                num_predicted_actions < self.max_number_of_predictions):
             # this actually just calls the policy's method by the same name
+
+            logger.debug("Predicting next action")
             action, policy, confidence = self.predict_next_action(tracker)
 
             logger.debug("should_predict_another_action %s", action)
@@ -181,6 +183,7 @@ class LineMessageProcessor(MessageProcessor):
                 user_msg = UserMessage(None,
                                        dispatcher.output_channel,
                                        dispatcher.sender_id)
+                logger.debug(user_msg)
                 self._predict_and_execute_next_action(user_msg, tracker)
             logger.debug("Save tracker...")
             # save tracker state to continue conversation from this state
