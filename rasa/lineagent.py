@@ -170,15 +170,16 @@ class LineMessageProcessor(MessageProcessor):
             # necessary for proper featurization, otherwise the previous
             # unrelated message would influence featurization
             tracker.update(UserUttered.empty())
+            dispatcher.output_channel.clear_messages()
             action = self._get_action(reminder_event.action_name)
             should_continue = self._run_action(action, tracker, dispatcher)
-            dispatcher.output_channel.send_push()
             if should_continue:
                 user_msg = UserMessage(None,
                                        dispatcher.output_channel,
                                        dispatcher.sender_id)
                 self._predict_and_execute_next_action(user_msg, tracker)
             # save tracker state to continue conversation from this state
+            dispatcher.output_channel.send_push()
             self._save_tracker(tracker)
 
     def _schedule_reminders(self, events: List[Event],
@@ -197,25 +198,3 @@ class LineMessageProcessor(MessageProcessor):
                         dispatcher,
                         job_id=e.name
                     )
-    
-    def _get_next_action_probabilities(
-        self,
-        tracker
-    ):
-        followup_action = tracker.followup_action
-        if followup_action:
-            tracker.clear_followup_action()
-            result = self._prob_array_for_action(followup_action)
-            if result:
-                return result
-            else:
-                logger.error(
-                    "Trying to run unknown follow up action '{}'!"
-                    "Instead of running that, we will ignore the action "
-                    "and predict the next action.".format(followup_action))
-
-        if (tracker.latest_message.intent.get("name") ==
-                self.domain.restart_intent):
-            return self._prob_array_for_action("action_restart")
-        return self.policy_ensemble.probabilities_using_best_policy(
-            tracker, self.domain)
