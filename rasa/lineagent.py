@@ -186,8 +186,12 @@ class LineMessageProcessor(MessageProcessor):
                 if isinstance(e, ReminderScheduled):
                     scheduler.enqueue_at(
                         e.trigger_date_time,
-                        self.handle_reminder,
+                        Test,
                         e,
                         dispatcher,
                         job_id=e.name
                     )
+
+def Test(e, dispatcher):
+    logger.debug(e.name)
+    logger.debug(dispatcher.sender_id)
