@@ -20,6 +20,7 @@ class ReminderJob(Job):
     # Job execution
     def perform(self, agent):  # noqa
         """Invokes the job function with the job arguments."""
+        logger.debug("Performing...")
         self.connection.persist(self.key)
         _job_stack.push(self)
         try:
@@ -39,6 +40,7 @@ class ReminderWorker(Worker):
         """Performs the actual work of a job.  Will/should only be called
         inside the work horse's process.
         """
+        logger.debug("Perform Job...")
         self.prepare_job_execution(job, heartbeat_ttl)
 
         push_connection(self.connection)
