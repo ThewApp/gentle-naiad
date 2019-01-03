@@ -1,11 +1,3 @@
-from rasa_core.interpreter import RasaNLUInterpreter
-from rasa.lineagent import LineAgent
-from rasa.lineconnector import LineInput
-from rasa.store import tracker_store, scheduler_store
-from rq import Worker, Queue, Connection
-from rq_scheduler.scheduler import Scheduler
-from multiprocessing import Process
-
 import argparse
 import logging
 import os
@@ -31,16 +23,21 @@ logging.basicConfig(level=logging_level)
 
 logger = logging.getLogger(__name__)
 
-line_secret = os.getenv('LINE_CHANNEL_SECRET', None)
-line_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
-
-agent = LineAgent.load(
-    "models/dialogue",
-    interpreter=RasaNLUInterpreter("models/current/nlu"),
-    tracker_store=tracker_store
-)
-
 def webapp():
+    from rasa_core.interpreter import RasaNLUInterpreter
+    from rasa.lineagent import LineAgent
+    from rasa.lineconnector import LineInput
+    from rasa.store import tracker_store
+
+    
+    agent = LineAgent.load(
+        "models/dialogue",
+        interpreter=RasaNLUInterpreter("models/current/nlu"),
+        tracker_store=tracker_store
+    )
+
+    line_secret = os.getenv('LINE_CHANNEL_SECRET', None)
+    line_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
     port = int(os.getenv('PORT', 8080))
 
     input_channel = LineInput(
@@ -53,6 +50,11 @@ def webapp():
     agent.handle_channels([input_channel], http_port=port)
 
 def worker():
+    from multiprocessing import Process
+    from rasa.store import scheduler_store
+    from rq import Worker, Queue, Connection
+    from rq_scheduler.scheduler import Scheduler
+
     listen = ['high', 'default', 'low']
     scheduler = Scheduler(
         connection=scheduler_store,
@@ -69,6 +71,8 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     if args.type == "web":
+        logger.debug("Starting web app")
         webapp()
     elif args.type == "worker":
+        logger.debug("Starting worker app")
         worker()
