@@ -177,7 +177,7 @@ class LineMessageProcessor(MessageProcessor):
             logger.info("Running reminder action %s", action)
             should_continue = self._run_action(action, tracker, dispatcher)
             dispatcher.output_channel.send_push()
-            logger.debug(tracker.current_state())
+            logger.debug(tracker.current_state(4))
             if should_continue:
                 logger.debug("Should continue true...")
                 user_msg = UserMessage(None,
@@ -228,6 +228,6 @@ class LineMessageProcessor(MessageProcessor):
         if (tracker.latest_message.intent.get("name") ==
                 self.domain.restart_intent):
             return self._prob_array_for_action("action_restart")
-        logger.debug(tracker.current_state())
+        logger.debug(tracker.current_state(4))
         return self.policy_ensemble.probabilities_using_best_policy(
             tracker, self.domain)
