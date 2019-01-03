@@ -20,7 +20,7 @@ from typing import Text, List, Optional, Callable, Any, Dict, Union
 logger = logging.getLogger(__name__)
 
 if scheduler_store:
-    scheduler = Scheduler(connection=scheduler_store)
+    scheduler = Scheduler(connection=scheduler_store, job_class=ReminderJob)
 
 
 class LineAgent(Agent):

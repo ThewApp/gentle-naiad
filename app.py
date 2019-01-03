@@ -59,12 +59,13 @@ def worker():
     listen = ['high', 'default', 'low']
     scheduler = Scheduler(
         connection=scheduler_store,
-        interval=5
+        interval=5,
+        job_class=ReminderJob
     )
     Process(target=scheduler.run).start()
     with Connection(scheduler_store):
-        worker = ReminderWorker(map(Queue, listen))
-        Process(target=worker.work).start()
+        worker = ReminderWorker(map(Queue, listen), job_class=ReminderJob)
+        Process(target=worker.work, kwargs={"agent": agent}).start()
     logger.info("Worker is ready.")
 
 if __name__ == "__main__":
