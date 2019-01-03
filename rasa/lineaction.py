@@ -24,8 +24,6 @@ def action_from_name(name: Text, action_endpoint: Optional[EndpointConfig],
 
     defaults = {a.name(): a for a in default_actions()}
 
-    logger.debug("Getting action for name %s", name)
-
     if name in defaults and name not in user_actions:
         return defaults.get(name)
     elif name.startswith("utter_"):
