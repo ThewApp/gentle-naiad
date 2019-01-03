@@ -10,6 +10,7 @@ from rasa.linedispatcher import LineDispatcher
 from rasa.linedomain import LineDomain
 from rasa.linenlg import LineNLG
 from rasa.store import scheduler_store
+from rasa.worker import ReminderJob, reminder_job
 from rq_scheduler import Scheduler
 
 import logging
@@ -19,7 +20,7 @@ from typing import Text, List, Optional, Callable, Any, Dict, Union
 logger = logging.getLogger(__name__)
 
 if scheduler_store:
-    scheduler = Scheduler(connection=scheduler_store)
+    scheduler = Scheduler(connection=scheduler_store, job_class=ReminderJob)
 
 
 class LineAgent(Agent):
@@ -103,6 +104,10 @@ class LineAgent(Agent):
                 "specification or a domain instance. But got "
                 "type '{}' with value '{}'".format(type(domain), domain))
 
+    def handle_reminder(self, e, dispatcher):
+        processor = self.create_processor()
+        return processor.handle_reminder(e, dispatcher)
+
 
 class LineMessageProcessor(MessageProcessor):
     def _predict_and_execute_next_action(self, message, tracker):
@@ -175,10 +180,6 @@ class LineMessageProcessor(MessageProcessor):
             # save tracker state to continue conversation from this state
             self._save_tracker(tracker)
 
-    @classmethod
-    def handle_reminder_worker(cls, e, dispatcher):
-        logger.debug("Event name: %s", e.name)
-
     def _schedule_reminders(self, events: List[Event],
                             dispatcher: LineDispatcher) -> None:
         """Uses the scheduler to time a job to trigger the passed reminder.
@@ -190,7 +191,7 @@ class LineMessageProcessor(MessageProcessor):
                 if isinstance(e, ReminderScheduled):
                     scheduler.enqueue_at(
                         e.trigger_date_time,
-                        LineMessageProcessor.handle_reminder_worker,
+                        reminder_job,
                         e,
                         dispatcher,
                         job_id=e.name
