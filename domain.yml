@@ -205,14 +205,14 @@ templates:
 
   line_test_reminder_setup:
     - type: "text"
-      text: "ตั้งเวลาทดสอบการแจ้งเตือนแล้ว\nอีก 10 วินาทีจะมีข้อความแจ้งเตือน"
+      text: "ตั้งเวลาทดสอบการแจ้งเตือนแล้ว\nอีก ประมาณ 1 นาทีจะมีข้อความแจ้งเตือน"
 
   line_medicine_reminder_push:
     - type: "template"
-      altText: "ทานยาความดันก่อนอาหารหรือยังคะ"
+      altText: "{text}"
       template:
         type: "confirm"
-        text: "ทานยาความดันก่อนอาหารหรือยังคะ"
+        text: "{text}"
         actions:
           - type: "message"
             label: "ทานแล้ว"

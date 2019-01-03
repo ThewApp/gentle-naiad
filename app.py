@@ -59,7 +59,7 @@ def worker():
     listen = ['high', 'default', 'low']
     scheduler = Scheduler(
         connection=scheduler_store,
-        interval=5,
+        interval=60,
         job_class=ReminderJob
     )
     Process(target=scheduler.run).start()

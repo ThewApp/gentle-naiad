@@ -85,11 +85,11 @@
   - reminder{"action": "custom_medicine_reminder_push", "date_time": "2019-01-02 11:59:29"}
 
 ## test reminder push
-  - line_medicine_reminder_push
+  - custom_medicine_reminder_push
 * affirmative
   - line_medicine_reminder_affirmative
 
 ## test reminder push
-  - line_medicine_reminder_push
+  - custom_medicine_reminder_push
 * negative
   - line_medicine_reminder_negative

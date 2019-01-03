@@ -170,7 +170,9 @@ class LineMessageProcessor(MessageProcessor):
             # necessary for proper featurization, otherwise the previous
             # unrelated message would influence featurization
             tracker.update(UserUttered.empty())
+            # clear replied messages
             dispatcher.output_channel.clear_messages()
+            dispatcher.reminder_data = reminder_event.data
             action = self._get_action(reminder_event.action_name)
             should_continue = self._run_action(action, tracker, dispatcher)
             if should_continue:
@@ -178,8 +180,9 @@ class LineMessageProcessor(MessageProcessor):
                                        dispatcher.output_channel,
                                        dispatcher.sender_id)
                 self._predict_and_execute_next_action(user_msg, tracker)
-            # save tracker state to continue conversation from this state
+            # send push to line api
             dispatcher.output_channel.send_push()
+            # save tracker state to continue conversation from this state
             self._save_tracker(tracker)
 
     def _schedule_reminders(self, events: List[Event],
