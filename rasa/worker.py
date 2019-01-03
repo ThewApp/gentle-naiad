@@ -33,8 +33,7 @@ class ReminderJob(Job):
 class ReminderWorker(Worker):
     def work(self, *args, **kwargs):
         self.agent = kwargs.pop("agent", None)
-        logger.debug("Reminder worker.work()")
-        super().work(*args, **kwargs)
+        super().work(*args, logging_level="DEBUG", **kwargs)
 
     def perform_job(self, job, queue, heartbeat_ttl=None):
         """Performs the actual work of a job.  Will/should only be called
