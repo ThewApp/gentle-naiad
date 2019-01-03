@@ -65,8 +65,8 @@ def worker():
     Process(target=scheduler.run).start()
     with Connection(scheduler_store):
         worker = ReminderWorker(map(Queue, listen), job_class=ReminderJob)
-        Process(target=worker.work, kwargs={"agent": agent}).start()
-    logger.info("Worker is ready.")
+        logger.info("Worker is ready.")
+        worker.work(agent=agent)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='MeDiary Application')

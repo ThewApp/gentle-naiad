@@ -128,10 +128,7 @@ class LineMessageProcessor(MessageProcessor):
                num_predicted_actions < self.max_number_of_predictions):
             # this actually just calls the policy's method by the same name
 
-            logger.debug("Predicting next action")
             action, policy, confidence = self.predict_next_action(tracker)
-
-            logger.debug("should_predict_another_action %s", action)
 
             should_predict_another_action = self._run_action(action,
                                                              tracker,
@@ -174,20 +171,15 @@ class LineMessageProcessor(MessageProcessor):
             # unrelated message would influence featurization
             tracker.update(UserUttered.empty())
             action = self._get_action(reminder_event.action_name)
-            logger.info("Running reminder action %s", action)
             should_continue = self._run_action(action, tracker, dispatcher)
             dispatcher.output_channel.send_push()
-            logger.debug(tracker.current_state(4))
             if should_continue:
-                logger.debug("Should continue true...")
                 user_msg = UserMessage(None,
                                        dispatcher.output_channel,
                                        dispatcher.sender_id)
                 self._predict_and_execute_next_action(user_msg, tracker)
-            logger.debug("Save tracker...")
             # save tracker state to continue conversation from this state
             self._save_tracker(tracker)
-            logger.debug("ENDING...")
 
     def _schedule_reminders(self, events: List[Event],
                             dispatcher: LineDispatcher) -> None:
@@ -210,13 +202,10 @@ class LineMessageProcessor(MessageProcessor):
         self,
         tracker
     ):
-        logger.debug("_get_next_action_probabilities")
         followup_action = tracker.followup_action
         if followup_action:
-            logger.debug("Followup Action")
             tracker.clear_followup_action()
             result = self._prob_array_for_action(followup_action)
-            logger.debug("result: %s", result)
             if result:
                 return result
             else:
@@ -228,6 +217,5 @@ class LineMessageProcessor(MessageProcessor):
         if (tracker.latest_message.intent.get("name") ==
                 self.domain.restart_intent):
             return self._prob_array_for_action("action_restart")
-        logger.debug(tracker.current_state(4))
         return self.policy_ensemble.probabilities_using_best_policy(
             tracker, self.domain)
