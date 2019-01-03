@@ -23,19 +23,19 @@ logging.basicConfig(level=logging_level)
 
 logger = logging.getLogger(__name__)
 
+from rasa_core.interpreter import RasaNLUInterpreter
+from rasa.lineagent import LineAgent
+from rasa.lineconnector import LineInput
+from rasa.store import tracker_store
+
+
+agent = LineAgent.load(
+    "models/dialogue",
+    interpreter=RasaNLUInterpreter("models/current/nlu"),
+    tracker_store=tracker_store
+)
+
 def webapp():
-    from rasa_core.interpreter import RasaNLUInterpreter
-    from rasa.lineagent import LineAgent
-    from rasa.lineconnector import LineInput
-    from rasa.store import tracker_store
-
-    
-    agent = LineAgent.load(
-        "models/dialogue",
-        interpreter=RasaNLUInterpreter("models/current/nlu"),
-        tracker_store=tracker_store
-    )
-
     line_secret = os.getenv('LINE_CHANNEL_SECRET', None)
     line_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
     port = int(os.getenv('PORT', 8080))
@@ -64,6 +64,7 @@ def worker():
     with Connection(scheduler_store):
         worker = Worker(map(Queue, listen))
         Process(target=worker.work).start()
+    logger.info("Worker is ready.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='MeDiary Application')

@@ -175,6 +175,10 @@ class LineMessageProcessor(MessageProcessor):
             # save tracker state to continue conversation from this state
             self._save_tracker(tracker)
 
+    @classmethod
+    def handle_reminder_worker(cls, e, dispatcher):
+        logger.debug("Event name: %s", e.name)
+
     def _schedule_reminders(self, events: List[Event],
                             dispatcher: LineDispatcher) -> None:
         """Uses the scheduler to time a job to trigger the passed reminder.
@@ -186,7 +190,7 @@ class LineMessageProcessor(MessageProcessor):
                 if isinstance(e, ReminderScheduled):
                     scheduler.enqueue_at(
                         e.trigger_date_time,
-                        self.handle_reminder,
+                        LineMessageProcessor.handle_reminder_worker,
                         e,
                         dispatcher,
                         job_id=e.name
