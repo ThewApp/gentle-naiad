@@ -70,7 +70,7 @@ def worker():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='MeDiary Application')
-    parser.add_argument('type', default="web", help='Process type')
+    parser.add_argument('type', nargs='?', default="web", help='Process type')
 
     args = parser.parse_args()
     if args.type == "web":
