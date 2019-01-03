@@ -19,6 +19,7 @@ actions:
 - line_cancel_success
 - custom_test_reminder_setup
 - line_test_reminder_setup
+- custom_medicine_reminder_push
 - line_medicine_reminder_push
 - line_medicine_reminder_affirmative
 - line_medicine_reminder_negative
