@@ -3,7 +3,7 @@ import sys
 
 from rq.compat import as_text, text_type
 from rq.job import Job, _job_stack
-from rq.worker import Worker, green, blue, yellow
+from rq.worker import SimpleWorker, green, blue, yellow
 from rq.connections import push_connection, pop_connection
 from rq.registry import StartedJobRegistry
 from rq.timeouts import JobTimeoutException
@@ -30,7 +30,7 @@ class ReminderJob(Job):
         return self._result
 
 
-class ReminderWorker(Worker):
+class ReminderWorker(SimpleWorker):
     def work(self, *args, **kwargs):
         self.agent = kwargs.pop("agent", None)
         super().work(*args, **kwargs)
