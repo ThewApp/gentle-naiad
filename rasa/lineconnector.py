@@ -137,6 +137,8 @@ class LineOutput(CollectingOutputChannel):
 
             logger.debug("Sending reply... %s", data)
 
+            self.messages = []
+
             return self.line_api._post(
                 '/v2/bot/message/reply', data=json.dumps(data)
             )
@@ -155,6 +157,8 @@ class LineOutput(CollectingOutputChannel):
             }
 
             logger.debug("Sending push... %s", data)
+
+            self.messages
 
             return self.line_api._post(
                 '/v2/bot/message/push', data=json.dumps(data)

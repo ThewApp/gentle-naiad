@@ -170,6 +170,7 @@ class LineMessageProcessor(MessageProcessor):
             # unrelated message would influence featurization
             tracker.update(UserUttered.empty())
             action = self._get_action(reminder_event.action_name)
+            logger.info("Running reminder action %s", action)
             should_continue = self._run_action(action, tracker, dispatcher)
             dispatcher.output_channel.send_push()
             if should_continue:
