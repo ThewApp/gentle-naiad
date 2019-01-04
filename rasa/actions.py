@@ -204,18 +204,18 @@ class custom_medicine_reminder_update(Action):
                         reminder = self.generateScheduled(
                             medicine_reminders, (time, meal))
                         logger.debug(
-                            "Adding reminder... time:{}".format(reminder))
-                        medicine_reminders[reminder]["job_id"] = reminder.name
+                            "Adding reminder... name:{}, time:{}".format(reminder.name, reminder.trigger_date_time))
+                        medicine_reminders[(time, meal)]["job_id"] = reminder.name
                         events.append(reminder)
 
-        for reminder in medicine_reminders:
-            if reminder in checked:
+        for reminder_tuple in medicine_reminders:
+            if reminder_tuple in checked:
                 continue
-            elif medicine_reminders[reminder]["job_id"] is not None:
+            elif medicine_reminders[reminder_tuple]["job_id"] is not None:
                 cancel_reminder = self.cancelScheduled(
-                    medicine_reminders, reminder)
+                    medicine_reminders, reminder_tuple)
                 logger.debug(
-                    "Canceling reminder... time:{}".format(reminder))
+                    "Canceling reminder... name:{}, time:{}".format(reminder.name, reminder.trigger_date_time))
                 events.append(cancel_reminder)
 
         return events
