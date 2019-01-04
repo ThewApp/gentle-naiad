@@ -32,7 +32,9 @@ class custom_form_add_medicine(LineForm):
 
         new_medicine_time = tracker.get_slot("new_medicine_time")
 
-        if not any(require_meal_time in new_medicine_time for require_meal_time in require_meal_times):
+        if (new_medicine_time and
+            not any(require_meal_time in new_medicine_time
+            for require_meal_time in require_meal_times)):
             return ["new_medicine_name", "new_medicine_time"]
 
         return ["new_medicine_name", "new_medicine_time", "new_medicine_meal"]
