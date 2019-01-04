@@ -19,6 +19,7 @@ actions:
 - line_cancel_success
 - custom_test_reminder_setup
 - line_test_reminder_setup
+- custom_medicine_reminder_update
 - custom_medicine_reminder_push
 - line_medicine_reminder_push
 - line_medicine_reminder_affirmative
@@ -65,6 +66,10 @@ slots:
     auto_fill: true
     initial_value: null
     type: rasa_core.slots.ListSlot
+  medicine_reminders:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
   new_medicine_meal:
     auto_fill: true
     initial_value: null

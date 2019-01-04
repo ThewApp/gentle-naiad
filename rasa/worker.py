@@ -1,5 +1,8 @@
 import logging
+import os
 import sys
+from threading import Thread
+import urllib
 
 from rq.compat import as_text, text_type
 from rq.job import Job, _job_stack
@@ -11,8 +14,12 @@ from rq.utils import utcnow
 
 logger = logging.getLogger(__name__)
 
+line_webhook = os.getenv("LINE_WEBHOOK_CHECK")
 
 def reminder_job(e, dispatcher, agent):
+    if line_webhook:
+        # Ping web
+        Thread(target=urllib.request.urlopen, args=(line_webhook)).start()
     agent.handle_reminder(e, dispatcher)
 
 

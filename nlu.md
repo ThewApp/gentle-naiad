@@ -57,14 +57,15 @@
 - เพิ่มยาใหม่
 
 ## intent:enter_medicine_data
-- [ก่อนอาหาร](medicine_meal)
-- [หลังอาหาร](medicine_meal)
-- [เช้า](medicine_time)
-- [กลางวัน](medicine_time)
-- [เย็น](medicine_time)
-- [ก่อนนอน](medicine_time)
-- [สามเวลา](medicine_time)
-- [เช้า-เย็น](medicine_time)
+- [ก่อนอาหาร](medicine_meal:before_meal)
+- [หลังอาหาร](medicine_meal:after_meal)
+- [เช้า](medicine_time:morning)
+- [กลางวัน](medicine_time:noon)
+- [เย็น](medicine_time:evening)
+- [ก่อนนอน](medicine_time:night)
+- [สาม เวลา](medicine_time:morning_noon_evening)
+- [เช้า เย็น](medicine_time:morning_evening)
+- [สี่ เวลา](medicine_time:morning_noon_evening_night)
 - ยาความดัน
 - ยาเบาหวาน
 - insulin

@@ -37,6 +37,7 @@ actions:
   - line_cancel_success
   - custom_test_reminder_setup
   - line_test_reminder_setup
+  - custom_medicine_reminder_update
   - custom_medicine_reminder_push
   - line_medicine_reminder_push
   - line_medicine_reminder_affirmative
@@ -248,6 +249,9 @@ slots:
 
   medicine_list:
     type: list
+
+  medicine_reminders:
+    type: unfeaturized
 
 forms:
   - custom_form_add_medicine

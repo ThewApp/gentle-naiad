@@ -183,7 +183,7 @@
           {
             "start": 0,
             "end": 9,
-            "value": "ก่อนอาหาร",
+            "value": "before_meal",
             "entity": "medicine_meal"
           }
         ],
@@ -195,7 +195,7 @@
           {
             "start": 0,
             "end": 9,
-            "value": "หลังอาหาร",
+            "value": "after_meal",
             "entity": "medicine_meal"
           }
         ],
@@ -207,7 +207,7 @@
           {
             "start": 0,
             "end": 4,
-            "value": "เช้า",
+            "value": "morning",
             "entity": "medicine_time"
           }
         ],
@@ -219,7 +219,7 @@
           {
             "start": 0,
             "end": 7,
-            "value": "กลางวัน",
+            "value": "noon",
             "entity": "medicine_time"
           }
         ],
@@ -231,7 +231,7 @@
           {
             "start": 0,
             "end": 4,
-            "value": "เย็น",
+            "value": "evening",
             "entity": "medicine_time"
           }
         ],
@@ -243,7 +243,7 @@
           {
             "start": 0,
             "end": 7,
-            "value": "ก่อนนอน",
+            "value": "night",
             "entity": "medicine_time"
           }
         ],
@@ -254,12 +254,12 @@
         "entities": [
           {
             "start": 0,
-            "end": 7,
-            "value": "สามเวลา",
+            "end": 8,
+            "value": "morning_noon_evening",
             "entity": "medicine_time"
           }
         ],
-        "text": "สามเวลา"
+        "text": "สาม เวลา"
       },
       {
         "intent": "enter_medicine_data",
@@ -267,11 +267,23 @@
           {
             "start": 0,
             "end": 9,
-            "value": "เช้า-เย็น",
+            "value": "morning_evening",
             "entity": "medicine_time"
           }
         ],
-        "text": "เช้า-เย็น"
+        "text": "เช้า เย็น"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "morning_noon_evening_night",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "สี่ เวลา"
       },
       {
         "intent": "enter_medicine_data",
@@ -404,6 +416,61 @@
     ],
     "regex_features": [],
     "lookup_tables": [],
-    "entity_synonyms": []
+    "entity_synonyms": [
+      {
+        "value": "before_meal",
+        "synonyms": [
+          "ก่อนอาหาร"
+        ]
+      },
+      {
+        "value": "after_meal",
+        "synonyms": [
+          "หลังอาหาร"
+        ]
+      },
+      {
+        "value": "morning",
+        "synonyms": [
+          "เช้า"
+        ]
+      },
+      {
+        "value": "noon",
+        "synonyms": [
+          "กลางวัน"
+        ]
+      },
+      {
+        "value": "evening",
+        "synonyms": [
+          "เย็น"
+        ]
+      },
+      {
+        "value": "night",
+        "synonyms": [
+          "ก่อนนอน"
+        ]
+      },
+      {
+        "value": "morning_noon_evening",
+        "synonyms": [
+          "สาม เวลา"
+        ]
+      },
+      {
+        "value": "morning_evening",
+        "synonyms": [
+          "เช้า เย็น"
+        ]
+      },
+      {
+        "value": "morning_noon_evening_night",
+        "synonyms": [
+          "สี่ เวลา"
+        ]
+      }
+    ]
   }
 }

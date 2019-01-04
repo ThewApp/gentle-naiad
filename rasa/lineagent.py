@@ -1,11 +1,12 @@
 from rasa_core.agent import Agent
 from rasa_core.channels.channel import UserMessage
-from rasa_core.events import Event, ReminderScheduled, UserUttered
+from rasa_core.events import Event, UserUttered
 from rasa_core.interpreter import NaturalLanguageInterpreter
 from rasa_core.policies import Policy
 from rasa_core.policies.ensemble import PolicyEnsemble
 from rasa_core.processor import MessageProcessor
 from rasa_core.utils import EndpointConfig
+from rasa.events import LineReminderScheduled
 from rasa.linedispatcher import LineDispatcher
 from rasa.linedomain import LineDomain
 from rasa.linenlg import LineNLG
@@ -148,7 +149,7 @@ class LineMessageProcessor(MessageProcessor):
                 self.on_circuit_break(tracker, dispatcher)
 
     def handle_reminder(self,
-                        reminder_event: ReminderScheduled,
+                        reminder_event: LineReminderScheduled,
                         dispatcher: LineDispatcher
                         ) -> None:
         """Handle a reminder that is triggered asynchronously."""
@@ -193,11 +194,16 @@ class LineMessageProcessor(MessageProcessor):
 
         if events is not None:
             for e in events:
-                if isinstance(e, ReminderScheduled):
-                    scheduler.enqueue_at(
-                        e.trigger_date_time,
-                        reminder_job,
-                        e,
-                        dispatcher,
-                        job_id=e.name
-                    )
+                if isinstance(e, LineReminderScheduled):
+                    if e.getattr("cancel", None) is True:
+                        logger.info("Descheduling... %s", e.name)
+                        scheduler.cancel(e.name)
+                    else:
+                        logger.info("Scheduling... %s", e.name)
+                        scheduler.enqueue_at(
+                            e.trigger_date_time,
+                            reminder_job,
+                            e,
+                            dispatcher,
+                            job_id=e.name
+                        )

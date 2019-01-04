@@ -39,7 +39,7 @@
   - custom_form_add_medicine
   - form{"name": "custom_form_add_medicine"}
   - form{"name": null}
-  - slot{"medicine_list": [{"name": "ยาความดัน", "time": "สามเวลา", "meal": "หลังอาหาร"}]}
+  - slot{"medicine_list": [{"name": "ยาความดัน", "time": "morning", "meal": "before_meal"}]}
   - slot{"new_medicine_name": null}
   - slot{"new_medicine_time": null}
   - slot{"new_medicine_meal": null}

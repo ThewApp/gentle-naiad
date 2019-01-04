@@ -1,13 +1,11 @@
 {
-  " full stack develope": "full stack developer",
-  "alex": "alex",
-  "developer": "developer",
-  "names": "name",
-  "places": "place",
-  "companies": "organisation",
-  "dates": "date",
-  "amounts": "money",
-  "how long": "duration",
-  "durations": "duration",
-  "distances": "distance"
+  "ก่อนอาหาร": "before_meal",
+  "หลังอาหาร": "after_meal",
+  "เช้า": "morning",
+  "กลางวัน": "noon",
+  "เย็น": "evening",
+  "ก่อนนอน": "night",
+  "สาม เวลา": "morning_noon_evening",
+  "เช้า เย็น": "morning_evening",
+  "สี่ เวลา": "morning_noon_evening_night"
 }
