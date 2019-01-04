@@ -49,8 +49,8 @@ class custom_form_add_medicine(LineForm):
 
         return {
             "new_medicine_name": self.from_text(not_intent="negative"),
-            "new_medicine_time": self.from_entity(intent="enter_medicine_data", entity="time"),
-            "new_medicine_meal": self.from_entity(intent="enter_medicine_data", entity="meal")
+            "new_medicine_time": self.from_entity(intent="enter_medicine_data", entity="medicine_time"),
+            "new_medicine_meal": self.from_entity(intent="enter_medicine_data", entity="medicine_meal")
         }
 
     def submit(self, dispatcher: LineDispatcher, tracker, domain):
