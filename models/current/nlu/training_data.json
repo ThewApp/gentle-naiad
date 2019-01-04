@@ -242,12 +242,24 @@
         "entities": [
           {
             "start": 0,
-            "end": 7,
+            "end": 8,
             "value": "night",
             "entity": "medicine_time"
           }
         ],
-        "text": "ก่อนนอน"
+        "text": "ก่อน นอน"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 17,
+            "value": "morning_noon_evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "เช้า กลางวัน เย็น"
       },
       {
         "intent": "enter_medicine_data",
@@ -450,12 +462,13 @@
       {
         "value": "night",
         "synonyms": [
-          "ก่อนนอน"
+          "ก่อน นอน"
         ]
       },
       {
         "value": "morning_noon_evening",
         "synonyms": [
+          "เช้า กลางวัน เย็น",
           "สาม เวลา"
         ]
       },

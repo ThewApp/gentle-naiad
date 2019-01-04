@@ -76,12 +76,13 @@ class custom_form_add_medicine(LineForm):
         })
 
         medicine_time_text = DEFAULT_MEDICINE_TEXT.get(new_medicine_time, new_medicine_time)
-        medicine_meal_text = DEFAULT_MEDICINE_TEXT.get(new_medicine_meal, new_medicine_meal)
+        medicine_meal_text = DEFAULT_MEDICINE_TEXT.get(new_medicine_meal, None)
+        medicine_info_text = medicine_time_text
+        medicine_info_text += " " + medicine_meal_text if medicine_meal_text else ""
 
         # utter submit template
         dispatcher.line_template('line_add_new_medicine_success', tracker,
-                                 medicine_time_text=medicine_time_text,
-                                 medicine_meal_text=medicine_meal_text
+                                 medicine_info_text=medicine_info_text
                                  )
 
         events = [
