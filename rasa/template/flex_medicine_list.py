@@ -40,9 +40,9 @@ def get_body_contents(medicine_list):
     for index, medicine in enumerate(medicine_list):
         delete_data = "/remove_medicine{\"remove_medicine_index\": %i}" % (index)
         medicine_time = medicine.get("time")
-        medicine_time_text = "ทานตอน" + DEFAULT_MEDICINE_TEXT.get(medicine_time) if medicine_time else ""
+        medicine_time_text = "ทานตอน" + DEFAULT_MEDICINE_TEXT.get(medicine_time) if medicine_time else " "
         medicine_meal = medicine.get("meal")
-        medicine_meal_text = DEFAULT_MEDICINE_TEXT.get(medicine_meal) if medicine_meal else ""
+        medicine_meal_text = DEFAULT_MEDICINE_TEXT.get(medicine_meal) if medicine_meal else " "
         contents.append({
             "type": "box",
             "layout": "vertical",
