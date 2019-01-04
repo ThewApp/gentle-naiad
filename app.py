@@ -1,10 +1,6 @@
-from rasa_core.interpreter import RasaNLUInterpreter
-from rasa.lineagent import LineAgent
-from rasa.lineconnector import LineInput
-from rasa.store import tracker_store
-
-import os
+import argparse
 import logging
+import os
 
 ENV = os.getenv('ENV', 'PRODUCTION')
 
@@ -27,9 +23,11 @@ logging.basicConfig(level=logging_level)
 
 logger = logging.getLogger(__name__)
 
-line_secret = os.getenv('LINE_CHANNEL_SECRET', None)
-line_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
-port = int(os.getenv('PORT', 8080))
+from rasa_core.interpreter import RasaNLUInterpreter
+from rasa.lineagent import LineAgent
+from rasa.lineconnector import LineInput
+from rasa.store import tracker_store
+
 
 agent = LineAgent.load(
     "models/dialogue",
@@ -37,11 +35,47 @@ agent = LineAgent.load(
     tracker_store=tracker_store
 )
 
-input_channel = LineInput(
-    line_secret=line_secret,
-    line_access_token=line_access_token
-)
+def webapp():
+    line_secret = os.getenv('LINE_CHANNEL_SECRET', None)
+    line_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
+    port = int(os.getenv('PORT', 8080))
 
-logger.info("Ready")
+    input_channel = LineInput(
+        line_secret=line_secret,
+        line_access_token=line_access_token
+    )
 
-app = agent.handle_channels([input_channel], http_port=port)
+    logger.info("Web is ready.")
+
+    agent.handle_channels([input_channel], http_port=port)
+
+def worker():
+    from multiprocessing import Process
+    from rasa.store import scheduler_store
+    from rasa.worker import ReminderJob, ReminderWorker
+    from rq import Worker, Queue, Connection
+    from rq_scheduler.scheduler import Scheduler
+
+    listen = ['high', 'default', 'low']
+    scheduler = Scheduler(
+        connection=scheduler_store,
+        interval=60,
+        job_class=ReminderJob
+    )
+    Process(target=scheduler.run).start()
+    with Connection(scheduler_store):
+        worker = ReminderWorker(map(Queue, listen), job_class=ReminderJob)
+        logger.info("Worker is ready.")
+        worker.work(agent=agent)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='MeDiary Application')
+    parser.add_argument('type', nargs='?', default="web", help='Process type')
+
+    args = parser.parse_args()
+    if args.type == "web":
+        logger.debug("Starting web app")
+        webapp()
+    elif args.type == "worker":
+        logger.debug("Starting worker app")
+        worker()

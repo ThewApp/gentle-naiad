@@ -1,31 +1,3 @@
-## happy path
-* greet
-  - line_greet
-* mood_great
-  - line_happy
-
-## sad path 1
-* greet
-  - line_greet
-* mood_unhappy
-  - line_cheer_up
-  - line_did_that_help
-* mood_affirm
-  - line_happy
-
-## sad path 2
-* greet
-  - line_greet
-* mood_unhappy
-  - line_cheer_up
-  - line_did_that_help
-* mood_deny
-  - line_goodbye
-
-## say goodbye
-* goodbye
-  - line_goodbye
-
 ## follow
 * follow_event
   - line_follow
@@ -39,10 +11,11 @@
   - custom_form_add_medicine
   - form{"name": "custom_form_add_medicine"}
   - form{"name": null}
-  - slot{"medicine_list": [{"name": "ยาความดัน", "time": "สามเวลา", "meal": "หลังอาหาร"}]}
+  - slot{"medicine_list": [{"name": "ยาความดัน", "time": "morning", "meal": "before_meal"}]}
   - slot{"new_medicine_name": null}
   - slot{"new_medicine_time": null}
   - slot{"new_medicine_meal": null}
+  - custom_medicine_reminder_update
 
 ## add medicine cancel
 * add_medicine
@@ -59,6 +32,7 @@
 * remove_medicine{"remove_medicine_index": 0}
   - custom_remove_medicine
   - slot{"medicine_list": []}
+  - custom_medicine_reminder_update
 
 ## list medicine (empty) affirmative
 * medicine_list
@@ -78,3 +52,18 @@
 * medicine_list
   - slot{"medicine_list": [{"name": "ยาความดัน"}]}
   - custom_flex_medicine_list
+
+## test reminder
+* test_reminder
+  - custom_test_reminder_setup
+  - reminder{"action": "custom_medicine_reminder_push", "date_time": "2019-01-02 11:59:29"}
+
+## test reminder push (affirmative)
+  - custom_medicine_reminder_push
+* affirmative
+  - line_medicine_reminder_affirmative
+
+## test reminder push (negative)
+  - custom_medicine_reminder_push
+* negative
+  - line_medicine_reminder_negative

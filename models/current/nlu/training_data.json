@@ -2,162 +2,6 @@
   "rasa_nlu_data": {
     "common_examples": [
       {
-        "intent": "greet",
-        "text": "hey"
-      },
-      {
-        "intent": "greet",
-        "text": "hello"
-      },
-      {
-        "intent": "greet",
-        "text": "hi"
-      },
-      {
-        "intent": "greet",
-        "text": "good morning"
-      },
-      {
-        "intent": "greet",
-        "text": "good evening"
-      },
-      {
-        "intent": "greet",
-        "text": "hey there"
-      },
-      {
-        "intent": "goodbye",
-        "text": "bye"
-      },
-      {
-        "intent": "goodbye",
-        "text": "goodbye"
-      },
-      {
-        "intent": "goodbye",
-        "text": "see you around"
-      },
-      {
-        "intent": "goodbye",
-        "text": "see you later"
-      },
-      {
-        "intent": "mood_affirm",
-        "text": "yes"
-      },
-      {
-        "intent": "mood_affirm",
-        "text": "indeed"
-      },
-      {
-        "intent": "mood_affirm",
-        "text": "of course"
-      },
-      {
-        "intent": "mood_affirm",
-        "text": "that sounds good"
-      },
-      {
-        "intent": "mood_affirm",
-        "text": "correct"
-      },
-      {
-        "intent": "mood_deny",
-        "text": "no"
-      },
-      {
-        "intent": "mood_deny",
-        "text": "never"
-      },
-      {
-        "intent": "mood_deny",
-        "text": "I don't think so"
-      },
-      {
-        "intent": "mood_deny",
-        "text": "don't like that"
-      },
-      {
-        "intent": "mood_deny",
-        "text": "no way"
-      },
-      {
-        "intent": "mood_deny",
-        "text": "not really"
-      },
-      {
-        "intent": "mood_great",
-        "text": "perfect"
-      },
-      {
-        "intent": "mood_great",
-        "text": "very good"
-      },
-      {
-        "intent": "mood_great",
-        "text": "great"
-      },
-      {
-        "intent": "mood_great",
-        "text": "amazing"
-      },
-      {
-        "intent": "mood_great",
-        "text": "wonderful"
-      },
-      {
-        "intent": "mood_great",
-        "text": "I am feeling very good"
-      },
-      {
-        "intent": "mood_great",
-        "text": "I am great"
-      },
-      {
-        "intent": "mood_great",
-        "text": "I'm good"
-      },
-      {
-        "intent": "mood_unhappy",
-        "text": "sad"
-      },
-      {
-        "intent": "mood_unhappy",
-        "text": "very sad"
-      },
-      {
-        "intent": "mood_unhappy",
-        "text": "unhappy"
-      },
-      {
-        "intent": "mood_unhappy",
-        "text": "bad"
-      },
-      {
-        "intent": "mood_unhappy",
-        "text": "very bad"
-      },
-      {
-        "intent": "mood_unhappy",
-        "text": "awful"
-      },
-      {
-        "intent": "mood_unhappy",
-        "text": "terrible"
-      },
-      {
-        "intent": "mood_unhappy",
-        "text": "not very good"
-      },
-      {
-        "intent": "mood_unhappy",
-        "text": "extremely sad"
-      },
-      {
-        "intent": "mood_unhappy",
-        "text": "so sad"
-      },
-      {
         "intent": "add_medicine",
         "text": "เพิ่มยา"
       },
@@ -183,7 +27,7 @@
           {
             "start": 0,
             "end": 9,
-            "value": "ก่อนอาหาร",
+            "value": "before_meal",
             "entity": "medicine_meal"
           }
         ],
@@ -195,7 +39,7 @@
           {
             "start": 0,
             "end": 9,
-            "value": "หลังอาหาร",
+            "value": "after_meal",
             "entity": "medicine_meal"
           }
         ],
@@ -207,7 +51,7 @@
           {
             "start": 0,
             "end": 4,
-            "value": "เช้า",
+            "value": "morning",
             "entity": "medicine_time"
           }
         ],
@@ -219,7 +63,7 @@
           {
             "start": 0,
             "end": 7,
-            "value": "กลางวัน",
+            "value": "noon",
             "entity": "medicine_time"
           }
         ],
@@ -231,7 +75,7 @@
           {
             "start": 0,
             "end": 4,
-            "value": "เย็น",
+            "value": "evening",
             "entity": "medicine_time"
           }
         ],
@@ -242,24 +86,36 @@
         "entities": [
           {
             "start": 0,
-            "end": 7,
-            "value": "ก่อนนอน",
+            "end": 8,
+            "value": "night",
             "entity": "medicine_time"
           }
         ],
-        "text": "ก่อนนอน"
+        "text": "ก่อน นอน"
       },
       {
         "intent": "enter_medicine_data",
         "entities": [
           {
             "start": 0,
-            "end": 7,
-            "value": "สามเวลา",
+            "end": 17,
+            "value": "morning_noon_evening",
             "entity": "medicine_time"
           }
         ],
-        "text": "สามเวลา"
+        "text": "เช้า กลางวัน เย็น"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "morning_noon_evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "สาม เวลา"
       },
       {
         "intent": "enter_medicine_data",
@@ -267,11 +123,23 @@
           {
             "start": 0,
             "end": 9,
-            "value": "เช้า-เย็น",
+            "value": "morning_evening",
             "entity": "medicine_time"
           }
         ],
-        "text": "เช้า-เย็น"
+        "text": "เช้า เย็น"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "morning_noon_evening_night",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "สี่ เวลา"
       },
       {
         "intent": "enter_medicine_data",
@@ -370,6 +238,14 @@
         "text": "ใช่ เพิ่มยาใหม่"
       },
       {
+        "intent": "affirmative",
+        "text": "ทานแล้ว"
+      },
+      {
+        "intent": "affirmative",
+        "text": "เรียบร้อย"
+      },
+      {
         "intent": "negative",
         "text": "ไม่"
       },
@@ -380,10 +256,78 @@
       {
         "intent": "negative",
         "text": "ยกเลิก"
+      },
+      {
+        "intent": "negative",
+        "text": "ยังเลย"
+      },
+      {
+        "intent": "negative",
+        "text": "ยังไม่ทาน"
+      },
+      {
+        "intent": "negative",
+        "text": "ยังไม่ได้ทานเลย"
       }
     ],
     "regex_features": [],
     "lookup_tables": [],
-    "entity_synonyms": []
+    "entity_synonyms": [
+      {
+        "value": "before_meal",
+        "synonyms": [
+          "ก่อนอาหาร"
+        ]
+      },
+      {
+        "value": "after_meal",
+        "synonyms": [
+          "หลังอาหาร"
+        ]
+      },
+      {
+        "value": "morning",
+        "synonyms": [
+          "เช้า"
+        ]
+      },
+      {
+        "value": "noon",
+        "synonyms": [
+          "กลางวัน"
+        ]
+      },
+      {
+        "value": "evening",
+        "synonyms": [
+          "เย็น"
+        ]
+      },
+      {
+        "value": "night",
+        "synonyms": [
+          "ก่อน นอน"
+        ]
+      },
+      {
+        "value": "morning_noon_evening",
+        "synonyms": [
+          "เช้า กลางวัน เย็น",
+          "สาม เวลา"
+        ]
+      },
+      {
+        "value": "morning_evening",
+        "synonyms": [
+          "เช้า เย็น"
+        ]
+      },
+      {
+        "value": "morning_noon_evening_night",
+        "synonyms": [
+          "สี่ เวลา"
+        ]
+      }
+    ]
   }
 }

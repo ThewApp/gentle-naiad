@@ -2,11 +2,6 @@
 ---
 actions:
 - line_follow
-- line_greet
-- line_cheer_up
-- line_did_that_help
-- line_happy
-- line_goodbye
 - line_ask_new_medicine_name
 - line_ask_new_medicine_time
 - line_ask_new_medicine_meal
@@ -17,6 +12,13 @@ actions:
 - line_remove_medicine_success
 - custom_flex_medicine_list
 - line_cancel_success
+- custom_test_reminder_setup
+- line_test_reminder_setup
+- custom_medicine_reminder_update
+- custom_medicine_reminder_push
+- line_medicine_reminder_push
+- line_medicine_reminder_affirmative
+- line_medicine_reminder_negative
 config:
   store_entities_as_slots: true
 entities:
@@ -27,18 +29,6 @@ intents:
 - follow_event:
     use_entities: true
 - unfollow_event:
-    use_entities: true
-- greet:
-    use_entities: true
-- goodbye:
-    use_entities: true
-- mood_affirm:
-    use_entities: true
-- mood_deny:
-    use_entities: true
-- mood_great:
-    use_entities: true
-- mood_unhappy:
     use_entities: true
 - add_medicine:
     use_entities: true
@@ -52,11 +42,17 @@ intents:
     use_entities: true
 - negative:
     use_entities: true
+- test_reminder:
+    use_entities: true
 slots:
   medicine_list:
     auto_fill: true
     initial_value: null
     type: rasa_core.slots.ListSlot
+  medicine_reminders:
+    auto_fill: true
+    initial_value: null
+    type: rasa_core.slots.UnfeaturizedSlot
   new_medicine_meal:
     auto_fill: true
     initial_value: null
@@ -75,7 +71,7 @@ slots:
     type: rasa_core.slots.UnfeaturizedSlot
 templates:
   line_add_new_medicine_success:
-  - - text: เพิ่ม {new_medicine_name} ทาน{new_medicine_time} {new_medicine_meal} เรียบร้อยแล้วค่ะ
+  - - text: เพิ่ม {new_medicine_name} ทานตอน{medicine_info_text} เรียบร้อยแล้วค่ะ
       type: text
     - packageId: '2'
       stickerId: '144'
@@ -183,40 +179,42 @@ templates:
   line_cancel_success:
   - text: ยกเลิกแล้วค่ะ
     type: text
-  line_cheer_up:
-  - - text: 'Here is something to cheer you up:'
-      type: text
-    - originalContentUrl: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024
-      previewImageUrl: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240
-      type: image
   line_default:
   - text: "ลองกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
-    type: text
-  line_did_that_help:
-  - text: Did that help you?
     type: text
   line_follow:
   - - text: "สวัสดีค่ะ !\nMediary เป็นบริการที่จะมาดูแลสุขภาพของคุณค่ะ ♥"
       type: text
     - text: "ท่านสามารถกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
       type: text
-  line_goodbye:
-  - text: Bye
-    type: text
-  line_greet:
-  - text: Hey! How are you?
-    type: text
-  line_happy:
-  - - text: Great carry on!
-      type: text
-    - packageId: '11538'
-      stickerId: '51626501'
-      type: sticker
-  - - text: Great carry on!
+  line_medicine_reminder_affirmative:
+  - - text: เยี่ยมมากค่ะ
       type: text
     - packageId: '11537'
-      stickerId: '52002734'
+      stickerId: '52002735'
       type: sticker
+  line_medicine_reminder_negative:
+  - - text: อย่าลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ
+      type: text
+    - packageId: '11537'
+      stickerId: '52002772'
+      type: sticker
+  line_medicine_reminder_push:
+  - altText: '{text}'
+    template:
+      actions:
+      - label: ทานแล้ว
+        text: ทานแล้ว
+        type: message
+      - label: ยังเลย
+        text: ยังเลย
+        type: message
+      text: '{text}'
+      type: confirm
+    type: template
   line_remove_medicine_success:
   - - text: ลบ {medicine_name} เรียบร้อยแล้วค่ะ
       type: text
+  line_test_reminder_setup:
+  - text: "ตั้งเวลาทดสอบการแจ้งเตือนแล้ว\nอีก ประมาณ 1 นาทีจะมีข้อความแจ้งเตือน"
+    type: text

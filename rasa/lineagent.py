@@ -1,18 +1,27 @@
 from rasa_core.agent import Agent
+from rasa_core.channels.channel import UserMessage
+from rasa_core.events import Event, UserUttered
 from rasa_core.interpreter import NaturalLanguageInterpreter
 from rasa_core.policies import Policy
 from rasa_core.policies.ensemble import PolicyEnsemble
 from rasa_core.processor import MessageProcessor
 from rasa_core.utils import EndpointConfig
+from rasa.events import LineReminderScheduled
 from rasa.linedispatcher import LineDispatcher
 from rasa.linedomain import LineDomain
 from rasa.linenlg import LineNLG
+from rasa.store import scheduler_store
+from rasa.worker import ReminderJob, reminder_job
+from rq_scheduler import Scheduler
 
 import logging
 import os
 from typing import Text, List, Optional, Callable, Any, Dict, Union
 
 logger = logging.getLogger(__name__)
+
+if scheduler_store:
+    scheduler = Scheduler(connection=scheduler_store, job_class=ReminderJob)
 
 
 class LineAgent(Agent):
@@ -96,6 +105,10 @@ class LineAgent(Agent):
                 "specification or a domain instance. But got "
                 "type '{}' with value '{}'".format(type(domain), domain))
 
+    def handle_reminder(self, e, dispatcher):
+        processor = self.create_processor()
+        return processor.handle_reminder(e, dispatcher)
+
 
 class LineMessageProcessor(MessageProcessor):
     def _predict_and_execute_next_action(self, message, tracker):
@@ -115,6 +128,7 @@ class LineMessageProcessor(MessageProcessor):
                self._should_handle_message(tracker) and
                num_predicted_actions < self.max_number_of_predictions):
             # this actually just calls the policy's method by the same name
+
             action, policy, confidence = self.predict_next_action(tracker)
 
             should_predict_another_action = self._run_action(action,
@@ -133,3 +147,63 @@ class LineMessageProcessor(MessageProcessor):
             if self.on_circuit_break:
                 # call a registered callback
                 self.on_circuit_break(tracker, dispatcher)
+
+    def handle_reminder(self,
+                        reminder_event: LineReminderScheduled,
+                        dispatcher: LineDispatcher
+                        ) -> None:
+        """Handle a reminder that is triggered asynchronously."""
+
+        tracker = self._get_tracker(dispatcher.sender_id)
+
+        if not tracker:
+            logger.warning("Failed to retrieve or create tracker for sender "
+                           "'{}'.".format(dispatcher.sender_id))
+            return None
+
+        if (reminder_event.kill_on_user_message and
+                self._has_message_after_reminder(tracker, reminder_event) or not
+                self._is_reminder_still_valid(tracker, reminder_event)):
+            logger.debug("Canceled reminder because it is outdated. "
+                         "(event: {} id: {})".format(reminder_event.action_name,
+                                                     reminder_event.name))
+        else:
+            # necessary for proper featurization, otherwise the previous
+            # unrelated message would influence featurization
+            tracker.update(UserUttered.empty())
+            # clear replied messages
+            dispatcher.output_channel.clear_messages()
+            dispatcher.reminder_data = reminder_event.data
+            action = self._get_action(reminder_event.action_name)
+            should_continue = self._run_action(action, tracker, dispatcher)
+            if should_continue:
+                user_msg = UserMessage(None,
+                                       dispatcher.output_channel,
+                                       dispatcher.sender_id)
+                self._predict_and_execute_next_action(user_msg, tracker)
+            # send push to line api
+            dispatcher.output_channel.send_push()
+            # save tracker state to continue conversation from this state
+            self._save_tracker(tracker)
+
+    def _schedule_reminders(self, events: List[Event],
+                            dispatcher: LineDispatcher) -> None:
+        """Uses the scheduler to time a job to trigger the passed reminder.
+        Reminders with the same `id` property will overwrite one another
+        (i.e. only one of them will eventually run)."""
+
+        if events is not None:
+            for e in events:
+                if isinstance(e, LineReminderScheduled):
+                    if getattr(e, "cancel", None) is True:
+                        logger.info("Descheduling... %s", e.name)
+                        scheduler.cancel(e.name)
+                    else:
+                        logger.info("Scheduling... %s", e.name)
+                        scheduler.enqueue_at(
+                            e.trigger_date_time,
+                            reminder_job,
+                            e,
+                            dispatcher,
+                            job_id=e.name
+                        )

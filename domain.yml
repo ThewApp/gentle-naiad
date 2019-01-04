@@ -1,29 +1,19 @@
 intents:
   - follow_event
   - unfollow_event
-  - greet
-  - goodbye
-  - mood_affirm
-  - mood_deny
-  - mood_great
-  - mood_unhappy
   - add_medicine
   - enter_medicine_data
   - remove_medicine
   - medicine_list
   - affirmative
   - negative
+  - test_reminder
 
 entities:
   - remove_medicine_index
 
 actions:
   - line_follow
-  - line_greet
-  - line_cheer_up
-  - line_did_that_help
-  - line_happy
-  - line_goodbye
   - line_ask_new_medicine_name
   - line_ask_new_medicine_time
   - line_ask_new_medicine_meal
@@ -34,6 +24,13 @@ actions:
   - line_remove_medicine_success
   - custom_flex_medicine_list
   - line_cancel_success
+  - custom_test_reminder_setup
+  - line_test_reminder_setup
+  - custom_medicine_reminder_update
+  - custom_medicine_reminder_push
+  - line_medicine_reminder_push
+  - line_medicine_reminder_affirmative
+  - line_medicine_reminder_negative
   
 
 templates:
@@ -46,37 +43,6 @@ templates:
         text: "สวัสดีค่ะ !\nMediary เป็นบริการที่จะมาดูแลสุขภาพของคุณค่ะ ♥"
       - type: "text"
         text: "ท่านสามารถกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
-
-  line_greet:
-    - type: "text"
-      text: "Hey! How are you?"
-
-  line_cheer_up:
-    - - type: "text"
-        text: "Here is something to cheer you up:"
-      - type: "image"
-        originalContentUrl: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024"
-        previewImageUrl: "https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240"
-
-  line_did_that_help:
-    - type: "text"
-      text: "Did that help you?"
-
-  line_happy:
-    - - type: "text"
-        text: "Great carry on!"
-      - type: "sticker"
-        packageId: "11538"
-        stickerId: "51626501"
-    - - type: "text"
-        text: "Great carry on!"
-      - type: "sticker"
-        packageId: "11537"
-        stickerId: "52002734"
-
-  line_goodbye:
-    - type: "text"
-      text: "Bye"
 
   line_ask_new_medicine_name:
     - type: "text"
@@ -168,7 +134,7 @@ templates:
 
   line_add_new_medicine_success:
     - - type: "text"
-        text: "เพิ่ม {new_medicine_name} ทาน{new_medicine_time} {new_medicine_meal} เรียบร้อยแล้วค่ะ"
+        text: "เพิ่ม {new_medicine_name} ทานตอน{medicine_info_text} เรียบร้อยแล้วค่ะ"
       - type: "sticker"
         packageId: "2"
         stickerId: "144"
@@ -197,6 +163,38 @@ templates:
     - type: "text"
       text: "ยกเลิกแล้วค่ะ"
 
+  line_test_reminder_setup:
+    - type: "text"
+      text: "ตั้งเวลาทดสอบการแจ้งเตือนแล้ว\nอีก ประมาณ 1 นาทีจะมีข้อความแจ้งเตือน"
+
+  line_medicine_reminder_push:
+    - type: "template"
+      altText: "{text}"
+      template:
+        type: "confirm"
+        text: "{text}"
+        actions:
+          - type: "message"
+            label: "ทานแล้ว"
+            text: "ทานแล้ว"
+          - type: "message"
+            label: "ยังเลย"
+            text: "ยังเลย"
+  
+  line_medicine_reminder_affirmative:
+    - - type: "text"
+        text: "เยี่ยมมากค่ะ"
+      - type: "sticker"
+        packageId: "11537"
+        stickerId: "52002735"
+
+  line_medicine_reminder_negative:
+    - - type: "text"
+        text: "อย่าลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ"
+      - type: "sticker"
+        packageId: "11537"
+        stickerId: "52002772"
+
 slots:
   new_medicine_name:
     type: text
@@ -209,6 +207,9 @@ slots:
 
   medicine_list:
     type: list
+
+  medicine_reminders:
+    type: unfeaturized
 
 forms:
   - custom_form_add_medicine
