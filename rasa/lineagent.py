@@ -195,7 +195,7 @@ class LineMessageProcessor(MessageProcessor):
         if events is not None:
             for e in events:
                 if isinstance(e, LineReminderScheduled):
-                    if e.getattr("cancel", None) is True:
+                    if getattr(e, "cancel", None) is True:
                         logger.info("Descheduling... %s", e.name)
                         scheduler.cancel(e.name)
                     else:
