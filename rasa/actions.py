@@ -215,7 +215,7 @@ class custom_medicine_reminder_update(Action):
                 cancel_reminder = self.cancelScheduled(
                     medicine_reminders, reminder_tuple)
                 logger.debug(
-                    "Canceling reminder... name:{}, time:{}".format(reminder.name, reminder.trigger_date_time))
+                    "Canceling reminder... name:{}".format(cancel_reminder.name))
                 events.append(cancel_reminder)
 
         return events
