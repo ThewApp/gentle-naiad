@@ -1,31 +1,3 @@
-## happy path
-* greet
-  - line_greet
-* mood_great
-  - line_happy
-
-## sad path 1
-* greet
-  - line_greet
-* mood_unhappy
-  - line_cheer_up
-  - line_did_that_help
-* mood_affirm
-  - line_happy
-
-## sad path 2
-* greet
-  - line_greet
-* mood_unhappy
-  - line_cheer_up
-  - line_did_that_help
-* mood_deny
-  - line_goodbye
-
-## say goodbye
-* goodbye
-  - line_goodbye
-
 ## follow
 * follow_event
   - line_follow
@@ -86,12 +58,12 @@
   - custom_test_reminder_setup
   - reminder{"action": "custom_medicine_reminder_push", "date_time": "2019-01-02 11:59:29"}
 
-## test reminder push
+## test reminder push (affirmative)
   - custom_medicine_reminder_push
 * affirmative
   - line_medicine_reminder_affirmative
 
-## test reminder push
+## test reminder push (negative)
   - custom_medicine_reminder_push
 * negative
   - line_medicine_reminder_negative

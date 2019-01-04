@@ -2,11 +2,6 @@
 ---
 actions:
 - line_follow
-- line_greet
-- line_cheer_up
-- line_did_that_help
-- line_happy
-- line_goodbye
 - line_ask_new_medicine_name
 - line_ask_new_medicine_time
 - line_ask_new_medicine_meal
@@ -34,18 +29,6 @@ intents:
 - follow_event:
     use_entities: true
 - unfollow_event:
-    use_entities: true
-- greet:
-    use_entities: true
-- goodbye:
-    use_entities: true
-- mood_affirm:
-    use_entities: true
-- mood_deny:
-    use_entities: true
-- mood_great:
-    use_entities: true
-- mood_unhappy:
     use_entities: true
 - add_medicine:
     use_entities: true
@@ -196,40 +179,14 @@ templates:
   line_cancel_success:
   - text: ยกเลิกแล้วค่ะ
     type: text
-  line_cheer_up:
-  - - text: 'Here is something to cheer you up:'
-      type: text
-    - originalContentUrl: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=1024
-      previewImageUrl: https://i.imgur.com/nGF1K8f_d.jpg?maxwidth=240
-      type: image
   line_default:
   - text: "ลองกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
-    type: text
-  line_did_that_help:
-  - text: Did that help you?
     type: text
   line_follow:
   - - text: "สวัสดีค่ะ !\nMediary เป็นบริการที่จะมาดูแลสุขภาพของคุณค่ะ ♥"
       type: text
     - text: "ท่านสามารถกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
       type: text
-  line_goodbye:
-  - text: Bye
-    type: text
-  line_greet:
-  - text: Hey! How are you?
-    type: text
-  line_happy:
-  - - text: Great carry on!
-      type: text
-    - packageId: '11538'
-      stickerId: '51626501'
-      type: sticker
-  - - text: Great carry on!
-      type: text
-    - packageId: '11537'
-      stickerId: '52002734'
-      type: sticker
   line_medicine_reminder_affirmative:
   - - text: เยี่ยมมากค่ะ
       type: text
