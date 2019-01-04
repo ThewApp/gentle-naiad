@@ -22,8 +22,9 @@ def train_nlu():
     training_data = load_data('nlu.md')
     trainer = Trainer(config.load("nlu_config.yml"))
     trainer.train(training_data)
-    model_directory = trainer.persist('models/nlu/',
-                                      fixed_model_name="current")
+    model_directory = trainer.persist('models/',
+                                      project_name="current",
+                                      fixed_model_name="nlu")
     return model_directory
 
 
