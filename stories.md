@@ -43,6 +43,7 @@
   - slot{"new_medicine_name": null}
   - slot{"new_medicine_time": null}
   - slot{"new_medicine_meal": null}
+  - custom_medicine_reminder_update
 
 ## add medicine cancel
 * add_medicine
@@ -59,6 +60,7 @@
 * remove_medicine{"remove_medicine_index": 0}
   - custom_remove_medicine
   - slot{"medicine_list": []}
+  - custom_medicine_reminder_update
 
 ## list medicine (empty) affirmative
 * medicine_list
