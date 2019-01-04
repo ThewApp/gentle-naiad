@@ -6,6 +6,18 @@ COLOR_1 = "#389ae5"
 COLOR_2 = "#ffa731"
 COLOR_3 = "#ff6c31"
 
+DEFAULT_MEDICINE_TEXT = {
+    "before_meal": "ก่อนอาหาร",
+    "after_meal": "หลังอาหาร",
+    "morning": "เช้า",
+    "noon": "กลางวัน",
+    "evening": "เย็น",
+    "night": "ก่อนนอน",
+    "morning_noon_evening": "เช้า-กลางวัน-เย็น",
+    "morning_evening": "เช้า-เย็น",
+    "morning_noon_evening_night": "เช้า-กลางวัน-เย็น-ก่อนนอน"
+}
+
 DEFAULT_REMINDER = {
     ("morning", "before_meal"): {
         "time_text": "เช้า",

@@ -1,4 +1,4 @@
-from rasa.constants import COLOR_PRIMARY, COLOR_3
+from rasa.constants import COLOR_PRIMARY, COLOR_3, DEFAULT_MEDICINE_TEXT
 
 def get_flex_medicine_list(medicine_list):
     return {
@@ -63,11 +63,11 @@ def get_body_contents(medicine_list):
                                     "contents": [
                                         {
                                             "type": "text",
-                                            "text": "ทาน" + medicine["time"]
+                                            "text": "ทาน" + DEFAULT_MEDICINE_TEXT.get(medicine["time"], medicine["time"])
                                         },
                                         {
                                             "type": "text",
-                                            "text": medicine["meal"]
+                                            "text": DEFAULT_MEDICINE_TEXT.get(medicine["meal"], medicine["meal"])
                                         }
                                     ]
                                 }

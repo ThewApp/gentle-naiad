@@ -1,3 +1,4 @@
+import copy
 from datetime import datetime, timedelta
 import logging
 
@@ -6,7 +7,7 @@ from rasa_core.constants import REQUESTED_SLOT
 from rasa_core.events import SlotSet, Form, FollowupAction
 from rasa.linedispatcher import LineDispatcher
 
-from rasa.constants import DEFAULT_REMINDER
+from rasa.constants import DEFAULT_MEDICINE_TEXT, DEFAULT_REMINDER
 from rasa.events import LineReminderScheduled
 from rasa.lineform import LineForm
 from rasa.template.flex_medicine_list import get_flex_medicine_list
@@ -34,7 +35,7 @@ class custom_form_add_medicine(LineForm):
 
         if (new_medicine_time and
             not any(require_meal_time in new_medicine_time
-            for require_meal_time in require_meal_times)):
+                    for require_meal_time in require_meal_times)):
             return ["new_medicine_name", "new_medicine_time"]
 
         return ["new_medicine_name", "new_medicine_time", "new_medicine_meal"]
@@ -74,8 +75,14 @@ class custom_form_add_medicine(LineForm):
             "meal": new_medicine_meal
         })
 
+        medicine_time_text = DEFAULT_MEDICINE_TEXT.get(new_medicine_time, new_medicine_time)
+        medicine_meal_text = DEFAULT_MEDICINE_TEXT.get(new_medicine_meal, new_medicine_meal)
+
         # utter submit template
-        dispatcher.line_template('line_add_new_medicine_success', tracker)
+        dispatcher.line_template('line_add_new_medicine_success', tracker,
+                                 medicine_time_text=medicine_time_text,
+                                 medicine_meal_text=medicine_meal_text
+                                 )
 
         events = [
             SlotSet("medicine_list", new_medicine_list),
@@ -179,7 +186,7 @@ class custom_medicine_reminder_update(Action):
         events = []
 
         if medicine_reminders is None:
-            medicine_reminders = DEFAULT_REMINDER
+            medicine_reminders = copy.deepcopy(DEFAULT_REMINDER)
             events.append(SlotSet("medicine_reminders", medicine_reminders))
 
         checked = []
@@ -244,8 +251,8 @@ class custom_medicine_reminder_push(Action):
         medicine_list = tracker.get_slot("medicine_list")
         medicine_reminders = tracker.get_slot("medicine_reminders")
         time_tuple = dispatcher.reminder_data.get("time_tuple")
-        
-        if medicine_list and time_tuple:
+
+        if medicine_list and medicine_reminders and time_tuple:
             medicine_to_remind = []
             time_text = medicine_reminders[time_tuple]["time_text"]
             if time_tuple[1]:
@@ -257,7 +264,7 @@ class custom_medicine_reminder_push(Action):
                 meal = medicine["meal"]
                 if (time, meal) == time_tuple:
                     medicine_to_remind.append(medicine["name"])
-            
+
             number_to_remind = len(medicine_to_remind)
             if number_to_remind > 0:
                 if number_to_remind == 1:
@@ -274,5 +281,10 @@ class custom_medicine_reminder_push(Action):
             medicine_reminders[time_tuple]["job_id"] = None
 
             return [SlotSet("medicine_reminders", medicine_reminders), FollowupAction("custom_medicine_reminder_update")]
+
+        else:
+            logger.warning("medicine_list:{}, medicine_reminders:{}, time_tuple:{}".format(
+                medicine_list, medicine_reminders, time_tuple
+            ))
 
         return []

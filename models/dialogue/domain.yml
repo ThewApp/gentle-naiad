@@ -88,7 +88,8 @@ slots:
     type: rasa_core.slots.UnfeaturizedSlot
 templates:
   line_add_new_medicine_success:
-  - - text: เพิ่ม {new_medicine_name} ทาน{new_medicine_time} {new_medicine_meal} เรียบร้อยแล้วค่ะ
+  - - text: เพิ่ม {new_medicine_name} ทาน{medicine_time_text} {medicine_meal_text}
+        เรียบร้อยแล้วค่ะ
       type: text
     - packageId: '2'
       stickerId: '144'
