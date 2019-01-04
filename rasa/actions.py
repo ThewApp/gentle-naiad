@@ -180,6 +180,7 @@ class custom_medicine_reminder_update(Action):
 
         if medicine_reminders is None:
             medicine_reminders = DEFAULT_REMINDER
+            events.append(SlotSet("medicine_reminders", medicine_reminders))
 
         checked = []
 

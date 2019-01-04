@@ -19,7 +19,7 @@ line_webhook = os.getenv("LINE_WEBHOOK_CHECK")
 def reminder_job(e, dispatcher, agent):
     if line_webhook:
         # Ping web
-        Thread(target=urllib.request.urlopen, args=(line_webhook)).start()
+        Thread(target=urllib.request.urlopen, args=(line_webhook, )).start()
     agent.handle_reminder(e, dispatcher)
 
 
