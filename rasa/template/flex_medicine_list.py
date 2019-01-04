@@ -45,6 +45,11 @@ def get_body_contents(medicine_list):
         medicine_info = [
             {
                 "type": "text",
+                "text": medicine["name"],
+                "size": "xl"
+            },
+            {
+                "type": "text",
                 "text": "ทานตอน" + DEFAULT_MEDICINE_TEXT.get(medicine_time, medicine_time)
             }
         ]
@@ -66,18 +71,7 @@ def get_body_contents(medicine_list):
                         {
                             "type": "box",
                             "layout": "vertical",
-                            "contents": [
-                                {
-                                    "type": "text",
-                                    "text": medicine["name"],
-                                    "size": "xl"
-                                },
-                                {
-                                    "type": "box",
-                                    "layout": "horizontal",
-                                    "contents": medicine_info
-                                }
-                            ]
+                            "contents": medicine_info
                         },
                         {
                             "type": "button",
