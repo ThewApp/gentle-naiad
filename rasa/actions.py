@@ -75,7 +75,8 @@ class custom_form_add_medicine(LineForm):
             "meal": new_medicine_meal
         })
 
-        medicine_time_text = DEFAULT_MEDICINE_TEXT.get(new_medicine_time, new_medicine_time)
+        medicine_time_text = DEFAULT_MEDICINE_TEXT.get(
+            new_medicine_time, new_medicine_time)
         medicine_meal_text = DEFAULT_MEDICINE_TEXT.get(new_medicine_meal, None)
         medicine_info_text = medicine_time_text
         medicine_info_text += " " + medicine_meal_text if medicine_meal_text else ""
@@ -204,6 +205,7 @@ class custom_medicine_reminder_update(Action):
                             medicine_reminders, (time, meal))
                         logger.debug(
                             "Adding reminder... time:{}".format(reminder))
+                        medicine_reminders[reminder]["job_id"] = reminder.name
                         events.append(reminder)
 
         for reminder in medicine_reminders:
