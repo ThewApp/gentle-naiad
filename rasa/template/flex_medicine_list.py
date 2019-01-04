@@ -78,6 +78,7 @@ def get_body_contents(medicine_list):
                             "flex": 0,
                             "style": "primary",
                             "color": COLOR_3,
+                            "gravity": "center",
                             "action": {
                                 "type": "postback",
                                 "label": "ลบ",
