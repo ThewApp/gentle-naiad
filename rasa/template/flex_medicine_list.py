@@ -1,5 +1,6 @@
 from rasa.constants import COLOR_PRIMARY, COLOR_3, DEFAULT_MEDICINE_TEXT
 
+
 def get_flex_medicine_list(medicine_list):
     return {
         "type": "flex",
@@ -38,11 +39,21 @@ def get_body_contents(medicine_list):
     contents = []
     length = len(medicine_list)
     for index, medicine in enumerate(medicine_list):
-        delete_data = "/remove_medicine{\"remove_medicine_index\": %i}" % (index)
+        delete_data = "/remove_medicine{\"remove_medicine_index\": %i}" % (
+            index)
         medicine_time = medicine.get("time")
-        medicine_time_text = "ทานตอน" + DEFAULT_MEDICINE_TEXT.get(medicine_time) if medicine_time else " "
+        medicine_info = [
+            {
+                "type": "text",
+                "text": "ทานตอน" + DEFAULT_MEDICINE_TEXT.get(medicine_time, medicine_time)
+            }
+        ]
         medicine_meal = medicine.get("meal")
-        medicine_meal_text = DEFAULT_MEDICINE_TEXT.get(medicine_meal) if medicine_meal else " "
+        if medicine_meal:
+            medicine_info.append({
+                "type": "text",
+                "text": DEFAULT_MEDICINE_TEXT.get(medicine_meal)
+            })
         contents.append({
             "type": "box",
             "layout": "vertical",
@@ -64,16 +75,7 @@ def get_body_contents(medicine_list):
                                 {
                                     "type": "box",
                                     "layout": "horizontal",
-                                    "contents": [
-                                        {
-                                            "type": "text",
-                                            "text": medicine_time_text
-                                        },
-                                        {
-                                            "type": "text",
-                                            "text": medicine_meal_text
-                                        }
-                                    ]
+                                    "contents": medicine_info
                                 }
                             ]
                         },
