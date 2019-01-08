@@ -19,6 +19,7 @@ actions:
 - line_medicine_reminder_push
 - line_medicine_reminder_affirmative
 - line_medicine_reminder_negative
+- line_greeting
 config:
   store_entities_as_slots: true
 entities:
@@ -43,6 +44,12 @@ intents:
 - negative:
     use_entities: true
 - test_reminder:
+    use_entities: true
+- greeting:
+    use_entities: true
+- good_mood:
+    use_entities: true
+- bad_mood:
     use_entities: true
 slots:
   medicine_list:
@@ -76,10 +83,21 @@ templates:
     - packageId: '2'
       stickerId: '144'
       type: sticker
-  line_ask_add_new_medicine:
-  - - text: ท่านยังไม่มีรายการยา
+  - - text: ยินดีด้วยค่ะ คุณได้ทำการเพิ่ม {new_medicine_name} ทานตอน{medicine_info_text}
+        สำเร็จแล้ว
       type: text
-    - altText: ท่านต้องการเพิ่มยาใหม่ไหมคะ
+    - packageId: '11538'
+      stickerId: '51626507'
+      type: sticker
+  - - text: เพิ่ม {new_medicine_name} ทานตอน{medicine_info_text} เรียบร้อยแล้ว แล้วเมื่อไหร่จะได้เราเข้าไปในใจคุณ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626508'
+      type: sticker
+  line_ask_add_new_medicine:
+  - - text: คุณยังไม่มีรายการยา
+      type: text
+    - altText: คุณต้องการเพิ่มยาใหม่ไหมคะ
       template:
         actions:
         - label: ใช่ เพิ่มยาใหม่
@@ -88,7 +106,7 @@ templates:
         - label: ไม่
           text: ไม่
           type: message
-        text: ท่านต้องการเพิ่มยาใหม่ไหมคะ
+        text: คุณต้องการเพิ่มยาใหม่ไหมคะ
         type: confirm
       type: template
   line_ask_new_medicine_meal:
@@ -177,8 +195,26 @@ templates:
     text: ทานเวลาไหนคะ
     type: text
   line_cancel_success:
-  - text: ยกเลิกแล้วค่ะ
-    type: text
+  - - text: ยกเลิกแล้วค่ะ
+      type: text
+    - packageId: '11539'
+      stickerId: '52114113'
+      type: sticker
+  - - text: เราลืมไปแล้วครับ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626523'
+      type: sticker
+  - - text: ลืมยาแล้วแต่ยังไม่ลืมคุณนะ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626509'
+      type: sticker
+  - - text: ถ้ามียาใหม่ อย่าลืมมาบอกเรานะครับ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626496'
+      type: sticker
   line_default:
   - text: "ลองกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
     type: text
@@ -187,17 +223,60 @@ templates:
       type: text
     - text: "ท่านสามารถกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
       type: text
+  line_greeting:
+  - - text: สวัสดีค่ะ วันนี้เป็นยังไงบ้างคะ
+      type: text
   line_medicine_reminder_affirmative:
   - - text: เยี่ยมมากค่ะ
       type: text
     - packageId: '11537'
       stickerId: '52002735'
       type: sticker
+  - - text: สุดยอดไปเลย
+      type: text
+    - packageId: '1'
+      stickerId: '119'
+      type: sticker
+  - - text: สมบูรณ์แบบไปเลยครับ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626501'
+      type: sticker
+  - - text: สุดยอดกว่านี้ไม่มีอีกแล้ว
+      type: text
+    - packageId: '11539'
+      stickerId: '52114117'
+      type: sticker
+  - - text: พูดตามนะ เยี่ยมจริงๆ เยี่ยมจริงๆ เยี่ยมจริงๆ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626501'
+      type: sticker
   line_medicine_reminder_negative:
   - - text: อย่าลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ
       type: text
     - packageId: '11537'
       stickerId: '52002772'
+      type: sticker
+  - - text: คุณทำอย่างนี้ ก็จะไม่หายสักทีน้าาา
+      type: text
+    - packageId: '11538'
+      stickerId: '51626528'
+      type: sticker
+  - - text: กินเถอะ สุขภาพจะได้แข็งแรง
+      type: text
+    - packageId: '11539'
+      stickerId: '52114131'
+      type: sticker
+  - - text: ไม่อยากตายก็กินไปเถอะครับ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626510'
+      type: sticker
+  - - text: อย่าลืมทานน้า แอบมองเธออยู่นะจ้ะ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626530'
       type: sticker
   line_medicine_reminder_push:
   - altText: '{text}'
@@ -215,6 +294,16 @@ templates:
   line_remove_medicine_success:
   - - text: ลบ {medicine_name} เรียบร้อยแล้วค่ะ
       type: text
+  - - text: เราลบ {medicine_name} ไปเรียบร้อยแล้วค่ะ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626512'
+      type: sticker
+  - - text: ลบ {medicine_name} แล้วแต่ยังไม่ลบคุณออกจากใจนะ อิอิ
+      type: text
+    - packageId: '11539'
+      stickerId: '52114111'
+      type: sticker
   line_test_reminder_setup:
   - text: "ตั้งเวลาทดสอบการแจ้งเตือนแล้ว\nอีก ประมาณ 1 นาทีจะมีข้อความแจ้งเตือน"
     type: text

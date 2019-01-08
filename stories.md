@@ -67,3 +67,7 @@
   - custom_medicine_reminder_push
 * negative
   - line_medicine_reminder_negative
+
+## greeting
+* greeting
+  - line_greeting

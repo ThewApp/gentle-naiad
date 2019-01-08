@@ -22,6 +22,18 @@
         "text": "เพิ่มยาใหม่"
       },
       {
+        "intent": "add_medicine",
+        "text": "บันทึกยา"
+      },
+      {
+        "intent": "add_medicine",
+        "text": "add new drug"
+      },
+      {
+        "intent": "add_medicine",
+        "text": "แอดยา"
+      },
+      {
         "intent": "enter_medicine_data",
         "entities": [
           {
@@ -63,11 +75,59 @@
           {
             "start": 0,
             "end": 7,
+            "value": "morning",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "morning"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
             "value": "noon",
             "entity": "medicine_time"
           }
         ],
         "text": "กลางวัน"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 4,
+            "value": "noon",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "noon"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 5,
+            "value": "noon",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "lunch"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 6,
+            "value": "noon",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "เที่ยง"
       },
       {
         "intent": "enter_medicine_data",
@@ -86,6 +146,78 @@
         "entities": [
           {
             "start": 0,
+            "end": 6,
+            "value": "evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "dinner"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "evening"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "ตอน เย็น"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 9,
+            "value": "evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "มื้อ เย็น"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "พลบ ค่ำ"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 3,
+            "value": "evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "ค่ำ"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
             "end": 8,
             "value": "night",
             "entity": "medicine_time"
@@ -98,12 +230,84 @@
         "entities": [
           {
             "start": 0,
+            "end": 5,
+            "value": "night",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "night"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 8,
+            "value": "night",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "bed time"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 12,
+            "value": "night",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "before sleep"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
             "end": 17,
             "value": "morning_noon_evening",
             "entity": "medicine_time"
           }
         ],
         "text": "เช้า กลางวัน เย็น"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 17,
+            "value": "morning_noon_evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "three times a day"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 13,
+            "value": "morning_noon_evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "3 times a day"
+      },
+      {
+        "intent": "enter_medicine_data",
+        "entities": [
+          {
+            "start": 0,
+            "end": 7,
+            "value": "morning_noon_evening",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "3 meals"
       },
       {
         "intent": "enter_medicine_data",
@@ -143,67 +347,15 @@
       },
       {
         "intent": "enter_medicine_data",
-        "text": "ยาความดัน"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "ยาเบาหวาน"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "insulin"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "อินซูลิน"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "ยาแก้อักเสบ"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "ยาแก้ไอ"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "ยาแก้เจ็บคอ"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "ยาลดกรด"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "ยาโรคกระเพาะ"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "ยาแก้ปวด"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "ยาถ่าย"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "ยาแก้ท้องเสีย"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "ยาลดความดัน"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "พารา"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "พาราเซตามอล"
-      },
-      {
-        "intent": "enter_medicine_data",
-        "text": "Paracetamol"
+        "entities": [
+          {
+            "start": 0,
+            "end": 25,
+            "value": "morning_noon_evening_night",
+            "entity": "medicine_time"
+          }
+        ],
+        "text": "เช้า กลางวัน เย็น ก่อนนอน"
       },
       {
         "intent": "medicine_list",
@@ -268,6 +420,34 @@
       {
         "intent": "negative",
         "text": "ยังไม่ได้ทานเลย"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi"
+      },
+      {
+        "intent": "greeting",
+        "text": "hey"
+      },
+      {
+        "intent": "greeting",
+        "text": "สวัสดี"
+      },
+      {
+        "intent": "greeting",
+        "text": "สวัสดีค่ะ"
+      },
+      {
+        "intent": "greeting",
+        "text": "สวัสดีครับ"
+      },
+      {
+        "intent": "greeting",
+        "text": "หวัดดี"
+      },
+      {
+        "intent": "greeting",
+        "text": "ดี"
       }
     ],
     "regex_features": [],
@@ -294,25 +474,37 @@
       {
         "value": "noon",
         "synonyms": [
-          "กลางวัน"
+          "กลางวัน",
+          "lunch",
+          "เที่ยง"
         ]
       },
       {
         "value": "evening",
         "synonyms": [
-          "เย็น"
+          "เย็น",
+          "dinner",
+          "ตอน เย็น",
+          "มื้อ เย็น",
+          "พลบ ค่ำ",
+          "ค่ำ"
         ]
       },
       {
         "value": "night",
         "synonyms": [
-          "ก่อน นอน"
+          "ก่อน นอน",
+          "bed time",
+          "before sleep"
         ]
       },
       {
         "value": "morning_noon_evening",
         "synonyms": [
           "เช้า กลางวัน เย็น",
+          "three times a day",
+          "3 times a day",
+          "3 meals",
           "สาม เวลา"
         ]
       },
@@ -325,7 +517,8 @@
       {
         "value": "morning_noon_evening_night",
         "synonyms": [
-          "สี่ เวลา"
+          "สี่ เวลา",
+          "เช้า กลางวัน เย็น ก่อนนอน"
         ]
       }
     ]

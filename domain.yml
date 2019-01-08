@@ -8,6 +8,9 @@ intents:
   - affirmative
   - negative
   - test_reminder
+  - greeting
+  - good_mood
+  - bad_mood
 
 entities:
   - remove_medicine_index
@@ -31,6 +34,7 @@ actions:
   - line_medicine_reminder_push
   - line_medicine_reminder_affirmative
   - line_medicine_reminder_negative
+  - line_greeting
   
 
 templates:
@@ -272,6 +276,9 @@ templates:
       - type: "sticker"
         packageId: "11538"
         stickerId: "51626530"
+  line_greeting:
+    - - type: "text"
+        text: "สวัสดีค่ะ วันนี้เป็นยังไงบ้างคะ"
 
 slots:
   new_medicine_name:
