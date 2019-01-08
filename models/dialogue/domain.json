@@ -2,8 +2,11 @@
   "states": [
     "intent_add_medicine",
     "intent_affirmative",
+    "intent_bad_mood",
     "intent_enter_medicine_data",
     "intent_follow_event",
+    "intent_good_mood",
+    "intent_greeting",
     "intent_medicine_list",
     "intent_negative",
     "intent_remove_medicine",
@@ -36,6 +39,7 @@
     "prev_line_medicine_reminder_push",
     "prev_line_medicine_reminder_affirmative",
     "prev_line_medicine_reminder_negative",
+    "prev_line_greeting",
     "prev_custom_form_add_medicine",
     "active_form_custom_form_add_medicine"
   ]

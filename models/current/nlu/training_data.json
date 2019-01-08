@@ -420,6 +420,34 @@
       {
         "intent": "negative",
         "text": "ยังไม่ได้ทานเลย"
+      },
+      {
+        "intent": "greeting",
+        "text": "hi"
+      },
+      {
+        "intent": "greeting",
+        "text": "hey"
+      },
+      {
+        "intent": "greeting",
+        "text": "สวัสดี"
+      },
+      {
+        "intent": "greeting",
+        "text": "สวัสดีค่ะ"
+      },
+      {
+        "intent": "greeting",
+        "text": "สวัสดีครับ"
+      },
+      {
+        "intent": "greeting",
+        "text": "หวัดดี"
+      },
+      {
+        "intent": "greeting",
+        "text": "ดี"
       }
     ],
     "regex_features": [],
