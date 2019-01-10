@@ -79,3 +79,11 @@
 ## lazy
 * lazy
   - line_lazy
+
+## hungry
+* hungry
+  - line_eat_food
+
+## tired
+* tired
+  - line_cheer_up

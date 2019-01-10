@@ -5,18 +5,6 @@
         "medicine_list"
       ]
     },
-    "line_medicine_reminder_affirmative": {
-      "slots": []
-    },
-    "custom_test_reminder_setup": {
-      "slots": []
-    },
-    "line_sleep": {
-      "slots": []
-    },
-    "action_restart": {
-      "slots": []
-    },
     "custom_remove_medicine": {
       "slots": [
         "medicine_list"
@@ -25,34 +13,52 @@
     "custom_medicine_reminder_update": {
       "slots": []
     },
+    "action_restart": {
+      "slots": []
+    },
     "custom_form_add_medicine": {
       "slots": [
         "new_medicine_time",
-        "new_medicine_name",
+        "new_medicine_meal",
         "medicine_list",
-        "new_medicine_meal"
+        "new_medicine_name"
       ]
     },
-    "custom_reset_add_new_medicine": {
-      "slots": [
-        "new_medicine_time",
-        "new_medicine_name",
-        "new_medicine_meal"
-      ]
+    "line_sleep": {
+      "slots": []
+    },
+    "line_cheer_up": {
+      "slots": []
     },
     "line_medicine_reminder_negative": {
       "slots": []
     },
-    "line_greeting": {
+    "line_lazy": {
+      "slots": []
+    },
+    "line_eat_food": {
+      "slots": []
+    },
+    "line_medicine_reminder_affirmative": {
+      "slots": []
+    },
+    "custom_reset_add_new_medicine": {
+      "slots": [
+        "new_medicine_time",
+        "new_medicine_meal",
+        "new_medicine_name"
+      ]
+    },
+    "line_follow": {
       "slots": []
     },
     "custom_flex_medicine_list": {
       "slots": []
     },
-    "line_follow": {
+    "custom_test_reminder_setup": {
       "slots": []
     },
-    "line_lazy": {
+    "line_greeting": {
       "slots": []
     }
   },
@@ -71,5 +77,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20190110-162355"
+  "trained_at": "20190110-164058"
 }

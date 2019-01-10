@@ -5,12 +5,14 @@
     "intent_enter_medicine_data",
     "intent_follow_event",
     "intent_greeting",
+    "intent_hungry",
     "intent_lazy",
     "intent_medicine_list",
     "intent_negative",
     "intent_remove_medicine",
     "intent_sleep",
     "intent_test_reminder",
+    "intent_tired",
     "intent_unfollow_event",
     "entity_remove_medicine_index",
     "slot_medicine_list_0",
@@ -42,6 +44,8 @@
     "prev_line_greeting",
     "prev_line_sleep",
     "prev_line_lazy",
+    "prev_line_eat_food",
+    "prev_line_cheer_up",
     "prev_custom_form_add_medicine",
     "active_form_custom_form_add_medicine"
   ]

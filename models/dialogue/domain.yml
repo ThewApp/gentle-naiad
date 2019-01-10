@@ -22,6 +22,8 @@ actions:
 - line_greeting
 - line_sleep
 - line_lazy
+- line_eat_food
+- line_cheer_up
 config:
   store_entities_as_slots: true
 entities:
@@ -52,6 +54,10 @@ intents:
 - sleep:
     use_entities: true
 - lazy:
+    use_entities: true
+- hungry:
+    use_entities: true
+- tired:
     use_entities: true
 slots:
   medicine_list:
@@ -217,9 +223,27 @@ templates:
     - packageId: '11538'
       stickerId: '51626496'
       type: sticker
+  line_cheer_up:
+  - - text: สู้ๆนะคะ อย่าลืมพักผ่อนให้เพียงพอ
+      type: text
+    - packageId: '3'
+      stickerId: '241'
+  - - text: พักก่อน ไม่ต้องเครียดนะคะ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626503'
   line_default:
   - text: "ลองกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
     type: text
+  line_eat_food:
+  - - text: ทานอะไรที่ดีกับสุขภาพ อย่าปล่อยให้หิวนานไม่ดีนะคะ
+      type: text
+    - packageId: '2'
+      stickerId: '510'
+  - - text: ทานอะไรที่มีประโยชน์ แล้วอย่าลืมทานให้ตรงเวลาด้วยนะคะ
+      type: text
+    - packageId: '4'
+      stickerId: '271'
   line_follow:
   - - text: "สวัสดีค่ะ !\nMediary เป็นบริการที่จะมาดูแลสุขภาพของคุณค่ะ ♥"
       type: text
@@ -327,7 +351,7 @@ templates:
       type: sticker
   - - text: นี่ก็ดึกแล้ว รีบเข้านอน เดี๋ยวพักผ่อนไม่เพียงพอนะคะ
       type: text
-    - text: ราตีสวัสดิ์ค่ะ
+    - text: ราตรีสวัสดิ์ค่ะ
       type: text
     - packageId: '11537'
       stickerId: '52002764'

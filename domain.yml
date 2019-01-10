@@ -11,6 +11,8 @@ intents:
   - greeting
   - sleep
   - lazy
+  - hungry
+  - tired
 
 entities:
   - remove_medicine_index
@@ -37,6 +39,8 @@ actions:
   - line_greeting
   - line_sleep
   - line_lazy
+  - line_eat_food
+  - line_cheer_up
 
 templates:
   line_default:
@@ -293,7 +297,7 @@ templates:
     - - type: "text"
         text: "นี่ก็ดึกแล้ว รีบเข้านอน เดี๋ยวพักผ่อนไม่เพียงพอนะคะ"
       - type: "text"
-        text: "ราตีสวัสดิ์ค่ะ"
+        text: "ราตรีสวัสดิ์ค่ะ"
       - type: "sticker"
         packageId: "11537"
         stickerId: "52002764"
@@ -306,16 +310,36 @@ templates:
         stickerId: "52114147"
 
   line_lazy: 
-   - - type: "text"
-       text: "ขี้เกียจแล้วเมื่อไหร่จะแข็งแรงละคะ"
-     - type: "sticker"
-       packageId: "11539"
-       stickerId: "52114135"
-   - - type: "text"
-       text: "อย่าขี้เกียจเลย ไปออกกำลังเถอะค่ะ"
-     - type: "sticker"
-       packageId: "2"
-       stickerId: "505"
+    - - type: "text"
+        text: "ขี้เกียจแล้วเมื่อไหร่จะแข็งแรงละคะ"
+      - type: "sticker"
+        packageId: "11539"
+        stickerId: "52114135"
+    - - type: "text"
+        text: "อย่าขี้เกียจเลย ไปออกกำลังเถอะค่ะ"
+      - type: "sticker"
+        packageId: "2"
+        stickerId: "505"
+
+  line_eat_food:
+    - - type: "text"
+        text: "ทานอะไรที่ดีกับสุขภาพ อย่าปล่อยให้หิวนานไม่ดีนะคะ"
+      - packageId: "2"
+        stickerId: "510"
+    - - type : "text"
+        text: "ทานอะไรที่มีประโยชน์ แล้วอย่าลืมทานให้ตรงเวลาด้วยนะคะ"
+      - packageId: "4"
+        stickerId: "271"
+
+  line_cheer_up:
+    - - type: "text"
+        text: "สู้ๆนะคะ อย่าลืมพักผ่อนให้เพียงพอ"
+      - packageId: "3"
+        stickerId: "241"
+    - - type: "text"
+        text: "พักก่อน ไม่ต้องเครียดนะคะ"
+      - packageId: "11538"
+        stickerId: "51626503"
 
 slots:
   new_medicine_name:
