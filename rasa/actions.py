@@ -263,10 +263,11 @@ class custom_medicine_reminder_push(Action):
             else:
                 meal_text = ""
             for medicine in medicine_list:
-                time = medicine["time"]
+                times = medicine["time"].split("_")
                 meal = medicine["meal"]
-                if (time, meal) == time_tuple:
-                    medicine_to_remind.append(medicine["name"])
+                for time in times:
+                    if (time, meal) == time_tuple:
+                        medicine_to_remind.append(medicine["name"])
 
             number_to_remind = len(medicine_to_remind)
             if number_to_remind > 0:
