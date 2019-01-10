@@ -20,6 +20,8 @@ actions:
 - line_medicine_reminder_affirmative
 - line_medicine_reminder_negative
 - line_greeting
+- line_sleep
+- line_lazy
 config:
   store_entities_as_slots: true
 entities:
@@ -47,9 +49,9 @@ intents:
     use_entities: true
 - greeting:
     use_entities: true
-- good_mood:
+- sleep:
     use_entities: true
-- bad_mood:
+- lazy:
     use_entities: true
 slots:
   medicine_list:
@@ -226,6 +228,17 @@ templates:
   line_greeting:
   - - text: สวัสดีค่ะ วันนี้เป็นยังไงบ้างคะ
       type: text
+  line_lazy:
+  - - text: ขี้เกียจแล้วเมื่อไหร่จะแข็งแรงละคะ
+      type: text
+    - packageId: '11539'
+      stickerId: '52114135'
+      type: sticker
+  - - text: อย่าขี้เกียจเลย ไปออกกำลังเถอะค่ะ
+      type: text
+    - packageId: '2'
+      stickerId: '505'
+      type: sticker
   line_medicine_reminder_affirmative:
   - - text: เยี่ยมมากค่ะ
       type: text
@@ -303,6 +316,28 @@ templates:
       type: text
     - packageId: '11539'
       stickerId: '52114111'
+      type: sticker
+  line_sleep:
+  - - text: นี่ก็ดึกแล้ว รีบเข้านอน เดี๋ยวพักผ่อนไม่เพียงพอนะคะ
+      type: text
+    - text: ฝันดีค่ะ
+      type: text
+    - packageId: '3'
+      stickerId: '239'
+      type: sticker
+  - - text: นี่ก็ดึกแล้ว รีบเข้านอน เดี๋ยวพักผ่อนไม่เพียงพอนะคะ
+      type: text
+    - text: ราตีสวัสดิ์ค่ะ
+      type: text
+    - packageId: '11537'
+      stickerId: '52002764'
+      type: sticker
+  - - text: เข้านอนได้แล้วค่ะ
+      type: text
+    - text: อย่าลืมตื่นเช้ามาออกกำลังกายด้วยนะคะ
+      type: text
+    - packageId: '11539'
+      stickerId: '52114147'
       type: sticker
   line_test_reminder_setup:
   - text: "ตั้งเวลาทดสอบการแจ้งเตือนแล้ว\nอีก ประมาณ 1 นาทีจะมีข้อความแจ้งเตือน"

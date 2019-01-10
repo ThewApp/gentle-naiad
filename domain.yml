@@ -9,8 +9,8 @@ intents:
   - negative
   - test_reminder
   - greeting
-  - good_mood
-  - bad_mood
+  - sleep
+  - lazy
 
 entities:
   - remove_medicine_index
@@ -35,7 +35,8 @@ actions:
   - line_medicine_reminder_affirmative
   - line_medicine_reminder_negative
   - line_greeting
-  
+  - line_sleep
+  - line_lazy
 
 templates:
   line_default:
@@ -276,9 +277,45 @@ templates:
       - type: "sticker"
         packageId: "11538"
         stickerId: "51626530"
+
   line_greeting:
     - - type: "text"
         text: "สวัสดีค่ะ วันนี้เป็นยังไงบ้างคะ"
+
+  line_sleep:
+    - - type: "text"
+        text: "นี่ก็ดึกแล้ว รีบเข้านอน เดี๋ยวพักผ่อนไม่เพียงพอนะคะ"
+      - type: "text"
+        text: "ฝันดีค่ะ"
+      - type: "sticker"
+        packageId: "3"
+        stickerId: "239"
+    - - type: "text"
+        text: "นี่ก็ดึกแล้ว รีบเข้านอน เดี๋ยวพักผ่อนไม่เพียงพอนะคะ"
+      - type: "text"
+        text: "ราตีสวัสดิ์ค่ะ"
+      - type: "sticker"
+        packageId: "11537"
+        stickerId: "52002764"
+    - - type: "text"
+        text: "เข้านอนได้แล้วค่ะ"
+      - type: "text"
+        text: "อย่าลืมตื่นเช้ามาออกกำลังกายด้วยนะคะ"
+      - type: "sticker"
+        packageId: "11539"
+        stickerId: "52114147"
+
+  line_lazy: 
+   - - type: "text"
+       text: "ขี้เกียจแล้วเมื่อไหร่จะแข็งแรงละคะ"
+     - type: "sticker"
+       packageId: "11539"
+       stickerId: "52114135"
+   - - type: "text"
+       text: "อย่าขี้เกียจเลย ไปออกกำลังเถอะค่ะ"
+     - type: "sticker"
+       packageId: "2"
+       stickerId: "505"
 
 slots:
   new_medicine_name:

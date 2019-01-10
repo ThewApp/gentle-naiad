@@ -71,3 +71,11 @@
 ## greeting
 * greeting
   - line_greeting
+
+## sleep
+* sleep
+  - line_sleep
+
+## lazy
+* lazy
+  - line_lazy

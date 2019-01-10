@@ -398,6 +398,14 @@
         "text": "เรียบร้อย"
       },
       {
+        "intent": "affirmative",
+        "text": "ถูกต้อง"
+      },
+      {
+        "intent": "affirmative",
+        "text": "ใช่เลย"
+      },
+      {
         "intent": "negative",
         "text": "ไม่"
       },
@@ -448,6 +456,74 @@
       {
         "intent": "greeting",
         "text": "ดี"
+      },
+      {
+        "intent": "greeting",
+        "text": "โย่ว"
+      },
+      {
+        "intent": "greeting",
+        "text": "ฮัลโหล"
+      },
+      {
+        "intent": "greeting",
+        "text": "ฮาโหล"
+      },
+      {
+        "intent": "greeting",
+        "text": "hello"
+      },
+      {
+        "intent": "greeting",
+        "text": "good morning"
+      },
+      {
+        "intent": "greeting",
+        "text": "good afternoon"
+      },
+      {
+        "intent": "greeting",
+        "text": "good evening"
+      },
+      {
+        "intent": "greeting",
+        "text": "อรุณสวัสดิ์"
+      },
+      {
+        "intent": "sleep",
+        "text": "ง่วง"
+      },
+      {
+        "intent": "sleep",
+        "text": "ง่วงจัง"
+      },
+      {
+        "intent": "sleep",
+        "text": "ง่วงนอน"
+      },
+      {
+        "intent": "sleep",
+        "text": "นอน"
+      },
+      {
+        "intent": "sleep",
+        "text": "ตาจะปิดแล้ว"
+      },
+      {
+        "intent": "sleep",
+        "text": "หลับ"
+      },
+      {
+        "intent": "lazy",
+        "text": "ขี้เกียจ"
+      },
+      {
+        "intent": "lazy",
+        "text": "ขี้เกียด"
+      },
+      {
+        "intent": "lazy",
+        "text": "ขี้เกียจจัง"
       }
     ],
     "regex_features": [],

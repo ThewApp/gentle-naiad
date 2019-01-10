@@ -5,16 +5,30 @@
         "medicine_list"
       ]
     },
-    "line_medicine_reminder_negative": {
+    "line_medicine_reminder_affirmative": {
       "slots": []
     },
-    "line_medicine_reminder_affirmative": {
+    "custom_test_reminder_setup": {
+      "slots": []
+    },
+    "line_sleep": {
+      "slots": []
+    },
+    "action_restart": {
+      "slots": []
+    },
+    "custom_remove_medicine": {
+      "slots": [
+        "medicine_list"
+      ]
+    },
+    "custom_medicine_reminder_update": {
       "slots": []
     },
     "custom_form_add_medicine": {
       "slots": [
-        "new_medicine_name",
         "new_medicine_time",
+        "new_medicine_name",
         "medicine_list",
         "new_medicine_meal"
       ]
@@ -26,32 +40,24 @@
         "new_medicine_meal"
       ]
     },
-    "line_follow": {
-      "slots": []
-    },
-    "custom_flex_medicine_list": {
+    "line_medicine_reminder_negative": {
       "slots": []
     },
     "line_greeting": {
       "slots": []
     },
-    "custom_test_reminder_setup": {
+    "custom_flex_medicine_list": {
       "slots": []
     },
-    "action_restart": {
+    "line_follow": {
       "slots": []
     },
-    "custom_medicine_reminder_update": {
+    "line_lazy": {
       "slots": []
-    },
-    "custom_remove_medicine": {
-      "slots": [
-        "medicine_list"
-      ]
     }
   },
   "rasa_core": "0.12.3",
-  "python": "3.6.7",
+  "python": "3.6.8",
   "max_histories": [
     5,
     null,
@@ -65,5 +71,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20190108-104419"
+  "trained_at": "20190110-162355"
 }
