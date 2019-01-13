@@ -22,6 +22,8 @@ logger = logging.getLogger(__name__)
 
 if scheduler_store:
     scheduler = Scheduler(connection=scheduler_store, job_class=ReminderJob)
+else:
+    scheduler = None
 
 
 class LineAgent(Agent):
@@ -192,7 +194,7 @@ class LineMessageProcessor(MessageProcessor):
         Reminders with the same `id` property will overwrite one another
         (i.e. only one of them will eventually run)."""
 
-        if events is not None:
+        if events is not None and scheduler is not None:
             for e in events:
                 if isinstance(e, LineReminderScheduled):
                     if getattr(e, "cancel", None) is True:
