@@ -67,9 +67,9 @@ DEFAULT_RICH_MENU_OBJECT = {
                 "height": 843
             },
             "action": {
-                "type": "message",
+                "type": "uri",
                 "label": "วิธีใช้",
-                "text": "วิธีใช้"
+                "uri": "line://app/1620473652-pXm3Xmxb"
             }
         }
     ]
