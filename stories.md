@@ -78,6 +78,10 @@
 * negative
   - line_greeting_help_negative
 
+## howto
+* howto
+  - line_howto
+
 ## sleep
 * sleep
   - line_sleep

@@ -9,6 +9,7 @@ intents:
   - negative
   - test_reminder
   - greeting
+  - howto
   - sleep
   - lazy
   - hungry
@@ -38,6 +39,7 @@ actions:
   - line_medicine_reminder_negative
   - line_greeting_help
   - line_greeting_help_negative
+  - line_howto
   - line_sleep
   - line_lazy
   - line_eat_food
@@ -158,7 +160,7 @@ templates:
       - type: "sticker"
         packageId: "11538"
         stickerId: "51626508"
-  
+
   line_ask_add_new_medicine:
     - - type: "text"
         text: "คุณยังไม่มีรายการยา"
@@ -174,7 +176,7 @@ templates:
             - type: "message"
               label: "ไม่"
               text: "ไม่"
-  
+
   line_remove_medicine_success:
     - - type: "text"
         text: "ลบ {medicine_name} เรียบร้อยแล้วค่ะ"
@@ -188,7 +190,7 @@ templates:
       - type: "sticker"
         packageId: "11539"
         stickerId: "52114111"
-  
+
   line_cancel_success:
     - - type: "text"
         text: "ยกเลิกแล้วค่ะ"
@@ -228,7 +230,7 @@ templates:
           - type: "message"
             label: "ยังเลย"
             text: "ยังเลย"
-  
+
   line_medicine_reminder_affirmative:
     - - type: "text"
         text: "เยี่ยมมากค่ะ"
@@ -308,10 +310,14 @@ templates:
                 text: "รายการยา"
             - type: "action"
               action:
-                type: "uri"
+                type: "message"
                 label: "ดูวิธีใช้"
-                uri: "{HELP_LIFF_URI}"
- 
+                text: "วิธีใช้"
+
+  line_howto:
+    - type: "text"
+      text: "กดปุ่ม Menu ด้านล่าง แล้วกดปุ่ม ❓ วิธีใช้ เพื่อดูวิธีการใช้งาน MeDiary นะคะ 😄"
+
   line_greeting_help_negative:
     - - type: "text"
         text: "โอเคค่ะ \nหากต้องการความช่วยเหลือในการดูแลสุขภาพของคุณ สามารถเข้ามาใช้บริการ Mediary ได้เสมอนะคะ"
@@ -347,7 +353,7 @@ templates:
         packageId: "11539"
         stickerId: "52114147"
 
-  line_lazy: 
+  line_lazy:
     - - type: "text"
         text: "ขี้เกียจแล้วเมื่อไหร่จะแข็งแรงละคะ"
       - type: "sticker"
@@ -364,7 +370,7 @@ templates:
         text: "ทานอะไรที่ดีกับสุขภาพ อย่าปล่อยให้หิวนานไม่ดีนะคะ"
       - packageId: "2"
         stickerId: "510"
-    - - type : "text"
+    - - type: "text"
         text: "ทานอะไรที่มีประโยชน์ แล้วอย่าลืมทานให้ตรงเวลาด้วยนะคะ"
       - packageId: "4"
         stickerId: "271"

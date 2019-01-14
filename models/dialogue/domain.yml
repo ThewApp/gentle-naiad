@@ -21,6 +21,7 @@ actions:
 - line_medicine_reminder_negative
 - line_greeting_help
 - line_greeting_help_negative
+- line_howto
 - line_sleep
 - line_lazy
 - line_eat_food
@@ -51,6 +52,8 @@ intents:
 - test_reminder:
     use_entities: true
 - greeting:
+    use_entities: true
+- howto:
     use_entities: true
 - sleep:
     use_entities: true
@@ -273,8 +276,8 @@ templates:
           type: action
         - action:
             label: ดูวิธีใช้
-            type: uri
-            uri: '{HELP_LIFF_URI}'
+            text: วิธีใช้
+            type: message
           type: action
       stickerId: '242'
       type: sticker
@@ -290,6 +293,10 @@ templates:
     - packageId: '11539'
       stickerId: '52114113'
       type: sticker
+  line_howto:
+  - text: กดปุ่ม Menu ด้านล่าง แล้วกดปุ่ม ❓ วิธีใช้ เพื่อดูวิธีการใช้งาน MeDiary นะคะ
+      😄
+    type: text
   line_lazy:
   - - text: ขี้เกียจแล้วเมื่อไหร่จะแข็งแรงละคะ
       type: text

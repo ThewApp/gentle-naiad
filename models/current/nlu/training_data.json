@@ -494,6 +494,26 @@
         "text": "อรุณสวัสดิ์"
       },
       {
+        "intent": "howto",
+        "text": "ดูวิธีใช้"
+      },
+      {
+        "intent": "howto",
+        "text": "วิธีใช้"
+      },
+      {
+        "intent": "howto",
+        "text": "ใช้ยังไง"
+      },
+      {
+        "intent": "howto",
+        "text": "ช่วยเหลือ"
+      },
+      {
+        "intent": "howto",
+        "text": "การใช้งาน"
+      },
+      {
         "intent": "sleep",
         "text": "ง่วง"
       },
