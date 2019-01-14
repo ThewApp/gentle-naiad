@@ -68,10 +68,6 @@
 * negative
   - line_medicine_reminder_negative
 
-## greeting
-* greeting
-  - line_greeting
-
 ## greeting help 
 * greeting
   - line_greeting_help

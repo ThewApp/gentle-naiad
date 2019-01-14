@@ -19,7 +19,6 @@ actions:
 - line_medicine_reminder_push
 - line_medicine_reminder_affirmative
 - line_medicine_reminder_negative
-- line_greeting
 - line_greeting_help
 - line_greeting_help_negative
 - line_sleep
@@ -250,9 +249,6 @@ templates:
   - - text: "สวัสดีค่ะ !\nMediary เป็นบริการที่จะมาดูแลสุขภาพของคุณค่ะ ♥"
       type: text
     - text: "ท่านสามารถกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
-      type: text
-  line_greeting:
-  - - text: สวัสดีค่ะ วันนี้เป็นยังไงบ้างคะ
       type: text
   line_greeting_help:
   - - text: สวัสดีค่ะ มีอะไรให้ช่วยไหมคะ
