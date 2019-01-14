@@ -59,7 +59,7 @@ class LineNLG(NaturalLanguageGenerator):
         template_vars: Dict[Text, Any]
     ) -> Dict[Text, Any]:
         """"Combine slot values and key word arguments to fill templates."""
-        line_text_keys = ["text", "altText", "label"]
+        line_text_keys = ["text", "altText", "label", "uri"]
         try:
             for key in line_text_keys:
                 if key in template:
