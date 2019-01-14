@@ -42,6 +42,8 @@
     "prev_line_medicine_reminder_affirmative",
     "prev_line_medicine_reminder_negative",
     "prev_line_greeting",
+    "prev_line_greeting_help",
+    "prev_line_greeting_help_negative",
     "prev_line_sleep",
     "prev_line_lazy",
     "prev_line_eat_food",

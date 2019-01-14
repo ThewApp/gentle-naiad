@@ -37,6 +37,8 @@ actions:
   - line_medicine_reminder_affirmative
   - line_medicine_reminder_negative
   - line_greeting
+  - line_greeting_help
+  - line_greeting_help_negative
   - line_sleep
   - line_lazy
   - line_eat_food
@@ -285,6 +287,47 @@ templates:
   line_greeting:
     - - type: "text"
         text: "สวัสดีค่ะ วันนี้เป็นยังไงบ้างคะ"
+
+  line_greeting_help:
+    - - type: "text"
+        text: "สวัสดีค่ะ มีอะไรให้ช่วยไหมคะ"
+      - type: "sticker"
+        packageId: "3"
+        stickerId: "242"
+        quickReply:
+          items:
+            - type: "action"
+              action:
+                type: "message"
+                label: "ไม่มี"
+                text: "ไม่มี"
+            - type: "action"
+              action:
+                type: "message"
+                label: "เพิ่มยาใหม่"
+                text: "เพิ่มยาใหม่"
+            - type: "action"
+              action:
+                type: "message"
+                label: "ดูรายการยา"
+                text: "รายการยา"
+            - type: "action"
+              action:
+                type: "message"
+                label: "ดูวิธีใช้"
+                text: "วิธีใช้"
+ 
+  line_greeting_help_negative:
+    - - type: "text"
+        text: "โอเคค่ะ \nหากต้องการความช่วยเหลือในการดูแลสุขภาพของคุณ สามารถเข้ามาใช้บริการ Mediary ได้เสมอนะคะ"
+      - type: "sticker"
+        packageId: "11537"
+        stickerId: "52002742"
+    - - type: "text"
+        text: "โอเคค่ะ"
+      - type: "sticker"
+        packageId: "11539"
+        stickerId: "52114113"
 
   line_sleep:
     - - type: "text"

@@ -411,6 +411,10 @@
       },
       {
         "intent": "negative",
+        "text": "ไม่มี"
+      },
+      {
+        "intent": "negative",
         "text": "ไม่เอา"
       },
       {
