@@ -66,6 +66,6 @@ DEFAULT_REMINDER = {
 HELP_LIFF_URI = "line://app/1620473652-pXm3Xmxb"
 
 DICT = {}
-for NAME, VALUE in vars().items():
-        if not NAME.startswith("__") and isinstance(VALUE, str):
-            DICT[NAME] = VALUE
+for NAME, VALUE in vars().copy().items():
+    if not NAME.startswith("__") and isinstance(VALUE, str):
+        DICT[NAME] = VALUE
