@@ -273,8 +273,8 @@ templates:
           type: action
         - action:
             label: ดูวิธีใช้
-            text: วิธีใช้
-            type: message
+            type: uri
+            uri: '{HELP_LIFF_URI}'
           type: action
       stickerId: '242'
       type: sticker

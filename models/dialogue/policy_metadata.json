@@ -5,13 +5,29 @@
         "medicine_list"
       ]
     },
+    "line_medicine_reminder_affirmative": {
+      "slots": []
+    },
     "custom_form_add_medicine": {
       "slots": [
-        "new_medicine_time",
+        "new_medicine_meal",
         "medicine_list",
         "new_medicine_name",
-        "new_medicine_meal"
+        "new_medicine_time"
       ]
+    },
+    "custom_reset_add_new_medicine": {
+      "slots": [
+        "new_medicine_meal",
+        "new_medicine_name",
+        "new_medicine_time"
+      ]
+    },
+    "line_greeting_help_negative": {
+      "slots": []
+    },
+    "custom_flex_medicine_list": {
+      "slots": []
     },
     "custom_medicine_reminder_update": {
       "slots": []
@@ -19,22 +35,7 @@
     "line_medicine_reminder_negative": {
       "slots": []
     },
-    "line_greeting_help": {
-      "slots": []
-    },
-    "line_medicine_reminder_affirmative": {
-      "slots": []
-    },
-    "line_cheer_up": {
-      "slots": []
-    },
-    "line_follow": {
-      "slots": []
-    },
-    "line_eat_food": {
-      "slots": []
-    },
-    "action_restart": {
+    "line_lazy": {
       "slots": []
     },
     "custom_remove_medicine": {
@@ -42,26 +43,25 @@
         "medicine_list"
       ]
     },
-    "custom_test_reminder_setup": {
-      "slots": []
-    },
-    "custom_reset_add_new_medicine": {
-      "slots": [
-        "new_medicine_time",
-        "new_medicine_name",
-        "new_medicine_meal"
-      ]
-    },
-    "custom_flex_medicine_list": {
-      "slots": []
-    },
-    "line_lazy": {
-      "slots": []
-    },
-    "line_greeting_help_negative": {
+    "line_eat_food": {
       "slots": []
     },
     "line_sleep": {
+      "slots": []
+    },
+    "line_follow": {
+      "slots": []
+    },
+    "line_greeting_help": {
+      "slots": []
+    },
+    "action_restart": {
+      "slots": []
+    },
+    "line_cheer_up": {
+      "slots": []
+    },
+    "custom_test_reminder_setup": {
       "slots": []
     }
   },
@@ -80,5 +80,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20190114-192447"
+  "trained_at": "20190114-210329"
 }
