@@ -308,9 +308,9 @@ templates:
                 text: "รายการยา"
             - type: "action"
               action:
-                type: "message"
+                type: "uri"
                 label: "ดูวิธีใช้"
-                text: "วิธีใช้"
+                uri: "{HELP_LIFF_URI}"
  
   line_greeting_help_negative:
     - - type: "text"

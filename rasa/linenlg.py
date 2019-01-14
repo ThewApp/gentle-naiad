@@ -1,6 +1,8 @@
 from rasa_core.nlg.generator import NaturalLanguageGenerator
 from rasa_core.trackers import DialogueStateTracker
 
+from rasa.constants import DICT
+
 import copy
 import logging
 import random
@@ -105,4 +107,5 @@ class LineNLG(NaturalLanguageGenerator):
         # Copying the filled slots in the template variables.
         template_vars = filled_slots.copy()
         template_vars.update(kwargs)
+        template_vars.update(DICT)
         return template_vars
