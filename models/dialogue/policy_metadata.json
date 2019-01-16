@@ -5,34 +5,48 @@
         "medicine_list"
       ]
     },
-    "line_medicine_reminder_negative": {
-      "slots": []
-    },
     "line_medicine_reminder_affirmative": {
       "slots": []
     },
     "custom_form_add_medicine": {
       "slots": [
-        "new_medicine_name",
         "new_medicine_time",
+        "new_medicine_meal",
         "medicine_list",
-        "new_medicine_meal"
+        "new_medicine_name"
       ]
-    },
-    "custom_reset_add_new_medicine": {
-      "slots": [
-        "new_medicine_time",
-        "new_medicine_name",
-        "new_medicine_meal"
-      ]
-    },
-    "line_follow": {
-      "slots": []
     },
     "custom_flex_medicine_list": {
       "slots": []
     },
-    "line_greeting": {
+    "custom_remove_medicine": {
+      "slots": [
+        "medicine_list"
+      ]
+    },
+    "custom_medicine_reminder_update": {
+      "slots": []
+    },
+    "line_greeting_help_negative": {
+      "slots": []
+    },
+    "custom_reset_add_new_medicine": {
+      "slots": [
+        "new_medicine_time",
+        "new_medicine_meal",
+        "new_medicine_name"
+      ]
+    },
+    "line_howto": {
+      "slots": []
+    },
+    "line_greeting_help": {
+      "slots": []
+    },
+    "line_cheer_up": {
+      "slots": []
+    },
+    "line_medicine_reminder_negative": {
       "slots": []
     },
     "custom_test_reminder_setup": {
@@ -41,17 +55,21 @@
     "action_restart": {
       "slots": []
     },
-    "custom_medicine_reminder_update": {
+    "line_follow": {
       "slots": []
     },
-    "custom_remove_medicine": {
-      "slots": [
-        "medicine_list"
-      ]
+    "line_lazy": {
+      "slots": []
+    },
+    "line_sleep": {
+      "slots": []
+    },
+    "line_eat_food": {
+      "slots": []
     }
   },
-  "rasa_core": "0.12.3",
-  "python": "3.6.7",
+  "rasa_core": "0.12.4",
+  "python": "3.6.8",
   "max_histories": [
     5,
     null,
@@ -65,5 +83,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20190108-104419"
+  "trained_at": "20190114-213832"
 }

@@ -68,6 +68,32 @@
 * negative
   - line_medicine_reminder_negative
 
-## greeting
+## greeting help 
 * greeting
-  - line_greeting
+  - line_greeting_help
+
+## greeting help (negative)
+* greeting
+  - line_greeting_help
+* negative
+  - line_greeting_help_negative
+
+## howto
+* howto
+  - line_howto
+
+## sleep
+* sleep
+  - line_sleep
+
+## lazy
+* lazy
+  - line_lazy
+
+## hungry
+* hungry
+  - line_eat_food
+
+## tired
+* tired
+  - line_cheer_up

@@ -398,8 +398,20 @@
         "text": "เรียบร้อย"
       },
       {
+        "intent": "affirmative",
+        "text": "ถูกต้อง"
+      },
+      {
+        "intent": "affirmative",
+        "text": "ใช่เลย"
+      },
+      {
         "intent": "negative",
         "text": "ไม่"
+      },
+      {
+        "intent": "negative",
+        "text": "ไม่มี"
       },
       {
         "intent": "negative",
@@ -448,6 +460,162 @@
       {
         "intent": "greeting",
         "text": "ดี"
+      },
+      {
+        "intent": "greeting",
+        "text": "โย่ว"
+      },
+      {
+        "intent": "greeting",
+        "text": "ฮัลโหล"
+      },
+      {
+        "intent": "greeting",
+        "text": "ฮาโหล"
+      },
+      {
+        "intent": "greeting",
+        "text": "hello"
+      },
+      {
+        "intent": "greeting",
+        "text": "good morning"
+      },
+      {
+        "intent": "greeting",
+        "text": "good afternoon"
+      },
+      {
+        "intent": "greeting",
+        "text": "good evening"
+      },
+      {
+        "intent": "greeting",
+        "text": "อรุณสวัสดิ์"
+      },
+      {
+        "intent": "howto",
+        "text": "ดูวิธีใช้"
+      },
+      {
+        "intent": "howto",
+        "text": "วิธีใช้"
+      },
+      {
+        "intent": "howto",
+        "text": "ใช้ยังไง"
+      },
+      {
+        "intent": "howto",
+        "text": "ช่วยเหลือ"
+      },
+      {
+        "intent": "howto",
+        "text": "การใช้งาน"
+      },
+      {
+        "intent": "sleep",
+        "text": "ง่วง"
+      },
+      {
+        "intent": "sleep",
+        "text": "ง่วงจัง"
+      },
+      {
+        "intent": "sleep",
+        "text": "ง่วงนอน"
+      },
+      {
+        "intent": "sleep",
+        "text": "นอน"
+      },
+      {
+        "intent": "sleep",
+        "text": "ตาจะปิดแล้ว"
+      },
+      {
+        "intent": "sleep",
+        "text": "หลับ"
+      },
+      {
+        "intent": "lazy",
+        "text": "ขี้เกียจ"
+      },
+      {
+        "intent": "lazy",
+        "text": "ขี้เกียด"
+      },
+      {
+        "intent": "lazy",
+        "text": "ขี้เกียจจัง"
+      },
+      {
+        "intent": "hungry",
+        "text": "หิว"
+      },
+      {
+        "intent": "hungry",
+        "text": "หิวมาก"
+      },
+      {
+        "intent": "hungry",
+        "text": "วันนี้ยังไม่ได้กินอะไรเลย"
+      },
+      {
+        "intent": "hungry",
+        "text": "กินอะไรดีวันนี้"
+      },
+      {
+        "intent": "hungry",
+        "text": "เที่ยงนี้กินอะไรดี"
+      },
+      {
+        "intent": "hungry",
+        "text": "เช้านี้กินอะไรดี"
+      },
+      {
+        "intent": "hungry",
+        "text": "เย็นนี้กินอะไรดี"
+      },
+      {
+        "intent": "hungry",
+        "text": "หิวข้าวจัง"
+      },
+      {
+        "intent": "hungry",
+        "text": "อยากกินข้าว"
+      },
+      {
+        "intent": "hungry",
+        "text": "หิวจัง"
+      },
+      {
+        "intent": "tired",
+        "text": "เหนื่อยมากวันนี้"
+      },
+      {
+        "intent": "tired",
+        "text": "เหนื่อยจัง"
+      },
+      {
+        "intent": "tired",
+        "text": "เหนื่อย"
+      },
+      {
+        "intent": "tired",
+        "text": "วันนี้เหนื่อย"
+      },
+      {
+        "intent": "tired",
+        "text": "ท้อจัง"
+      },
+      {
+        "intent": "tired",
+        "text": "งานเหนื่อย"
+      },
+      {
+        "intent": "tired",
+        "text": "งานหนัก"
       }
     ],
     "regex_features": [],

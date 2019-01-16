@@ -62,3 +62,11 @@ DEFAULT_REMINDER = {
         "job_id": None
     }
 }
+
+HELP_LIFF_URI = "line://app/1620473652-9rLd3Lw8"
+THINGS_LIFF_URI = "line://app/1620473652-pXm3Xmxb"
+
+DICT = {}
+for NAME, VALUE in vars().copy().items():
+    if not NAME.startswith("__") and isinstance(VALUE, str):
+        DICT[NAME] = VALUE

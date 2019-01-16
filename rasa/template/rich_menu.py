@@ -1,3 +1,5 @@
+from rasa.constants import HELP_LIFF_URI
+
 DEFAULT_RICH_MENU_OBJECT = {
     "size": {
         "width": 2500,
@@ -67,9 +69,9 @@ DEFAULT_RICH_MENU_OBJECT = {
                 "height": 843
             },
             "action": {
-                "type": "message",
+                "type": "uri",
                 "label": "วิธีใช้",
-                "text": "วิธีใช้"
+                "uri": HELP_LIFF_URI
             }
         }
     ]

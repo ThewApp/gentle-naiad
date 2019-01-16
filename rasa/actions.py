@@ -257,23 +257,27 @@ class custom_medicine_reminder_push(Action):
 
         if medicine_list and medicine_reminders and time_tuple:
             medicine_to_remind = []
+
+            # Time and Meal text to send push
             time_text = medicine_reminders[time_tuple]["time_text"]
             if time_tuple[1]:
                 meal_text = " " + medicine_reminders[time_tuple]["meal_text"]
             else:
                 meal_text = ""
+
             for medicine in medicine_list:
-                time = medicine["time"]
+                times = medicine["time"].split("_")
                 meal = medicine["meal"]
-                if (time, meal) == time_tuple:
-                    medicine_to_remind.append(medicine["name"])
+                for time in times:
+                    if (time, meal) == time_tuple:
+                        medicine_to_remind.append(medicine["name"])
 
             number_to_remind = len(medicine_to_remind)
             if number_to_remind > 0:
-                if number_to_remind == 1:
+                if number_to_remind == 1: # For one medicine, send as one line text
                     text = "สวัสดีค่ะ คุณทาน{} ตอน{}{} หรือยังคะ".format(
                         medicine_to_remind[0], time_text, meal_text)
-                else:
+                else: # For multiple medicines, send them as a list
                     text = "สวัสดีค่ะ คุณทาน\n"
                     for medicine in medicine_to_remind:
                         text += "❥ " + medicine + "\n"
