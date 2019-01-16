@@ -63,7 +63,8 @@ DEFAULT_REMINDER = {
     }
 }
 
-HELP_LIFF_URI = "line://app/1620473652-pXm3Xmxb"
+HELP_LIFF_URI = "line://app/1620473652-9rLd3Lw8"
+THINGS_LIFF_URI = "line://app/1620473652-pXm3Xmxb"
 
 DICT = {}
 for NAME, VALUE in vars().copy().items():
