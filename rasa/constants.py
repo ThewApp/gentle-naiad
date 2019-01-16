@@ -1,4 +1,5 @@
 from datetime import time
+import os
 
 COLOR_PRIMARY = "#2de898"
 COLOR_SECONDARY = "#23D8F5"
@@ -63,8 +64,17 @@ DEFAULT_REMINDER = {
     }
 }
 
-HELP_LIFF_URI = "line://app/1620473652-9rLd3Lw8"
-THINGS_LIFF_URI = "line://app/1620473652-pXm3Xmxb"
+ENV = os.getenv('ENV', 'PRODUCTION')
+if ENV == "LOCAL_DEVELOPMENT":
+    pass
+elif ENV == "DEVELOPMENT":
+    HELP_LIFF_URI = "line://app/1620473652-9rLd3Lw8"
+    THINGS_LIFF_URI = "line://app/1620473652-pXm3Xmxb"
+elif ENV == "STAGING":
+    HELP_LIFF_URI = "line://app/1620763427-40gn3dzb"
+    THINGS_LIFF_URI = "line://app/1620763427-Ze5QqXaj"
+else:
+    pass
 
 DICT = {}
 for NAME, VALUE in vars().copy().items():
