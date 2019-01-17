@@ -16,7 +16,7 @@ intents:
   - tired
 
 entities:
-  - remove_medicine_index
+  - remove_medicine_uuid
 
 actions:
   - line_follow
@@ -28,6 +28,7 @@ actions:
   - custom_reset_add_new_medicine
   - custom_remove_medicine
   - line_remove_medicine_success
+  - line_remove_medicine_already
   - custom_flex_medicine_list
   - line_cancel_success
   - custom_test_reminder_setup
@@ -190,6 +191,10 @@ templates:
       - type: "sticker"
         packageId: "11539"
         stickerId: "52114111"
+
+  line_remove_medicine_already:
+    - - type: "text"
+        text: "ยานี้ถูกลบไปก่อนหน้านี้แล้วค่ะ"
 
   line_cancel_success:
     - - type: "text"

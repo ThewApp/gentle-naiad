@@ -10,6 +10,7 @@ actions:
 - custom_reset_add_new_medicine
 - custom_remove_medicine
 - line_remove_medicine_success
+- line_remove_medicine_already
 - custom_flex_medicine_list
 - line_cancel_success
 - custom_test_reminder_setup
@@ -29,7 +30,7 @@ actions:
 config:
   store_entities_as_slots: true
 entities:
-- remove_medicine_index
+- remove_medicine_uuid
 forms:
 - custom_form_add_medicine
 intents:
@@ -373,6 +374,9 @@ templates:
       text: '{text}'
       type: confirm
     type: template
+  line_remove_medicine_already:
+  - - text: ยานี้ถูกลบไปก่อนหน้านี้แล้วค่ะ
+      type: text
   line_remove_medicine_success:
   - - text: ลบ {medicine_name} เรียบร้อยแล้วค่ะ
       type: text

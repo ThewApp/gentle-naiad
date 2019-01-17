@@ -1,6 +1,7 @@
 import copy
 from datetime import datetime, timedelta
 import logging
+import uuid
 
 from rasa_core.actions.action import Action
 from rasa_core.constants import REQUESTED_SLOT
@@ -72,7 +73,8 @@ class custom_form_add_medicine(LineForm):
         new_medicine_list.append({
             "name": new_medicine_name,
             "time": new_medicine_time,
-            "meal": new_medicine_meal
+            "meal": new_medicine_meal,
+            "uuid": uuid.uuid4()
         })
 
         medicine_time_text = DEFAULT_MEDICINE_TEXT.get(
@@ -122,15 +124,24 @@ class custom_remove_medicine(Action):
 
     def run(self, dispatcher: LineDispatcher, tracker, domain):
 
-        new_medicine_list = tracker.get_slot("medicine_list").copy()
+        old_medicine_list = tracker.get_slot("medicine_list")
+        new_medicine_list = []
 
-        index = next(tracker.get_latest_entity_values(
-            "remove_medicine_index"), None)
+        remove_medicine_uuid = next(tracker.get_latest_entity_values(
+            "remove_medicine_uuid"), None)
 
-        removed_medicine = new_medicine_list.pop(index)
-
-        dispatcher.line_template(
-            'line_remove_medicine_success', tracker, medicine_name=removed_medicine["name"])
+        removed_medicine = None
+        for medicine_dict in old_medicine_list:
+            if medicine_dict.get("uuid") == uuid.UUID(remove_medicine_uuid):
+                removed_medicine = medicine_dict
+            else:
+                new_medicine_list.append(medicine_dict)
+        
+        if removed_medicine is not None:
+            dispatcher.line_template(
+                'line_remove_medicine_success', tracker, medicine_name=removed_medicine["name"])
+        else:
+            dispatcher.line_template('line_remove_medicine_already', tracker)
 
         return [SlotSet("medicine_list", new_medicine_list), FollowupAction("custom_medicine_reminder_update")]
 

@@ -29,7 +29,7 @@
   - slot{"new_medicine_meal": null}
 
 ## delete medicine
-* remove_medicine{"remove_medicine_index": 0}
+* remove_medicine{"remove_medicine_uuid": "uuid"}
   - custom_remove_medicine
   - slot{"medicine_list": []}
   - custom_medicine_reminder_update
