@@ -127,11 +127,11 @@ class custom_remove_medicine(Action):
         old_medicine_list = tracker.get_slot("medicine_list")
         new_medicine_list = []
 
-        uuid = next(tracker.get_latest_entity_values(
+        remove_medicine_uuid = next(tracker.get_latest_entity_values(
             "remove_medicine_uuid"), None)
 
         for medicine_dict in old_medicine_list:
-            if medicine_dict.get("uuid") == uuid.UUID(uuid):
+            if medicine_dict.get("uuid") == uuid.UUID(remove_medicine_uuid):
                 removed_medicine = medicine_dict
             else:
                 new_medicine_list.append(medicine_dict)
