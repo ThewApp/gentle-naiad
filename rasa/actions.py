@@ -131,7 +131,7 @@ class custom_remove_medicine(Action):
             "remove_medicine_uuid"), None)
 
         for medicine_dict in old_medicine_list:
-            if medicine_dict.get("uuid") == uuid:
+            if medicine_dict.get("uuid") == uuid.UUID(uuid):
                 removed_medicine = medicine_dict
             else:
                 new_medicine_list.append(medicine_dict)

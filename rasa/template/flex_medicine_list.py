@@ -39,7 +39,7 @@ def get_body_contents(medicine_list):
     contents = []
     length = len(medicine_list)
     for index, medicine in enumerate(medicine_list):
-        delete_data = "/remove_medicine{\"remove_medicine_uuid\": %s}" % (
+        delete_data = "/remove_medicine{\"remove_medicine_uuid\": \"%s\"}" % (
             medicine.get("uuid"))
         medicine_time = medicine.get("time")
         medicine_info = [
