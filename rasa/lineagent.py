@@ -49,7 +49,6 @@ class LineAgent(Agent):
         # Checks that the interpreter and tracker store are set and
         # creates a processor
         self._ensure_agent_is_ready()
-        logger.debug("Creating processor")
         return LineMessageProcessor(
             self.interpreter,
             self.policy_ensemble,
