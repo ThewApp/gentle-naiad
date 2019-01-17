@@ -1,2 +1,2 @@
-web: gunicorn web:app -t 60
+web: gunicorn web:app
 worker: python worker.py
