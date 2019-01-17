@@ -11,7 +11,7 @@ from rasa.linedispatcher import LineDispatcher
 from rasa.linedomain import LineDomain
 from rasa.linenlg import LineNLG
 from rasa.store import scheduler_store
-from rasa.worker import ReminderJob, reminder_job
+from app.scheduling import ReminderJob, reminder_job
 from rq_scheduler import Scheduler
 
 import logging
