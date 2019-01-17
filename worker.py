@@ -1,4 +1,5 @@
 import logging
+import os
 from multiprocessing import Process
 
 from rasa_core.interpreter import RasaNLUInterpreter
@@ -6,6 +7,7 @@ from rq import Connection, Queue, Worker
 from rq_scheduler.scheduler import Scheduler
 
 import app.logging
+from app.rich_menu import RichMenu
 from app.scheduling import ReminderJob, ReminderWorker
 from rasa.lineagent import LineAgent
 from rasa.store import scheduler_store, tracker_store
@@ -13,6 +15,10 @@ from rasa.store import scheduler_store, tracker_store
 logger = logging.getLogger(__name__)
 
 logger.debug("Starting worker")
+
+line_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
+rich_menu = RichMenu(line_access_token)
+rich_menu.setup()
 
 agent = LineAgent.load(
     "models/dialogue",
