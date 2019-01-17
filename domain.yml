@@ -16,7 +16,7 @@ intents:
   - tired
 
 entities:
-  - remove_medicine_index
+  - remove_medicine_uuid
 
 actions:
   - line_follow

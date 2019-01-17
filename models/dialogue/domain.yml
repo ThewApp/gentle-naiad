@@ -29,7 +29,7 @@ actions:
 config:
   store_entities_as_slots: true
 entities:
-- remove_medicine_index
+- remove_medicine_uuid
 forms:
 - custom_form_add_medicine
 intents:

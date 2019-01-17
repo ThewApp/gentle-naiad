@@ -5,18 +5,22 @@
         "medicine_list"
       ]
     },
-    "line_medicine_reminder_affirmative": {
+    "line_greeting_help_negative": {
       "slots": []
     },
-    "custom_form_add_medicine": {
-      "slots": [
-        "new_medicine_time",
-        "new_medicine_meal",
-        "medicine_list",
-        "new_medicine_name"
-      ]
+    "line_sleep": {
+      "slots": []
     },
-    "custom_flex_medicine_list": {
+    "line_cheer_up": {
+      "slots": []
+    },
+    "action_restart": {
+      "slots": []
+    },
+    "line_follow": {
+      "slots": []
+    },
+    "line_medicine_reminder_affirmative": {
       "slots": []
     },
     "custom_remove_medicine": {
@@ -27,41 +31,37 @@
     "custom_medicine_reminder_update": {
       "slots": []
     },
-    "line_greeting_help_negative": {
-      "slots": []
-    },
-    "custom_reset_add_new_medicine": {
+    "custom_form_add_medicine": {
       "slots": [
-        "new_medicine_time",
         "new_medicine_meal",
-        "new_medicine_name"
+        "new_medicine_name",
+        "medicine_list",
+        "new_medicine_time"
       ]
     },
-    "line_howto": {
+    "custom_test_reminder_setup": {
       "slots": []
     },
-    "line_greeting_help": {
-      "slots": []
-    },
-    "line_cheer_up": {
+    "custom_flex_medicine_list": {
       "slots": []
     },
     "line_medicine_reminder_negative": {
       "slots": []
     },
-    "custom_test_reminder_setup": {
-      "slots": []
-    },
-    "action_restart": {
-      "slots": []
-    },
-    "line_follow": {
+    "line_greeting_help": {
       "slots": []
     },
     "line_lazy": {
       "slots": []
     },
-    "line_sleep": {
+    "custom_reset_add_new_medicine": {
+      "slots": [
+        "new_medicine_meal",
+        "new_medicine_time",
+        "new_medicine_name"
+      ]
+    },
+    "line_howto": {
       "slots": []
     },
     "line_eat_food": {
@@ -83,5 +83,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20190114-213832"
+  "trained_at": "20190117-104556"
 }
