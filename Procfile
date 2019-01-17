@@ -1,2 +1,2 @@
-web: gunicorn web:app
+web: gunicorn web:app --preload
 worker: python worker.py
