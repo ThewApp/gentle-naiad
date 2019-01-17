@@ -15,6 +15,8 @@ logger = logging.getLogger(__name__)
 line_secret = os.getenv('LINE_CHANNEL_SECRET', None)
 line_access_token = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', None)
 
+app = Flask(__name__)
+
 agent = LineAgent.load(
     "models/dialogue",
     interpreter=RasaNLUInterpreter("models/current/nlu"),
@@ -26,7 +28,6 @@ line_input_channel = LineInput(
     line_access_token=line_access_token
 )
 
-app = Flask(__name__)
 channel.register([line_input_channel],
                  app,
                  agent.handle_message,
