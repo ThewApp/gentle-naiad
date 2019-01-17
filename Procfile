@@ -1,2 +1,2 @@
-web: gunicorn web:app --preload --log-level=DEBUG
+web: gunicorn web:app -t 60
 worker: python worker.py

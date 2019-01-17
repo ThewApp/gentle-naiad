@@ -67,7 +67,7 @@ class RasaLineHandler(WebhookHandler):
             event.source.user_id,
             input_channel=self.name()
         )
-        logger.debug(self.on_new_message(user_msg))
+        self.on_new_message(user_msg)
         out_channel.send_reply()
 
     def handle_postback_event(self, event):
