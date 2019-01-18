@@ -31,6 +31,7 @@ class LineNLG(NaturalLanguageGenerator):
         """Generate a response for the requested template."""
 
         filled_slots = tracker.current_slot_values()
+        filled_slots.update(tracker.latest_message.entities)
         return self.generate_from_slots(template_name,
                                         filled_slots,
                                         **kwargs)
