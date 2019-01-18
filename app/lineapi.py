@@ -69,7 +69,9 @@ class LineApi():
         )
 
     def get_rich_menu_list(self, **kwargs):
-        return self._get('/v2/bot/richmenu/list', **kwargs)
+        response = self._get('/v2/bot/richmenu/list', **kwargs)
+
+        return response.json().get('richmenus')
 
     def _get(self, path, headers={}, timeout=None, **kwargs):
         if timeout is None:
