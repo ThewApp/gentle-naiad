@@ -1,6 +1,8 @@
 intents:
   - follow_event
   - unfollow_event
+  - things_link
+  - things_unlink
   - add_medicine
   - enter_medicine_data
   - remove_medicine
@@ -17,9 +19,12 @@ intents:
 
 entities:
   - remove_medicine_uuid
+  - things_deviceId
 
 actions:
   - line_follow
+  - line_things_link
+  - line_things_unlink
   - line_ask_new_medicine_name
   - line_ask_new_medicine_time
   - line_ask_new_medicine_meal
@@ -56,6 +61,14 @@ templates:
         text: "สวัสดีค่ะ !\nMediary เป็นบริการที่จะมาดูแลสุขภาพของคุณค่ะ ♥"
       - type: "text"
         text: "ท่านสามารถกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
+
+  line_things_link:
+    - - type: "text"
+        text: "คุณได้ทำการเชื่อมต่ออุปกรณ์หมายเลข {things_deviceId} แล้ว"
+
+  line_things_unlink:
+    - - type: "text"
+        text: "คุณได้ทำการลบอุปกรณ์หมายเลข {things_deviceId} แล้ว"
 
   line_ask_new_medicine_name:
     - type: "text"

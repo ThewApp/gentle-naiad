@@ -2,6 +2,8 @@
 ---
 actions:
 - line_follow
+- line_things_link
+- line_things_unlink
 - line_ask_new_medicine_name
 - line_ask_new_medicine_time
 - line_ask_new_medicine_meal
@@ -31,12 +33,17 @@ config:
   store_entities_as_slots: true
 entities:
 - remove_medicine_uuid
+- things_deviceId
 forms:
 - custom_form_add_medicine
 intents:
 - follow_event:
     use_entities: true
 - unfollow_event:
+    use_entities: true
+- things_link:
+    use_entities: true
+- things_unlink:
     use_entities: true
 - add_medicine:
     use_entities: true
@@ -415,3 +422,9 @@ templates:
   line_test_reminder_setup:
   - text: "ตั้งเวลาทดสอบการแจ้งเตือนแล้ว\nอีก ประมาณ 1 นาทีจะมีข้อความแจ้งเตือน"
     type: text
+  line_things_link:
+  - - text: คุณได้ทำการเชื่อมต่ออุปกรณ์หมายเลข {things_deviceId} แล้ว
+      type: text
+  line_things_unlink:
+  - - text: คุณได้ทำการลบอุปกรณ์หมายเลข {things_deviceId} แล้ว
+      type: text

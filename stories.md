@@ -6,6 +6,14 @@
 * unfollow_event
   - action_restart
 
+## things link
+* things_link{"things_deviceId": "t123"}
+  - line_things_link
+
+## things unlink
+* things_unlink{"things_deviceId": "t123"}
+  - line_things_unlink
+
 ## add medicine
 * add_medicine
   - custom_form_add_medicine

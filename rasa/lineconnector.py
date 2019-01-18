@@ -67,6 +67,30 @@ class RasaLineHandler(WebhookHandler):
         )
         self.on_new_message(user_msg)
 
+    def handle_things_link(self, event):
+        logger.info("Line Things Link from %s", event["source"]["userId"])
+        out_channel = LineOutput(self.line_api, event["replyToken"])
+        user_msg = UserMessage(
+            "/things_link{\"things_deviceId\": \"%s\"}" % event["things"]["deviceId"],
+            out_channel,
+            event["source"]["userId"],
+            input_channel=self.name()
+        )
+        self.on_new_message(user_msg)
+        out_channel.send_reply()
+
+    def handle_things_unlink(self, event):
+        logger.info("Line Things Unlink from %s", event["source"]["userId"])
+        out_channel = LineOutput(self.line_api, event["replyToken"])
+        user_msg = UserMessage(
+            "/things_unlink{\"things_deviceId\": \"%s\"}" % event["things"]["deviceId"],
+            out_channel,
+            event["source"]["userId"],
+            input_channel=self.name()
+        )
+        self.on_new_message(user_msg)
+        out_channel.send_reply()
+
 
 RECIPIENT_ID = "recipient_id"
 
