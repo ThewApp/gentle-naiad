@@ -71,7 +71,7 @@ class LineApi():
     def get_rich_menu_list(self, **kwargs):
         return self._get('/v2/bot/richmenu/list', **kwargs)
 
-    def _get(self, path, headers=None, timeout=None, **kwargs):
+    def _get(self, path, headers={}, timeout=None, **kwargs):
         if timeout is None:
             timeout = self.timeout
 
@@ -86,7 +86,7 @@ class LineApi():
         self.__check_error(response)
         return response
 
-    def _post(self, path, headers=None, timeout=None, **kwargs):
+    def _post(self, path, headers={}, timeout=None, **kwargs):
         if timeout is None:
             timeout = self.timeout
 
@@ -101,7 +101,7 @@ class LineApi():
         self.__check_error(response)
         return response
 
-    def _delete(self, path, headers=None, timeout=None, **kwargs):
+    def _delete(self, path, headers={}, timeout=None, **kwargs):
         url = self.endpoint + path
 
         headers.update(self.headers)
