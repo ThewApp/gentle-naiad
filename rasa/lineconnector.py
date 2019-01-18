@@ -1,17 +1,15 @@
 import json
 import logging
 
-from linebot import LineBotApi, WebhookHandler
-from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import (
-    FollowEvent, UnfollowEvent, MessageEvent, PostbackEvent,
-    TextMessage
-)
-
 from flask import Blueprint, abort, jsonify, request
-from rasa_core.channels import (
-    CollectingOutputChannel, InputChannel, UserMessage
-)
+from linebot import WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import (FollowEvent, MessageEvent, PostbackEvent,
+                            TextMessage, UnfollowEvent)
+from rasa_core.channels import (CollectingOutputChannel, InputChannel,
+                                UserMessage)
+
+from app.lineapi import LineApi
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +19,7 @@ class RasaLineHandler(WebhookHandler):
     def name(cls):
         return "line"
 
-    def __init__(self, channel_secret, line_api):
+    def __init__(self, channel_secret, line_api: LineApi):
         self.line_api = line_api
         super().__init__(channel_secret)
 
@@ -94,7 +92,7 @@ class LineOutput(CollectingOutputChannel):
     def name(cls):
         return "line"
 
-    def __init__(self, line_api, reply_token=None):
+    def __init__(self, line_api: LineApi, reply_token=None):
         self.line_api = line_api
         self.reply_token = reply_token
         super().__init__()
@@ -117,9 +115,7 @@ class LineOutput(CollectingOutputChannel):
 
             logger.debug("Sending reply... %s", data)
 
-            return self.line_api._post(
-                '/v2/bot/message/reply', data=json.dumps(data)
-            )
+            return self.line_api.reply_message(data)
 
     def send_push(self):
         if self.messages:
@@ -136,9 +132,7 @@ class LineOutput(CollectingOutputChannel):
 
             logger.debug("Sending push... %s", data)
 
-            return self.line_api._post(
-                '/v2/bot/message/push', data=json.dumps(data)
-            )
+            return self.line_api.push_message(data)
 
     def clear_messages(self):
         self.messages = []
@@ -151,7 +145,7 @@ class LineInput(InputChannel):
     def name(cls):
         return "line"
 
-    def __init__(self, line_secret, line_access_token):
+    def __init__(self, line_secret: str, line_access_token: str):
         # type: (Text, Text, Text) -> None
         """Create a line input channel.
         Needs a couple of settings to properly authenticate and validate
@@ -160,7 +154,7 @@ class LineInput(InputChannel):
             line_secret: Line Signature validation
             line_access_token: Access token
         """
-        self.line_api = LineBotApi(line_access_token)
+        self.line_api = LineApi(line_access_token)
         self.handler = RasaLineHandler(line_secret, self.line_api)
 
     def blueprint(self, on_new_message):
@@ -177,11 +171,6 @@ class LineInput(InputChannel):
         def webhook():
             try:
                 self.handler.handle_webhook(on_new_message)
-            except LineBotApiError as e:
-                logger.error(
-                    "Got exception from LINE Messaging API: %s\n" % e.message)
-                for m in e.error.details:
-                    logger.error("  %s: %s" % (m.property, m.message))
             except InvalidSignatureError:
                 abort(400)
 
