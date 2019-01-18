@@ -1,15 +1,11 @@
 import json
 import logging
 
-from flask import Blueprint, abort, jsonify, request
-from linebot import WebhookHandler
-from linebot.exceptions import InvalidSignatureError
-from linebot.models import (FollowEvent, MessageEvent, PostbackEvent,
-                            TextMessage, UnfollowEvent)
+from flask import Blueprint, jsonify
 from rasa_core.channels import (CollectingOutputChannel, InputChannel,
                                 UserMessage)
 
-from app.lineapi import LineApi
+from app.lineapi import LineApi, WebhookHandler
 
 logger = logging.getLogger(__name__)
 
@@ -23,62 +19,50 @@ class RasaLineHandler(WebhookHandler):
         self.line_api = line_api
         super().__init__(channel_secret)
 
-        self.add(MessageEvent, message=TextMessage)(self.handle_text_message)
-        self.add(PostbackEvent)(self.handle_postback_event)
-        self.add(FollowEvent)(self.handle_follow_event)
-        self.add(UnfollowEvent)(self.handle_unfollow_event)
-
-    def handle_webhook(self, on_new_message):
-        self.on_new_message = on_new_message
-        signature = request.headers.get("X-Line-Signature") or ''
-        body = request.get_data(as_text=True)
-        logger.debug("Handling... %s", body)
-        self.handle(body, signature)
-
-    def handle_text_message(self, event):
+    def handle_text(self, event):
         logger.info("Line Text: %s from %s",
-                    event.message.text, event.source.user_id)
-        out_channel = LineOutput(self.line_api, event.reply_token)
+                    event["message"]["text"], event["source"]["userId"])
+        out_channel = LineOutput(self.line_api, event["replyToken"])
         user_msg = UserMessage(
-            event.message.text,
+            event["message"]["text"],
             out_channel,
-            event.source.user_id,
+            event["source"]["userId"],
             input_channel=self.name()
         )
         self.on_new_message(user_msg)
         out_channel.send_reply()
 
-    def handle_postback_event(self, event):
+    def handle_postback(self, event):
         logger.info("Line Postback: %s from %s",
-                    event.postback.data, event.source.user_id)
-        out_channel = LineOutput(self.line_api, event.reply_token)
+                    event["postback"]["data"], event["source"]["userId"])
+        out_channel = LineOutput(self.line_api, event["replyToken"])
         user_msg = UserMessage(
-            event.postback.data,
+            event["postback"]["data"],
             out_channel,
-            event.source.user_id,
+            event["source"]["userId"],
             input_channel=self.name()
         )
         self.on_new_message(user_msg)
         out_channel.send_reply()
 
-    def handle_follow_event(self, event):
-        logger.info("Line Follow from %s", event.source.user_id)
-        out_channel = LineOutput(self.line_api, event.reply_token)
+    def handle_follow(self, event):
+        logger.info("Line Follow from %s", event["source"]["userId"])
+        out_channel = LineOutput(self.line_api, event["replyToken"])
         user_msg = UserMessage(
             "/follow_event",
             out_channel,
-            event.source.user_id,
+            event["source"]["userId"],
             input_channel=self.name()
         )
         self.on_new_message(user_msg)
         out_channel.send_reply()
 
-    def handle_unfollow_event(self, event):
-        logger.info("Line Unfollow from %s", event.source.user_id)
+    def handle_unfollow(self, event):
+        logger.info("Line Unfollow from %s", event["source"]["userId"])
         user_msg = UserMessage(
             "/unfollow_event",
             None,
-            event.source.user_id,
+            event["source"]["userId"],
             input_channel=self.name()
         )
         self.on_new_message(user_msg)
@@ -169,10 +153,7 @@ class LineInput(InputChannel):
         @line_webhook.route("/webhook", methods=['POST'])
         # pylint: disable=unused-variable
         def webhook():
-            try:
-                self.handler.handle_webhook(on_new_message)
-            except InvalidSignatureError:
-                abort(400)
+            self.handler.handle_webhook(on_new_message)
 
             return "success"
 
