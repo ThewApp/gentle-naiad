@@ -145,6 +145,12 @@ class LineInput(InputChannel):
 
         line_webhook = Blueprint('line_webhook', __name__)
 
+        @line_webhook.before_request
+        # pylint: disable=unused-variable
+        def log_pid():
+            import os
+            logger.log("Handling line_webhook with pid: %i" % os.getpid())
+
         @line_webhook.route("/", methods=['GET'])
         # pylint: disable=unused-variable
         def health():
