@@ -1,6 +1,5 @@
 gunicorn[gevent]~=19.9.0
 ipython<7.0.0
-line-bot-sdk>=1.8.0
 numpy~=1.16.0
 pythainlp~=1.7.1
 rasa_core~=0.12.4
