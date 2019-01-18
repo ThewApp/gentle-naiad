@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class LineApi():
-    def __init__(self, channel_access_token: str, timeout: float = 2.0):
+    def __init__(self, channel_access_token: str, timeout: float = 5.0):
         self.endpoint = "https://api.line.me"
         self.headers = {
             'Authorization': 'Bearer ' + channel_access_token
