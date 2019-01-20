@@ -131,13 +131,18 @@ templates:
           - type: "action"
             action:
               type: "message"
-              label: "สามเวลา"
-              text: "สามเวลา"
+              label: "เช้า-เย็น"
+              text: "เช้า เย็น"
           - type: "action"
             action:
               type: "message"
-              label: "เช้า-เย็น"
-              text: "เช้า-เย็น"
+              label: "เช้า-กลางวัน-เย็น"
+              text: "เช้า กลางวัน เย็น"
+          - type: "action"
+            action:
+              type: "message"
+              label: "เช้า-กลางวัน-เย็น-ก่อนนอน"
+              text: "เช้า กลางวัน เย็น ก่อนนอน"
 
   line_ask_new_medicine_meal:
     - type: "text"
