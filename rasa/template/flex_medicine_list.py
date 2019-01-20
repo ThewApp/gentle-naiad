@@ -50,7 +50,7 @@ def get_body_contents(medicine_list):
             },
             {
                 "type": "text",
-                "wrap": "true",
+                "wrap": True,
                 "text": "ทานตอน" + DEFAULT_MEDICINE_TEXT.get(medicine_time, medicine_time)
             }
         ]
