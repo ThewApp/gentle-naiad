@@ -206,13 +206,18 @@ templates:
           type: message
         type: action
       - action:
-          label: สามเวลา
-          text: สามเวลา
+          label: เช้า-เย็น
+          text: เช้า เย็น
           type: message
         type: action
       - action:
-          label: เช้า-เย็น
-          text: เช้า-เย็น
+          label: เช้า-กลางวัน-เย็น
+          text: เช้า กลางวัน เย็น
+          type: message
+        type: action
+      - action:
+          label: เช้า-กลางวัน-เย็น-ก่อนนอน
+          text: เช้า กลางวัน เย็น ก่อนนอน
           type: message
         type: action
     text: ทานเวลาไหนคะ
