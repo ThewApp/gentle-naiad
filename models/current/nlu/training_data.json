@@ -350,12 +350,12 @@
         "entities": [
           {
             "start": 0,
-            "end": 25,
+            "end": 26,
             "value": "morning_noon_evening_night",
             "entity": "medicine_time"
           }
         ],
-        "text": "เช้า กลางวัน เย็น ก่อนนอน"
+        "text": "เช้า กลางวัน เย็น ก่อน นอน"
       },
       {
         "intent": "medicine_list",
@@ -694,7 +694,7 @@
         "value": "morning_noon_evening_night",
         "synonyms": [
           "สี่ เวลา",
-          "เช้า กลางวัน เย็น ก่อนนอน"
+          "เช้า กลางวัน เย็น ก่อน นอน"
         ]
       }
     ]

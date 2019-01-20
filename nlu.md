@@ -35,7 +35,7 @@
 - [สาม เวลา](medicine_time:morning_noon_evening)
 - [เช้า เย็น](medicine_time:morning_evening)
 - [สี่ เวลา](medicine_time:morning_noon_evening_night)
-- [เช้า กลางวัน เย็น ก่อนนอน](medicine_time:morning_noon_evening_night)
+- [เช้า กลางวัน เย็น ก่อน นอน](medicine_time:morning_noon_evening_night)
 
 ## intent: medicine_list
 - รายการยา
