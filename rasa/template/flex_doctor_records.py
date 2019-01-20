@@ -4,7 +4,7 @@ from rasa.constants import COLOR_SECONDARY
 def get_flex_doctor_records():
     return {
         "type": "flex",
-        "altText": "ตารางนัดพบแพทย์",
+        "altText": "🏥 ตารางพบแพทย์",
         "contents": get_flex_doctor_contents()
     }
 
