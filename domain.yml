@@ -7,6 +7,7 @@ intents:
   - enter_medicine_data
   - remove_medicine
   - medicine_list
+  - doctor_records
   - affirmative
   - negative
   - test_reminder
@@ -43,6 +44,7 @@ actions:
   - line_medicine_reminder_push
   - line_medicine_reminder_affirmative
   - line_medicine_reminder_negative
+  - custom_flex_doctor_records
   - line_greeting_help
   - line_greeting_help_negative
   - line_howto

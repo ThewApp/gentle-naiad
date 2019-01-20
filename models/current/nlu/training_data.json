@@ -382,6 +382,14 @@
         "text": "medication list"
       },
       {
+        "intent": "doctor_records",
+        "text": "ตารางนัดพบแพทย์"
+      },
+      {
+        "intent": "doctor_records",
+        "text": "doctor records"
+      },
+      {
         "intent": "affirmative",
         "text": "ใช่"
       },

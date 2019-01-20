@@ -66,17 +66,21 @@
   - custom_test_reminder_setup
   - reminder{"action": "custom_medicine_reminder_push", "date_time": "2019-01-02 11:59:29"}
 
-## test reminder push (affirmative)
+## reminder push (affirmative)
   - custom_medicine_reminder_push
 * affirmative
   - line_medicine_reminder_affirmative
 
-## test reminder push (negative)
+## reminder push (negative)
   - custom_medicine_reminder_push
 * negative
   - line_medicine_reminder_negative
 
-## greeting help 
+## doctor records
+* doctor_records
+  - custom_flex_doctor_records
+
+## greeting help
 * greeting
   - line_greeting_help
 

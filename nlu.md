@@ -45,6 +45,10 @@
 - medicine list
 - medication list
 
+## intent: doctor_records
+- ตารางนัดพบแพทย์
+- doctor records
+
 ## intent: affirmative
 - ใช่
 - ใช่ เพิ่มยาใหม่
