@@ -211,12 +211,12 @@ templates:
           type: message
         type: action
       - action:
-          label: เช้า-กลางวัน-เย็น
+          label: สามเวลา
           text: เช้า กลางวัน เย็น
           type: message
         type: action
       - action:
-          label: เช้า-กลางวัน-เย็น-ก่อนนอน
+          label: สี่เวลา
           text: เช้า กลางวัน เย็น ก่อนนอน
           type: message
         type: action

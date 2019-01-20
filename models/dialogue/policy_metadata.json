@@ -5,46 +5,13 @@
         "medicine_list"
       ]
     },
-    "custom_flex_doctor_records": {
-      "slots": []
-    },
-    "custom_form_add_medicine": {
-      "slots": [
-        "new_medicine_name",
-        "medicine_list",
-        "new_medicine_time",
-        "new_medicine_meal"
-      ]
-    },
-    "custom_medicine_reminder_update": {
-      "slots": []
-    },
-    "line_things_unlink": {
-      "slots": []
-    },
-    "line_greeting_help": {
-      "slots": []
-    },
-    "line_follow": {
-      "slots": []
-    },
-    "custom_flex_medicine_list": {
-      "slots": []
-    },
-    "custom_test_reminder_setup": {
+    "line_medicine_reminder_negative": {
       "slots": []
     },
     "line_medicine_reminder_affirmative": {
       "slots": []
     },
-    "custom_reset_add_new_medicine": {
-      "slots": [
-        "new_medicine_name",
-        "new_medicine_time",
-        "new_medicine_meal"
-      ]
-    },
-    "action_restart": {
+    "line_follow": {
       "slots": []
     },
     "custom_remove_medicine": {
@@ -52,28 +19,61 @@
         "medicine_list"
       ]
     },
-    "line_lazy": {
+    "custom_medicine_reminder_update": {
       "slots": []
     },
+    "action_restart": {
+      "slots": []
+    },
+    "custom_flex_medicine_list": {
+      "slots": []
+    },
+    "custom_form_add_medicine": {
+      "slots": [
+        "medicine_list",
+        "new_medicine_meal",
+        "new_medicine_time",
+        "new_medicine_name"
+      ]
+    },
     "line_sleep": {
+      "slots": []
+    },
+    "custom_test_reminder_setup": {
+      "slots": []
+    },
+    "custom_flex_doctor_records": {
       "slots": []
     },
     "line_howto": {
       "slots": []
     },
+    "line_lazy": {
+      "slots": []
+    },
     "line_things_link": {
       "slots": []
     },
-    "line_eat_food": {
+    "line_things_unlink": {
       "slots": []
     },
-    "line_medicine_reminder_negative": {
-      "slots": []
+    "custom_reset_add_new_medicine": {
+      "slots": [
+        "new_medicine_meal",
+        "new_medicine_name",
+        "new_medicine_time"
+      ]
     },
     "line_cheer_up": {
       "slots": []
     },
     "line_greeting_help_negative": {
+      "slots": []
+    },
+    "line_greeting_help": {
+      "slots": []
+    },
+    "line_eat_food": {
       "slots": []
     }
   },
@@ -92,5 +92,5 @@
     "rasa_core.policies.memoization.MemoizationPolicy",
     "rasa_core.policies.form_policy.FormPolicy"
   ],
-  "trained_at": "20190120-180657"
+  "trained_at": "20190120-181558"
 }
