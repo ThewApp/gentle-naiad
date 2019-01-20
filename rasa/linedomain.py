@@ -35,13 +35,15 @@ class LineDomain(Domain):
                 # options we will always create a dict out of them
                 if isinstance(t, str) and not isLine:
                     validated_variations.append({"text": t})
-                elif isLine and isinstance(t, dict) and "type" not in t:
-                    raise SyntaxError(f"template: {template_key} must has `type` property")
-                elif isLine and isinstance(t, list):
-                    for index, message in enumerate(t):
-                        if "type" not in message:
-                            raise SyntaxError(f"template: \"{template_key}\" message index: \"{index}\" must has `type` property")
                 else:
+                    if isLine and isinstance(t, dict) and "type" not in t:
+                        raise SyntaxError(f"template: {template_key} "
+                                          "must has `type` property")
+                    if isLine and isinstance(t, list):
+                        for index, message in enumerate(t):
+                            if "type" not in message:
+                                raise SyntaxError(f"template: \"{template_key}\" "
+                                                  f"message index: \"{index}\" must has `type` property")
                     validated_variations.append(t)
             templates[template_key] = validated_variations
         return templates
