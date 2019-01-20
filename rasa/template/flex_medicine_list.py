@@ -20,7 +20,7 @@ def get_flex_medicine_list(medicine_list):
                         "type": "text",
                         "text": "รายการยา",
                         "weight": "bold",
-                        "color": "#444444",
+                        "color": "#1F1F1F",
                         "size": "xl"
                     }
                 ]
