@@ -100,8 +100,38 @@ slots:
     initial_value: null
     type: rasa_core.slots.UnfeaturizedSlot
 templates:
-  line_add_new_medicine_success: []
-  line_ask_add_new_medicine: []
+  line_add_new_medicine_success:
+  - - text: เพิ่ม {new_medicine_name} ทานตอน{medicine_info_text} เรียบร้อยแล้วค่ะ
+      type: text
+    - packageId: '2'
+      stickerId: '144'
+      type: sticker
+  - - text: ยินดีด้วยค่ะ คุณได้ทำการเพิ่ม {new_medicine_name} ทานตอน{medicine_info_text}
+        สำเร็จแล้ว
+      type: text
+    - packageId: '11538'
+      stickerId: '51626507'
+      type: sticker
+  - - text: เพิ่ม {new_medicine_name} ทานตอน{medicine_info_text} เรียบร้อยแล้ว แล้วเมื่อไหร่จะได้เราเข้าไปในใจคุณ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626508'
+      type: sticker
+  line_ask_add_new_medicine:
+  - - text: คุณยังไม่มีรายการยา
+      type: text
+    - altText: คุณต้องการเพิ่มยาใหม่ไหมคะ
+      template:
+        actions:
+        - label: ใช่ เพิ่มยาใหม่
+          text: ใช่ เพิ่มยาใหม่
+          type: message
+        - label: ไม่
+          text: ไม่
+          type: message
+        text: คุณต้องการเพิ่มยาใหม่ไหมคะ
+        type: confirm
+      type: template
   line_ask_new_medicine_meal:
   - quickReply:
       items:
@@ -187,22 +217,164 @@ templates:
         type: action
     text: ทานเวลาไหนคะ
     type: text
-  line_cancel_success: []
-  line_cheer_up: []
+  line_cancel_success:
+  - - text: ยกเลิกแล้วค่ะ
+      type: text
+    - packageId: '11539'
+      stickerId: '52114113'
+      type: sticker
+  - - text: เราลืมไปแล้วครับ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626523'
+      type: sticker
+  - - text: ลืมยาแล้วแต่ยังไม่ลืมคุณนะ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626509'
+      type: sticker
+  - - text: ถ้ามียาใหม่ อย่าลืมมาบอกเรานะครับ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626496'
+      type: sticker
+  line_cheer_up:
+  - - text: สู้ๆนะคะ อย่าลืมพักผ่อนให้เพียงพอ
+      type: text
+    - packageId: '3'
+      stickerId: '241'
+      type: sticker
+  - - text: พักก่อน ไม่ต้องเครียดนะคะ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626503'
+      type: sticker
   line_default:
   - text: "ลองกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
     type: text
-  line_eat_food: []
-  line_follow: []
-  line_greeting_help: []
-  line_greeting_help_negative: []
+  line_eat_food:
+  - - text: ทานอะไรที่ดีกับสุขภาพ อย่าปล่อยให้หิวนานไม่ดีนะคะ
+      type: text
+    - packageId: '2'
+      stickerId: '510'
+      type: sticker
+  - - text: ทานอะไรที่มีประโยชน์ แล้วอย่าลืมทานให้ตรงเวลาด้วยนะคะ
+      type: text
+    - packageId: '4'
+      stickerId: '271'
+      type: sticker
+  line_follow:
+  - - text: "สวัสดีค่ะ !\nMediary เป็นบริการที่จะมาดูแลสุขภาพของคุณค่ะ ♥"
+      type: text
+    - text: "ท่านสามารถกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
+      type: text
+  line_greeting_help:
+  - - text: สวัสดีค่ะ มีอะไรให้ช่วยไหมคะ
+      type: text
+    - packageId: '3'
+      quickReply:
+        items:
+        - action:
+            label: ไม่มี
+            text: ไม่มี
+            type: message
+          type: action
+        - action:
+            label: เพิ่มยาใหม่
+            text: เพิ่มยาใหม่
+            type: message
+          type: action
+        - action:
+            label: ดูรายการยา
+            text: รายการยา
+            type: message
+          type: action
+        - action:
+            label: ดูวิธีใช้
+            text: วิธีใช้
+            type: message
+          type: action
+      stickerId: '242'
+      type: sticker
+  line_greeting_help_negative:
+  - - text: "โอเคค่ะ \nหากต้องการความช่วยเหลือในการดูแลสุขภาพของคุณ สามารถเข้ามาใช้บริการ\
+        \ Mediary ได้เสมอนะคะ"
+      type: text
+    - packageId: '11537'
+      stickerId: '52002742'
+      type: sticker
+  - - text: โอเคค่ะ
+      type: text
+    - packageId: '11539'
+      stickerId: '52114113'
+      type: sticker
   line_howto:
   - text: กดปุ่ม Menu ด้านล่าง แล้วกดปุ่ม ❓ วิธีใช้ เพื่อดูวิธีการใช้งาน MeDiary นะคะ
       😄
     type: text
-  line_lazy: []
-  line_medicine_reminder_affirmative: []
-  line_medicine_reminder_negative: []
+  line_lazy:
+  - - text: ขี้เกียจแล้วเมื่อไหร่จะแข็งแรงละคะ
+      type: text
+    - packageId: '11539'
+      stickerId: '52114135'
+      type: sticker
+  - - text: อย่าขี้เกียจเลย ไปออกกำลังเถอะค่ะ
+      type: text
+    - packageId: '2'
+      stickerId: '505'
+      type: sticker
+  line_medicine_reminder_affirmative:
+  - - text: เยี่ยมมากค่ะ
+      type: text
+    - packageId: '11537'
+      stickerId: '52002735'
+      type: sticker
+  - - text: สุดยอดไปเลย
+      type: text
+    - packageId: '1'
+      stickerId: '119'
+      type: sticker
+  - - text: สมบูรณ์แบบไปเลยครับ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626501'
+      type: sticker
+  - - text: สุดยอดกว่านี้ไม่มีอีกแล้ว
+      type: text
+    - packageId: '11539'
+      stickerId: '52114117'
+      type: sticker
+  - - text: พูดตามนะ เยี่ยมจริงๆ เยี่ยมจริงๆ เยี่ยมจริงๆ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626501'
+      type: sticker
+  line_medicine_reminder_negative:
+  - - text: อย่าลืมทานยาให้ตรงเวลานะคะ เพื่อการรักษาที่มีประสิทธิภาพ
+      type: text
+    - packageId: '11537'
+      stickerId: '52002772'
+      type: sticker
+  - - text: คุณทำอย่างนี้ ก็จะไม่หายสักทีน้าาา
+      type: text
+    - packageId: '11538'
+      stickerId: '51626528'
+      type: sticker
+  - - text: กินเถอะ สุขภาพจะได้แข็งแรง
+      type: text
+    - packageId: '11539'
+      stickerId: '52114131'
+      type: sticker
+  - - text: ไม่อยากตายก็กินไปเถอะครับ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626510'
+      type: sticker
+  - - text: อย่าลืมทานน้า แอบมองเธออยู่นะจ้ะ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626530'
+      type: sticker
   line_medicine_reminder_push:
   - altText: '{text}'
     template:
@@ -216,11 +388,50 @@ templates:
       text: '{text}'
       type: confirm
     type: template
-  line_remove_medicine_already: []
-  line_remove_medicine_success: []
-  line_sleep: []
+  line_remove_medicine_already:
+  - - text: ยานี้ถูกลบไปก่อนหน้านี้แล้วค่ะ
+      type: text
+  line_remove_medicine_success:
+  - - text: ลบ {medicine_name} เรียบร้อยแล้วค่ะ
+      type: text
+  - - text: เราลบ {medicine_name} ไปเรียบร้อยแล้วค่ะ
+      type: text
+    - packageId: '11538'
+      stickerId: '51626512'
+      type: sticker
+  - - text: ลบ {medicine_name} แล้วแต่ยังไม่ลบคุณออกจากใจนะ อิอิ
+      type: text
+    - packageId: '11539'
+      stickerId: '52114111'
+      type: sticker
+  line_sleep:
+  - - text: นี่ก็ดึกแล้ว รีบเข้านอน เดี๋ยวพักผ่อนไม่เพียงพอนะคะ
+      type: text
+    - text: ฝันดีค่ะ
+      type: text
+    - packageId: '3'
+      stickerId: '239'
+      type: sticker
+  - - text: นี่ก็ดึกแล้ว รีบเข้านอน เดี๋ยวพักผ่อนไม่เพียงพอนะคะ
+      type: text
+    - text: ราตรีสวัสดิ์ค่ะ
+      type: text
+    - packageId: '11537'
+      stickerId: '52002764'
+      type: sticker
+  - - text: เข้านอนได้แล้วค่ะ
+      type: text
+    - text: อย่าลืมตื่นเช้ามาออกกำลังกายด้วยนะคะ
+      type: text
+    - packageId: '11539'
+      stickerId: '52114147'
+      type: sticker
   line_test_reminder_setup:
   - text: "ตั้งเวลาทดสอบการแจ้งเตือนแล้ว\nอีก ประมาณ 1 นาทีจะมีข้อความแจ้งเตือน"
     type: text
-  line_things_link: []
-  line_things_unlink: []
+  line_things_link:
+  - - text: คุณได้ทำการเชื่อมต่ออุปกรณ์หมายเลข {things_deviceId} แล้ว
+      type: text
+  line_things_unlink:
+  - - text: คุณได้ทำการลบอุปกรณ์หมายเลข {things_deviceId} แล้ว
+      type: text
