@@ -1,5 +1,6 @@
 from rasa.constants import COLOR_SECONDARY
 
+
 def get_flex_doctor_records():
     return {
         "type": "flex",
@@ -7,12 +8,13 @@ def get_flex_doctor_records():
         "contents": get_flex_doctor_contents()
     }
 
+
 def get_flex_doctor_contents():
     return {
         "type": "bubble",
         "styles": {
             "header": {
-                "backgroundColor": COLOR_SECONDARY
+                "backgroundColor": "#23D8F5"
             }
         },
         "header": {
@@ -41,46 +43,73 @@ def get_flex_doctor_contents():
                 },
                 {
                     "type": "box",
-                    "layout": "vertical",
-                    "spacing": "md",
+                    "layout": "horizontal",
                     "contents": [
                         {
                             "type": "text",
                             "text": "หมอ A",
                             "size": "lg",
-                            "align": "center"
+                            "align": "center",
+                            "flex": 1,
+                            "wrap": True
                         },
                         {
                             "type": "box",
-                            "layout": "horizontal",
+                            "layout": "vertical",
+                            "flex": 3,
                             "spacing": "md",
                             "contents": [
                                 {
-                                    "type": "text",
-                                    "text": "พบครั้งต่อไป",
-                                    "weight": "bold",
-                                    "align": "end"
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "พบ",
+                                            "weight": "bold",
+                                            "align": "center"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": "จันทร์หน้า"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "type": "text",
-                                    "text": "จันทร์หน้า"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "spacing": "md",
-                            "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "เวลา",
-                                    "weight": "bold",
-                                    "align": "end"
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "เวลา",
+                                            "weight": "bold",
+                                            "align": "center"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": "บ่ายโมง"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "type": "text",
-                                    "text": "บ่ายโมง"
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "เพิ่มเติม",
+                                            "weight": "bold",
+                                            "align": "center"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "wrap": True,
+                                            "text": "- ไม่มี -"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -88,46 +117,73 @@ def get_flex_doctor_contents():
                 },
                 {
                     "type": "box",
-                    "layout": "vertical",
-                    "spacing": "md",
+                    "layout": "horizontal",
                     "contents": [
                         {
                             "type": "text",
                             "text": "หมอ B",
                             "size": "lg",
-                            "align": "center"
+                            "align": "center",
+                            "flex": 1,
+                            "wrap": True
                         },
                         {
                             "type": "box",
-                            "layout": "horizontal",
+                            "layout": "vertical",
+                            "flex": 3,
                             "spacing": "md",
                             "contents": [
                                 {
-                                    "type": "text",
-                                    "text": "พบครั้งต่อไป",
-                                    "weight": "bold",
-                                    "align": "end"
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "พบ",
+                                            "weight": "bold",
+                                            "align": "center"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": "พุธหน้า"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "type": "text",
-                                    "text": "พุธหน้า"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "box",
-                            "layout": "horizontal",
-                            "spacing": "md",
-                            "contents": [
-                                {
-                                    "type": "text",
-                                    "text": "เวลา",
-                                    "weight": "bold",
-                                    "align": "end"
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "เวลา",
+                                            "weight": "bold",
+                                            "align": "center"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": "8 โมง"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "type": "text",
-                                    "text": "8 โมง"
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "เพิ่มเติม",
+                                            "weight": "bold",
+                                            "align": "center"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "wrap": True,
+                                            "text": "❌งดน้ำ ก่อนมาตรวจ 4 ชั่วโมง"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -144,29 +200,56 @@ def get_flex_doctor_contents():
                 },
                 {
                     "type": "box",
-                    "layout": "vertical",
-                    "spacing": "md",
+                    "layout": "horizontal",
                     "contents": [
                         {
                             "type": "text",
                             "text": "หมอ A",
                             "size": "lg",
-                            "align": "center"
+                            "align": "center",
+                            "flex": 1,
+                            "wrap": True
                         },
                         {
                             "type": "box",
-                            "layout": "horizontal",
+                            "layout": "vertical",
+                            "flex": 3,
                             "spacing": "md",
                             "contents": [
                                 {
-                                    "type": "text",
-                                    "text": "พบเมื่อ",
-                                    "weight": "bold",
-                                    "align": "end"
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "พบ",
+                                            "weight": "bold",
+                                            "align": "center"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": "พุธที่แล้ว"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "type": "text",
-                                    "text": "จันทร์ที่แล้ว"
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "เพิ่มเติม",
+                                            "weight": "bold",
+                                            "align": "center"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "wrap": True,
+                                            "text": "❌งดน้ำอัดลม"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -174,29 +257,56 @@ def get_flex_doctor_contents():
                 },
                 {
                     "type": "box",
-                    "layout": "vertical",
-                    "spacing": "md",
+                    "layout": "horizontal",
                     "contents": [
                         {
                             "type": "text",
                             "text": "หมอ B",
                             "size": "lg",
-                            "align": "center"
+                            "align": "center",
+                            "flex": 1,
+                            "wrap": True
                         },
                         {
                             "type": "box",
-                            "layout": "horizontal",
+                            "layout": "vertical",
+                            "flex": 3,
                             "spacing": "md",
                             "contents": [
                                 {
-                                    "type": "text",
-                                    "text": "พบเมื่อ",
-                                    "weight": "bold",
-                                    "align": "end"
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "พบ",
+                                            "weight": "bold",
+                                            "align": "center"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "text": "พุธที่แล้ว"
+                                        }
+                                    ]
                                 },
                                 {
-                                    "type": "text",
-                                    "text": "พุธที่แล้ว"
+                                    "type": "box",
+                                    "layout": "horizontal",
+                                    "spacing": "sm",
+                                    "contents": [
+                                        {
+                                            "type": "text",
+                                            "text": "เพิ่มเติม",
+                                            "weight": "bold",
+                                            "align": "center"
+                                        },
+                                        {
+                                            "type": "text",
+                                            "wrap": True,
+                                            "text": "- ไม่มี -"
+                                        }
+                                    ]
                                 }
                             ]
                         }
