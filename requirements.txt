@@ -1,6 +1,7 @@
 gunicorn[gevent]~=19.9.0
 ipython<7.0.0
 numpy~=1.16.0
+psycopg2~=2.6.1
 pythainlp~=1.7.1
 rasa_core~=0.12.4
 rasa_nlu[tensorflow]~=0.13.8
