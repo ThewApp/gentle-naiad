@@ -7,7 +7,7 @@ import logging
 import requests
 from flask import abort, request
 
-from app.database import users
+from app.database import users, things
 
 logger = logging.getLogger(__name__)
 
@@ -284,8 +284,10 @@ class WebhookHandler():
     def handle_things(self, event):
         things_type = event["things"].get("type", None)
         if things_type == "link":
+            things.updateHas(event["source"]["userId"][-32:], True)
             self.handle_things_link(event)
         elif things_type == "unlink":
+            things.updateHas(event["source"]["userId"][-32:], False)
             self.handle_things_unlink(event)
         else:
             logger.warn('Unknown things type. type=' + things_type)

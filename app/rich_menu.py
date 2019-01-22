@@ -1,11 +1,12 @@
 import json
 import logging
 
+from app.database import things
 from app.lineapi import LineApi
-from rasa.template.rich_menu import (
-    RICH_MENU_DEFAULT_OBJECT, RICH_MENU_DEFAULT_IMAGE,
-    RICH_MENU_THINGS_OBJECT, RICH_MENU_THINGS_IMAGE
-)
+from rasa.template.rich_menu import (RICH_MENU_DEFAULT_IMAGE,
+                                     RICH_MENU_DEFAULT_OBJECT,
+                                     RICH_MENU_THINGS_IMAGE,
+                                     RICH_MENU_THINGS_OBJECT)
 
 logger = logging.getLogger(__name__)
 
@@ -32,3 +33,7 @@ class RichMenu():
             self.line_api.set_rich_menu_image(
                 things_rich_menu_id, RICH_MENU_THINGS_IMAGE["type"], f)
         logger.debug("Setup things rich menu: " + things_rich_menu_id)
+        # Link things rich menu to users
+        things_users = things.getAllHas()
+        for thing_user in things_users:
+            self.line_api.link_rich_menu_to_user(thing_user[0], things_rich_menu_id)
