@@ -41,7 +41,7 @@ class RichMenu():
         # Link things rich menu to users
         things_users = things.getAllHas()
         for thing_user in things_users:
-            self.link_things(thing_user[0])
+            self.link_things("U" + thing_user[0].replace('-', ''))
 
     def link_things(self, userId):
         self.line_api.link_rich_menu_to_user(userId, self.things_rich_menu_id)
