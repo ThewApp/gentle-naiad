@@ -22,6 +22,11 @@ def reminder_job(e, dispatcher, agent):
         Thread(target=urllib.request.urlopen, args=(line_webhook, )).start()
     agent.handle_reminder(e, dispatcher)
 
+def rich_menu_update_things(userId, state, rich_menu):
+    if state == True:
+        rich_menu.link_things(userId)
+    elif state == False:
+        rich_menu.unlink_things(userId)
 
 class ReminderJob(Job):
     # Job execution

@@ -6,11 +6,18 @@ import logging
 
 import requests
 from flask import abort, request
+from rq import Queue
 
-from app.database import users, things
+from app.database import things, users
+from app.scheduling import ReminderJob, rich_menu_update_things
+from rasa.store import scheduler_store
 
 logger = logging.getLogger(__name__)
 
+if scheduler_store:
+    highQ = Queue('high', connection=scheduler_store, job_class=ReminderJob)
+else:
+    highQ = None
 
 class LineApi():
     def __init__(self, channel_access_token: str, timeout: float = 5.0):
@@ -285,9 +292,11 @@ class WebhookHandler():
         things_type = event["things"].get("type", None)
         if things_type == "link":
             things.updateHas(event["source"]["userId"][-32:], True)
+            highQ.enqueue(rich_menu_update_things, event["source"]["userId"][-32:], True)
             self.handle_things_link(event)
         elif things_type == "unlink":
             things.updateHas(event["source"]["userId"][-32:], False)
+            highQ.enqueue(rich_menu_update_things, event["source"]["userId"][-32:], False)
             self.handle_things_unlink(event)
         else:
             logger.warn('Unknown things type. type=' + things_type)
