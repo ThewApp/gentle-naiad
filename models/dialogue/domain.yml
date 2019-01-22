@@ -106,16 +106,10 @@ templates:
     - packageId: '2'
       stickerId: '144'
       type: sticker
-  - - text: ยินดีด้วยค่ะ คุณได้ทำการเพิ่ม {new_medicine_name} ทานตอน{medicine_info_text}
-        สำเร็จแล้ว
+  - - text: คุณได้ทำการเพิ่ม {new_medicine_name} ทานตอน{medicine_info_text} สำเร็จแล้ว
       type: text
     - packageId: '11538'
       stickerId: '51626507'
-      type: sticker
-  - - text: เพิ่ม {new_medicine_name} ทานตอน{medicine_info_text} เรียบร้อยแล้ว แล้วเมื่อไหร่จะได้เราเข้าไปในใจคุณ
-      type: text
-    - packageId: '11538'
-      stickerId: '51626508'
       type: sticker
   line_ask_add_new_medicine:
   - - text: คุณยังไม่มีรายการยา
@@ -228,17 +222,7 @@ templates:
     - packageId: '11539'
       stickerId: '52114113'
       type: sticker
-  - - text: เราลืมไปแล้วครับ
-      type: text
-    - packageId: '11538'
-      stickerId: '51626523'
-      type: sticker
-  - - text: ลืมยาแล้วแต่ยังไม่ลืมคุณนะ
-      type: text
-    - packageId: '11538'
-      stickerId: '51626509'
-      type: sticker
-  - - text: ถ้ามียาใหม่ อย่าลืมมาบอกเรานะครับ
+  - - text: ถ้ามียาใหม่ อย่าลืมมาบอกเรานะคะ
       type: text
     - packageId: '11538'
       stickerId: '51626496'
@@ -369,11 +353,6 @@ templates:
       type: text
     - packageId: '11539'
       stickerId: '52114131'
-      type: sticker
-  - - text: ไม่อยากตายก็กินไปเถอะครับ
-      type: text
-    - packageId: '11538'
-      stickerId: '51626510'
       type: sticker
   - - text: อย่าลืมทานน้า แอบมองเธออยู่นะจ้ะ
       type: text
