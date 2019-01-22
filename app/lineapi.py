@@ -7,6 +7,8 @@ import logging
 import requests
 from flask import abort, request
 
+from app.database import users
+
 logger = logging.getLogger(__name__)
 
 
@@ -154,6 +156,7 @@ class WebhookHandler():
 
         body_json = json.loads(body)
         for event in body_json['events']:
+            users.userUttered(event["source"]["userId"])
             event_type = event['type']
             if event_type == 'message':
                 self.handle_message(event)
