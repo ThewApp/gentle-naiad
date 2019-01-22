@@ -156,7 +156,7 @@ class WebhookHandler():
 
         body_json = json.loads(body)
         for event in body_json['events']:
-            users.userUttered(event["source"]["userId"])
+            users.userUttered(event["source"]["userId"][-32:])
             event_type = event['type']
             if event_type == 'message':
                 self.handle_message(event)
