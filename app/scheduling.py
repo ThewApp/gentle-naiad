@@ -25,12 +25,12 @@ def reminder_job(e, dispatcher, agent):
 
 class ReminderJob(Job):
     # Job execution
-    def perform(self, agent):  # noqa
+    def perform(self, workerKwargs):  # noqa
         """Invokes the job function with the job arguments."""
         self.connection.persist(self.key)
         _job_stack.push(self)
         try:
-            self._kwargs["agent"] = agent
+            self._kwargs.update(workerKwargs)
             self._result = self._execute()
         finally:
             assert self is _job_stack.pop()
@@ -39,7 +39,7 @@ class ReminderJob(Job):
 
 class ReminderWorker(SimpleWorker):
     def work(self, *args, **kwargs):
-        self.agent = kwargs.pop("agent", None)
+        self.workerKwargs = kwargs.pop("workerKwargs", None)
         super().work(*args, **kwargs)
 
     def perform_job(self, job, queue, heartbeat_ttl=None):
@@ -58,7 +58,7 @@ class ReminderWorker(SimpleWorker):
             job.started_at = utcnow()
             timeout = job.timeout or self.queue_class.DEFAULT_TIMEOUT
             with self.death_penalty_class(timeout, JobTimeoutException, job_id=job.id):
-                rv = job.perform(self.agent)
+                rv = job.perform(self.workerKwargs)
 
             job.ended_at = utcnow()
 

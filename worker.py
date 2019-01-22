@@ -26,6 +26,11 @@ agent = LineAgent.load(
     tracker_store=tracker_store
 )
 
+workerKwargs = {
+    "rich_menu": rich_menu,
+    "agent": agent
+}
+
 listen = ['high', 'default', 'low']
 scheduler = Scheduler(
     connection=scheduler_store,
@@ -36,4 +41,4 @@ Process(target=scheduler.run).start()
 with Connection(scheduler_store):
     worker = ReminderWorker(map(Queue, listen), job_class=ReminderJob)
     logger.info("Worker is ready.")
-    worker.work(agent=agent)
+    worker.work(workerKwargs=workerKwargs)
