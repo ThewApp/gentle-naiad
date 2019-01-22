@@ -16,13 +16,13 @@ logger = logging.getLogger(__name__)
 
 line_webhook = os.getenv("LINE_WEBHOOK_CHECK")
 
-def reminder_job(e, dispatcher, agent):
+def reminder_job(e, dispatcher, agent, *args, **kwargs):
     if line_webhook:
         # Ping web
         Thread(target=urllib.request.urlopen, args=(line_webhook, )).start()
     agent.handle_reminder(e, dispatcher)
 
-def rich_menu_update_things(userId, state, rich_menu):
+def rich_menu_update_things(userId, state, rich_menu, *args, **kwargs):
     if state == True:
         rich_menu.link_things(userId)
     elif state == False:
