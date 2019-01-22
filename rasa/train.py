@@ -1,4 +1,7 @@
 import argparse
+import logging
+
+import coloredlogs
 
 
 def train_core():
@@ -30,9 +33,37 @@ def train_nlu():
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('type', choices=['core', 'nlu'])
+    parser.add_argument(
+        'mode',
+        help="Selecting training mode",
+        choices=['core', 'nlu']
+    )
+    parser.add_argument(
+        '-v', '--verbose',
+        help="Be verbose. Sets logging level to INFO",
+        action="store_const",
+        dest="loglevel",
+        const=logging.INFO,
+        default=logging.INFO,
+    )
+    parser.add_argument(
+        '-vv', '--debug',
+        help="Print lots of debugging statements. "
+                "Sets logging level to DEBUG",
+        action="store_const",
+        dest="loglevel",
+        const=logging.DEBUG,
+    )
+    parser.add_argument(
+        '--quiet',
+        help="Be quiet! Sets logging level to WARNING",
+        action="store_const",
+        dest="loglevel",
+        const=logging.WARNING,
+    )
     args = parser.parse_args()
-    if args.type == "core":
+    coloredlogs.install(level=args.loglevel)
+    if args.mode == "core":
         train_core()
-    elif args.type == "nlu":
+    elif args.mode == "nlu":
         train_nlu()

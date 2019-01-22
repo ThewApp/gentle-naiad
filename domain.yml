@@ -1,10 +1,13 @@
 intents:
   - follow_event
   - unfollow_event
+  - things_link
+  - things_unlink
   - add_medicine
   - enter_medicine_data
   - remove_medicine
   - medicine_list
+  - doctor_records
   - affirmative
   - negative
   - test_reminder
@@ -17,9 +20,12 @@ intents:
 
 entities:
   - remove_medicine_uuid
+  - things_deviceId
 
 actions:
   - line_follow
+  - line_things_link
+  - line_things_unlink
   - line_ask_new_medicine_name
   - line_ask_new_medicine_time
   - line_ask_new_medicine_meal
@@ -38,6 +44,7 @@ actions:
   - line_medicine_reminder_push
   - line_medicine_reminder_affirmative
   - line_medicine_reminder_negative
+  - custom_flex_doctor_records
   - line_greeting_help
   - line_greeting_help_negative
   - line_howto
@@ -56,6 +63,14 @@ templates:
         text: "สวัสดีค่ะ !\nMediary เป็นบริการที่จะมาดูแลสุขภาพของคุณค่ะ ♥"
       - type: "text"
         text: "ท่านสามารถกดปุ่ม Menu ด้านล่าง\nเพื่อดูสิ่งที่ฉันทำได้หรือดูวิธีใช้นะคะ"
+
+  line_things_link:
+    - - type: "text"
+        text: "คุณได้ทำการเชื่อมต่ออุปกรณ์หมายเลข {things_deviceId} แล้ว"
+
+  line_things_unlink:
+    - - type: "text"
+        text: "คุณได้ทำการลบอุปกรณ์หมายเลข {things_deviceId} แล้ว"
 
   line_ask_new_medicine_name:
     - type: "text"
@@ -116,13 +131,18 @@ templates:
           - type: "action"
             action:
               type: "message"
-              label: "สามเวลา"
-              text: "สามเวลา"
+              label: "เช้า-เย็น"
+              text: "เช้า เย็น"
           - type: "action"
             action:
               type: "message"
-              label: "เช้า-เย็น"
-              text: "เช้า-เย็น"
+              label: "สามเวลา"
+              text: "เช้า กลางวัน เย็น"
+          - type: "action"
+            action:
+              type: "message"
+              label: "สี่เวลา"
+              text: "เช้า กลางวัน เย็น ก่อนนอน"
 
   line_ask_new_medicine_meal:
     - type: "text"
@@ -373,21 +393,25 @@ templates:
   line_eat_food:
     - - type: "text"
         text: "ทานอะไรที่ดีกับสุขภาพ อย่าปล่อยให้หิวนานไม่ดีนะคะ"
-      - packageId: "2"
+      - type: "sticker"
+        packageId: "2"
         stickerId: "510"
     - - type: "text"
         text: "ทานอะไรที่มีประโยชน์ แล้วอย่าลืมทานให้ตรงเวลาด้วยนะคะ"
-      - packageId: "4"
+      - type: "sticker"
+        packageId: "4"
         stickerId: "271"
 
   line_cheer_up:
     - - type: "text"
         text: "สู้ๆนะคะ อย่าลืมพักผ่อนให้เพียงพอ"
-      - packageId: "3"
+      - type: "sticker"
+        packageId: "3"
         stickerId: "241"
     - - type: "text"
         text: "พักก่อน ไม่ต้องเครียดนะคะ"
-      - packageId: "11538"
+      - type: "sticker"
+        packageId: "11538"
         stickerId: "51626503"
 
 slots:

@@ -28,13 +28,22 @@ class LineDomain(Domain):
         """
         templates = {}
         for template_key, template_variations in yml_templates.items():
+            isLine = template_key.startswith("line_")
             validated_variations = []
             for t in template_variations:
                 # templates can either directly be strings or a dict with
                 # options we will always create a dict out of them
-                if isinstance(t, str):
+                if isinstance(t, str) and not isLine:
                     validated_variations.append({"text": t})
                 else:
+                    if isLine and isinstance(t, dict) and "type" not in t:
+                        raise SyntaxError(f"template: {template_key} "
+                                          "must has `type` property")
+                    if isLine and isinstance(t, list):
+                        for index, message in enumerate(t):
+                            if "type" not in message:
+                                raise SyntaxError(f"template: \"{template_key}\" "
+                                                  f"message index: \"{index}\" must has `type` property")
                     validated_variations.append(t)
             templates[template_key] = validated_variations
         return templates

@@ -45,7 +45,7 @@
             "class": "rasa_nlu.extractors.entity_synonyms.EntitySynonymMapper"
         },
         {
-            "token_pattern": "(?u)\\b\\w\\w+\\b",
+            "token_pattern": ".*",
             "strip_accents": null,
             "stop_words": null,
             "min_df": 1,
@@ -92,6 +92,6 @@
         }
     ],
     "training_data": "training_data.json",
-    "trained_at": "20190114-213916",
+    "trained_at": "20190120-183219",
     "rasa_nlu_version": "0.13.8"
 }

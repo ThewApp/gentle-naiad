@@ -1,3 +1,7 @@
+import logging
+import os
+from typing import Any, Callable, Dict, List, Optional, Text, Union
+
 from rasa_core.agent import Agent
 from rasa_core.channels.channel import UserMessage
 from rasa_core.events import Event, UserUttered
@@ -6,17 +10,14 @@ from rasa_core.policies import Policy
 from rasa_core.policies.ensemble import PolicyEnsemble
 from rasa_core.processor import MessageProcessor
 from rasa_core.utils import EndpointConfig
+from rq_scheduler import Scheduler
+
+from app.scheduling import ReminderJob, reminder_job
 from rasa.events import LineReminderScheduled
 from rasa.linedispatcher import LineDispatcher
 from rasa.linedomain import LineDomain
 from rasa.linenlg import LineNLG
 from rasa.store import scheduler_store
-from rasa.worker import ReminderJob, reminder_job
-from rq_scheduler import Scheduler
-
-import logging
-import os
-from typing import Text, List, Optional, Callable, Any, Dict, Union
 
 logger = logging.getLogger(__name__)
 

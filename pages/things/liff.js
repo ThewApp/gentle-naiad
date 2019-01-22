@@ -1,5 +1,17 @@
+const urlParams = new URLSearchParams(window.location.search);
+const env = urlParams.get('env');
+
 // User service UUID: Change this to your generated service UUID
-const USER_SERVICE_UUID         = '117abe93-8bed-490a-bdf1-26e97a682b0b'; // LED, Button
+let USER_SERVICE_UUID;
+if (env == 'dev') {
+    USER_SERVICE_UUID = '117abe93-8bed-490a-bdf1-26e97a682b0b';
+} else if (env == 'stg') {
+    USER_SERVICE_UUID = '66396bfa-9016-45c9-92d3-85d1094fd1e0';
+} else {
+    USER_SERVICE_UUID = '4b9ab816-efca-4a3b-89cc-3c744e004403';
+}
+
+; // LED, Button
 // User service characteristics
 const LED_CHARACTERISTIC_UUID   = 'E9062E71-9E62-4BC6-B0D3-35CDCD9B027B';
 const BTN_CHARACTERISTIC_UUID   = '62FBD229-6EDD-4D1A-B554-5C4E1BB29169';

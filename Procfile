@@ -1,2 +1,2 @@
-web: python app.py web
-worker: python app.py worker
+web: gunicorn web:app --worker-class gevent -t 45
+worker: python worker.py

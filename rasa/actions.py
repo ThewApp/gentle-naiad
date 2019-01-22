@@ -12,6 +12,7 @@ from rasa.constants import DEFAULT_MEDICINE_TEXT, DEFAULT_REMINDER
 from rasa.events import LineReminderScheduled
 from rasa.lineform import LineForm
 from rasa.template.flex_medicine_list import get_flex_medicine_list
+from rasa.template.flex_doctor_records import get_flex_doctor_records
 
 logger = logging.getLogger(__name__)
 
@@ -136,7 +137,7 @@ class custom_remove_medicine(Action):
                 removed_medicine = medicine_dict
             else:
                 new_medicine_list.append(medicine_dict)
-        
+
         if removed_medicine is not None:
             dispatcher.line_template(
                 'line_remove_medicine_success', tracker, medicine_name=removed_medicine["name"])
@@ -216,7 +217,8 @@ class custom_medicine_reminder_update(Action):
                             medicine_reminders, (time, meal))
                         logger.debug(
                             "Adding reminder... name:{}, time:{}".format(reminder.name, reminder.trigger_date_time))
-                        medicine_reminders[(time, meal)]["job_id"] = reminder.name
+                        medicine_reminders[(time, meal)
+                                           ]["job_id"] = reminder.name
                         events.append(reminder)
 
         for reminder_tuple in medicine_reminders:
@@ -285,10 +287,10 @@ class custom_medicine_reminder_push(Action):
 
             number_to_remind = len(medicine_to_remind)
             if number_to_remind > 0:
-                if number_to_remind == 1: # For one medicine, send as one line text
+                if number_to_remind == 1:  # For one medicine, send as one line text
                     text = "สวัสดีค่ะ คุณทาน{} ตอน{}{} หรือยังคะ".format(
                         medicine_to_remind[0], time_text, meal_text)
-                else: # For multiple medicines, send them as a list
+                else:  # For multiple medicines, send them as a list
                     text = "สวัสดีค่ะ คุณทาน\n"
                     for medicine in medicine_to_remind:
                         text += "❥ " + medicine + "\n"
@@ -304,5 +306,21 @@ class custom_medicine_reminder_push(Action):
             logger.warning("medicine_list:{}, medicine_reminders:{}, time_tuple:{}".format(
                 medicine_list, medicine_reminders, time_tuple
             ))
+
+        return []
+
+
+class custom_flex_doctor_records(Action):
+    def name(self):
+        # type: () -> Text
+        return "custom_flex_doctor_records"
+
+    def run(self, dispatcher: LineDispatcher, tracker, domain):
+
+        # medicine_list = tracker.get_slot("doctor_records")
+
+        message = get_flex_doctor_records()
+
+        dispatcher.line_response(message)
 
         return []

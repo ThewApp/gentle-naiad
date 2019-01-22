@@ -65,14 +65,18 @@ DEFAULT_REMINDER = {
 }
 
 ENV = os.getenv('ENV', 'PRODUCTION')
+APP_URL = os.getenv('APP_URL', "")
 if ENV == "LOCAL_DEVELOPMENT":
     pass
 elif ENV == "DEVELOPMENT":
     HELP_LIFF_URI = "line://app/1620473652-9rLd3Lw8"
-    THINGS_LIFF_URI = "line://app/1620473652-pXm3Xmxb"
+    THINGS_LIFF_URI = "line://app/1620473652-pXm3Xmxb" + f"?app_url={APP_URL}&env=dev"
 elif ENV == "STAGING":
     HELP_LIFF_URI = "line://app/1620763427-40gn3dzb"
-    THINGS_LIFF_URI = "line://app/1620763427-Ze5QqXaj"
+    THINGS_LIFF_URI = "line://app/1620763427-Ze5QqXaj" + f"?app_url={APP_URL}&env=stg"
+elif ENV == "PRODUCTION":
+    HELP_LIFF_URI = "line://app/1625178308-WrlmGaGJ"
+    THINGS_LIFF_URI = "line://app/1625178308-R8Mo9L9r" + f"?app_url={APP_URL}"
 else:
     pass
 
