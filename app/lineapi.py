@@ -292,11 +292,11 @@ class WebhookHandler():
         things_type = event["things"].get("type", None)
         if things_type == "link":
             things.updateHas(event["source"]["userId"][-32:], True)
-            highQ.enqueue(rich_menu_update_things, event["source"]["userId"][-32:], True)
+            highQ.enqueue(rich_menu_update_things, event["source"]["userId"], True)
             self.handle_things_link(event)
         elif things_type == "unlink":
             things.updateHas(event["source"]["userId"][-32:], False)
-            highQ.enqueue(rich_menu_update_things, event["source"]["userId"][-32:], False)
+            highQ.enqueue(rich_menu_update_things, event["source"]["userId"], False)
             self.handle_things_unlink(event)
         else:
             logger.warn('Unknown things type. type=' + things_type)
